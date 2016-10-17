@@ -1,0 +1,863 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         11/Aug/2015  10:04:44 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\Source\lux.c         #
+#    Command line       =  -f C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\P #
+#                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\.. #
+#                          \Tools\CC2530DB\f8wEndev.cfg (-DCPU32MHZ           #
+#                          -DROOT=__near_func -DMAC_CFG_TX_DATA_MAX=3         #
+#                          -DMAC_CFG_TX_MAX=6 -DMAC_CFG_RX_MAX=3) -f          #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\To #
+#                          ols\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO            #
+#                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
+#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x0101                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=500               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 C:\Users\boyangel\Desktop\Õ #
+#                          ýÊ½°æ-4.0\EndDvice\Projects\zstack\Samples\SampleA #
+#                          pp\Source\lux.c -D xNWK_AUTO_POLL -D POWER_SAVING  #
+#                          -D endA06 -D AUTO_RESET -D xMT_TASK -D             #
+#                          xMT_SYS_FUNC -D xMT_ZDO_FUNC -D                    #
+#                          xLCD_SUPPORTED=DEBUG -lC                           #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\EndDeviceEB #
+#                          \List\ -lA C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\En #
+#                          dDvice\Projects\zstack\Samples\SampleApp\CC2530DB\ #
+#                          EndDeviceEB\List\ --diag_suppress Pe001,Pa010 -o   #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\EndDeviceEB #
+#                          \Obj\ -e --no_code_motion --debug --core=plain     #
+#                          --dptr=16,1 --data_model=large                     #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data_rom                  #
+#                          --nr_virtual_regs 16 -I C:\Users\boyangel\Desktop\ #
+#                          ÕýÊ½°æ-4.0\EndDvice\Projects\zstack\Samples\Sample #
+#                          App\CC2530DB\ -I C:\Users\boyangel\Desktop\ÕýÊ½°æ- #
+#                          4.0\EndDvice\Projects\zstack\Samples\SampleApp\CC2 #
+#                          530DB\..\Source\ -I C:\Users\boyangel\Desktop\ÕýÊ½ #
+#                          °æ-4.0\EndDvice\Projects\zstack\Samples\SampleApp\ #
+#                          CC2530DB\..\..\..\ZMain\TI2530DB\ -I               #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\hal\include\ -I                     #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\hal\target\CC2530EB\ -I             #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\mac\include\ -I                     #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\mac\high_level\ -I                  #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\mac\low_level\srf04\ -I             #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\mac\low_level\srf04\single_chip\    #
+#                          -I C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\P #
+#                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\.. #
+#                          \..\..\Components\mt\ -I                           #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\osal\include\ -I                    #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\services\saddr\ -I                  #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\services\sdata\ -I                  #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\stack\af\ -I                        #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\stack\nwk\ -I                       #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\stack\sapi\ -I                      #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\stack\sec\ -I                       #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\stack\sys\ -I                       #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\stack\zdo\ -I                       #
+#                          C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. #
+#                          \..\Components\zmac\ -I C:\Users\boyangel\Desktop\ #
+#                          ÕýÊ½°æ-4.0\EndDvice\Projects\zstack\Samples\Sample #
+#                          App\CC2530DB\..\..\..\..\..\Components\zmac\f8w\   #
+#                          -Ohz --require_prototypes                          #
+#    List file          =  C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\EndDeviceEB #
+#                          \List\lux.lst                                      #
+#    Object file        =  C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Proj #
+#                          ects\zstack\Samples\SampleApp\CC2530DB\EndDeviceEB #
+#                          \Obj\lux.r51                                       #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\boyangel\Desktop\ÕýÊ½°æ-4.0\EndDvice\Projects\zstack\Samples\SampleApp\Source\lux.c
+      1          #include <ioCC2530.h>
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xf4
+   \   unsigned char volatile __sfr P1SEL
+   \                     P1SEL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xf6
+   \   unsigned char volatile __sfr P1INP
+   \                     P1INP:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+      2          #include "OnBoard.h"
+      3          
+      4          #define   uchar unsigned char
+      5          #define   uint unsigned int	
+      6          #define	  SCL P1_2      //IICÊ±ÖÓÒý½Å¶¨Òå
+      7          #define   SDA P1_3      //IICÊý¾ÝÒý½Å¶¨Òå
+      8          #define	  SlaveAddress   0X46 //¶¨ÒåÆ÷¼þÔÚIIC×ÜÏßÖÐµÄ´ÓµØÖ·,¸ù¾ÝALT  ADDRESSµØÖ·Òý½Å²»Í¬ÐÞ¸Ä
+      9                                        //ALT  ADDRESSÒý½Å½ÓµØÊ±µØÖ·Îª0x46£¬½ÓµçÔ´Ê±µØÖ·Îª0xB8
+     10          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     11          uchar    BUF[3];                         //½ÓÊÕÊý¾Ý»º´æÇø      	
+   \                     BUF:
+   \   000000                DS 3
+   \   000003                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     12          uint     dis_data;                       //±äÁ¿
+   \                     dis_data:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     13          uint16 Light;
+   \                     Light:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     14          uint8 LUXerror=0;
+   \                     LUXerror:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     15          
+     16          void delayms(uchar i);
+     17          void Start(void);
+     18          void Stop(void);
+     19          void SendACK(uchar ack);
+     20          void RecvACK(void);
+     21          uchar RecvByte(void);
+     22          void SendByte(uchar dat);
+     23          uchar RecvByte(void);
+     24          //void conversion(uint temp_data);
+     25          void Single_Write(uchar REG_Address);
+     26          void Multiple_Read(void);
+     27          
+     28          void lux(void);
+     29          void conversion(uint temp_data);
+     30          
+     31          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     32          void delayms(uchar i)
+   \                     delayms:
+     33          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   8004         SJMP    ??delayms_0
+     34            for(;i>0;i--)
+     35            {
+     36               asm("NOP");
+   \                     ??delayms_1:
+   \   000002   00           NOP
+     37               asm("NOP");
+   \   000003   00           NOP
+     38               asm("NOP");
+   \   000004   00           NOP
+     39            }
+   \   000005   19           DEC     R1
+   \                     ??delayms_0:
+   \   000006   E9           MOV     A,R1
+   \   000007   70F9         JNZ     ??delayms_1
+     40          }
+   \   000009   02....       LJMP    ?BRET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     41          void Start(void)
+   \                     Start:
+     42          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     43              SDA = 1;                    //À­¸ßÊý¾ÝÏß
+   \   000004   D293         SETB    0x90.3
+     44              SCL = 1;                    //À­¸ßÊ±ÖÓÏß
+   \   000006   D292         SETB    0x90.2
+     45              delayms(1);                 //ÑÓÊ±
+   \   000008                ; Setup parameters for call to function delayms
+   \   000008   7901         MOV     R1,#0x1
+   \   00000A   12....       LCALL   ??delayms?relay
+     46              SDA = 0;                    //²úÉúÏÂ½µÑØ
+   \   00000D   C293         CLR     0x90.3
+     47              delayms(1);                 //ÑÓÊ±
+   \   00000F                ; Setup parameters for call to function delayms
+   \   00000F   12....       LCALL   ??Subroutine5_0 & 0xFFFF
+     48              SCL = 0;                    //À­µÍÊ±ÖÓÏß
+     49              delayms(1);
+   \                     ??CrossCallReturnLabel_6:
+   \   000012                ; Setup parameters for call to function delayms
+   \   000012                REQUIRE ?Subroutine0
+   \   000012                REQUIRE _A_P1
+   \   000012                ; // Fall through to label ?Subroutine0
+     50          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   7901         MOV     R1,#0x1
+   \   000002   12....       LCALL   ??delayms?relay
+   \   000005   D083         POP     DPH
+   \   000007   D082         POP     DPL
+   \   000009   02....       LJMP    ?BRET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine5_0:
+   \   000000   7901         MOV     R1,#0x1
+   \   000002   12....       LCALL   ??delayms?relay
+   \   000005   C292         CLR     0x90.2
+   \   000007   22           RET
+     51          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     52          void Stop(void)
+   \                     Stop:
+     53          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     54              SDA = 0;                    //À­µÍÊý¾ÝÏß
+   \   000004   C293         CLR     0x90.3
+     55              SCL = 1;                    //À­¸ßÊ±ÖÓÏß
+   \   000006   D292         SETB    0x90.2
+     56              delayms(1);                //ÑÓÊ±
+   \   000008                ; Setup parameters for call to function delayms
+   \   000008   7901         MOV     R1,#0x1
+   \   00000A   12....       LCALL   ??delayms?relay
+     57              SDA = 1;                    //²úÉúÉÏÉýÑØ
+   \   00000D   D293         SETB    0x90.3
+     58              delayms(1);                 //ÑÓÊ±
+   \   00000F                ; Setup parameters for call to function delayms
+   \   00000F   80..         SJMP    ?Subroutine0
+   \   000011                REQUIRE _A_P1
+     59          }
+     60          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     61          void SendACK(uchar ack)
+   \                     SendACK:
+     62          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+     63              SDA = ack;                  //Ð´Ó¦´ðÐÅºÅ
+   \   000006   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000008   9293         MOV     0x90.3,C
+     64              SCL = 1;                    //À­¸ßÊ±ÖÓÏß
+   \   00000A   12....       LCALL   ?Subroutine2 & 0xFFFF
+     65              delayms(1);                 //ÑÓÊ±
+     66              SCL = 0;                    //À­µÍÊ±ÖÓÏß
+     67              delayms(1);                 //ÑÓÊ±
+   \                     ??CrossCallReturnLabel_4:
+   \   00000D                ; Setup parameters for call to function delayms
+   \   00000D   7901         MOV     R1,#0x1
+   \   00000F   12....       LCALL   ??delayms?relay
+     68          }
+   \   000012   80..         SJMP    ?Subroutine1
+   \   000014                REQUIRE _A_P1
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   D292         SETB    0x90.2
+   \   000002                ; Setup parameters for call to function delayms
+   \   000002                ; Setup parameters for call to function delayms
+   \   000002                REQUIRE ??Subroutine5_0
+   \   000002                ; // Fall through to label ??Subroutine5_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   7F01         MOV     R7,#0x1
+   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
+     69          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     70          void RecvACK(void)
+   \                     RecvACK:
+     71          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     72              P1DIR|=0X08;
+   \   000004   43FE08       ORL     0xfe,#0x8
+     73              delayms(1);
+   \   000007                ; Setup parameters for call to function delayms
+   \   000007   7901         MOV     R1,#0x1
+   \   000009   12....       LCALL   ??delayms?relay
+     74              SDA=1;
+   \   00000C   12....       LCALL   ?Subroutine4 & 0xFFFF
+     75              P1DIR&=~0X08;
+     76              delayms(1);
+     77              SCL = 1;                    //À­¸ßÊ±ÖÓÏß
+   \                     ??CrossCallReturnLabel_2:
+   \   00000F   D292         SETB    0x90.2
+     78              delayms(1);                 //ÑÓÊ±
+   \   000011                ; Setup parameters for call to function delayms
+   \   000011   7901         MOV     R1,#0x1
+   \   000013   12....       LCALL   ??delayms?relay
+     79              if(SDA)
+   \   000016   A293         MOV     C,0x90.3
+   \   000018   5006         JNC     ??RecvACK_0
+     80                LUXerror=1;
+   \   00001A   90....       MOV     DPTR,#LUXerror
+   \   00001D   7401         MOV     A,#0x1
+   \   00001F   F0           MOVX    @DPTR,A
+     81              SCL = 0;                    //À­µÍÊ±ÖÓÏß
+   \                     ??RecvACK_0:
+   \   000020   C292         CLR     0x90.2
+     82              P1DIR|=0X08;
+   \   000022   43FE08       ORL     0xfe,#0x8
+     83              delayms(1);
+   \   000025                ; Setup parameters for call to function delayms
+   \   000025   80..         SJMP    ?Subroutine0
+   \   000027                REQUIRE P1DIR
+   \   000027                REQUIRE _A_P1
+     84          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine4:
+   \   000000   D293         SETB    0x90.3
+   \   000002   53FEF7       ANL     0xfe,#0xf7
+   \   000005                ; Setup parameters for call to function delayms
+   \   000005                ; Setup parameters for call to function delayms
+   \   000005   7901         MOV     R1,#0x1
+   \   000007   12....       LCALL   ??delayms?relay
+   \   00000A   22           RET
+     85          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     86          void SendByte(uchar dat)
+   \                     SendByte:
+     87          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FF           MOV     R7,A
+     88              uchar i;
+     89              for (i=0; i<8; i++)         //8Î»¼ÆÊýÆ÷
+   \   000007   7E08         MOV     R6,#0x8
+     90              {
+     91          	if(dat & 0x80)
+   \                     ??SendByte_0:
+   \   000009   EF           MOV     A,R7
+   \   00000A   A2E7         MOV     C,0xE0 /* A   */.7
+   \   00000C   5004         JNC     ??SendByte_1
+     92                    SDA = 1;
+   \   00000E   D293         SETB    0x90.3
+   \   000010   8002         SJMP    ??SendByte_2
+     93          	else
+     94                    SDA = 0;
+   \                     ??SendByte_1:
+   \   000012   C293         CLR     0x90.3
+     95                  dat <<= 1;              //ÒÆ³öÊý¾ÝµÄ×î¸ßÎ»
+   \                     ??SendByte_2:
+   \   000014   C3           CLR     C
+   \   000015   33           RLC     A
+   \   000016   FF           MOV     R7,A
+     96                  SCL = 1;                //À­¸ßÊ±ÖÓÏß       
+   \   000017   12....       LCALL   ?Subroutine2 & 0xFFFF
+     97                  delayms(1);             //ÑÓÊ±
+     98                  SCL = 0;                //À­µÍÊ±ÖÓÏß
+     99              }
+   \                     ??CrossCallReturnLabel_5:
+   \   00001A   1E           DEC     R6
+   \   00001B   EE           MOV     A,R6
+   \   00001C   70EB         JNZ     ??SendByte_0
+    100              RecvACK();
+   \   00001E                ; Setup parameters for call to function RecvACK
+   \   00001E   12....       LCALL   ??RecvACK?relay
+    101          }
+   \   000021   80..         SJMP    ?Subroutine1
+   \   000023                REQUIRE _A_P1
+    102          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    103          uchar RecvByte(void)
+   \                     RecvByte:
+    104          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    105              uchar i;
+    106              uchar dat = 0;
+   \   000005   7E00         MOV     R6,#0x0
+    107          
+    108              SDA = 1;                    //Ê¹ÄÜÄÚ²¿ÉÏÀ­,×¼±¸¶ÁÈ¡Êý¾Ý,
+   \   000007   12....       LCALL   ?Subroutine4 & 0xFFFF
+    109              P1DIR &= ~0x08;
+    110              delayms(1);
+    111              for (i=0; i<8; i++)         //8Î»¼ÆÊýÆ÷
+   \                     ??CrossCallReturnLabel_3:
+   \   00000A   7F08         MOV     R7,#0x8
+    112              {
+    113                  dat <<= 1;
+    114                  SCL = 1;                //À­¸ßÊ±ÖÓÏß
+   \                     ??RecvByte_0:
+   \   00000C   D292         SETB    0x90.2
+    115                  delayms(1);             //ÑÓÊ±
+   \   00000E                ; Setup parameters for call to function delayms
+   \   00000E   7901         MOV     R1,#0x1
+   \   000010   12....       LCALL   ??delayms?relay
+    116                  dat |= SDA;             //¶ÁÊý¾Ý   
+   \   000013   A293         MOV     C,0x90.3
+   \   000015   E4           CLR     A
+   \   000016   33           RLC     A
+   \   000017   F8           MOV     R0,A
+   \   000018   EE           MOV     A,R6
+   \   000019   33           RLC     A
+   \   00001A   48           ORL     A,R0
+   \   00001B   FE           MOV     R6,A
+    117                  delayms(1);
+   \   00001C                ; Setup parameters for call to function delayms
+   \   00001C   12....       LCALL   ??Subroutine5_0 & 0xFFFF
+    118                  SCL = 0;                //À­µÍÊ±ÖÓÏß
+    119              }
+   \                     ??CrossCallReturnLabel_7:
+   \   00001F   1F           DEC     R7
+   \   000020   EF           MOV     A,R7
+   \   000021   70E9         JNZ     ??RecvByte_0
+    120              P1DIR |= 0x08;
+   \   000023   43FE08       ORL     0xfe,#0x8
+    121              return dat;
+   \   000026   EE           MOV     A,R6
+   \   000027   F9           MOV     R1,A
+   \   000028                REQUIRE ?Subroutine1
+   \   000028                REQUIRE _A_P1
+   \   000028                REQUIRE P1DIR
+   \   000028                ; // Fall through to label ?Subroutine1
+    122          }
+    123          
+    124          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    125          void Single_Write(uchar REG_Address)
+   \                     Single_Write:
+    126          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+    127              Start();                  //ÆðÊ¼ÐÅºÅ
+   \   000007                ; Setup parameters for call to function Start
+   \   000007   12....       LCALL   ??Start?relay
+    128              SendByte(SlaveAddress);   //·¢ËÍÉè±¸µØÖ·+Ð´ÐÅºÅ
+   \   00000A                ; Setup parameters for call to function SendByte
+   \   00000A   7946         MOV     R1,#0x46
+   \   00000C   12....       LCALL   ??SendByte?relay
+    129              SendByte(REG_Address);    //ÄÚ²¿¼Ä´æÆ÷µØÖ·£¬
+   \   00000F                ; Setup parameters for call to function SendByte
+   \   00000F   EE           MOV     A,R6
+   \   000010   F9           MOV     R1,A
+   \   000011   12....       LCALL   ??SendByte?relay
+    130              Stop();                   //·¢ËÍÍ£Ö¹ÐÅºÅ
+   \   000014                ; Setup parameters for call to function Stop
+   \   000014   12....       LCALL   ??Stop?relay
+    131          }
+   \   000017   80..         SJMP    ?Subroutine1
+    132          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    133          void Multiple_Read(void)
+   \                     Multiple_Read:
+    134          {   uchar i;	
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+    135              Start();                          //ÆðÊ¼ÐÅºÅ
+   \   000005                ; Setup parameters for call to function Start
+   \   000005   12....       LCALL   ??Start?relay
+    136              SendByte(SlaveAddress+1);         //·¢ËÍÉè±¸µØÖ·+¶ÁÐÅºÅ
+   \   000008                ; Setup parameters for call to function SendByte
+   \   000008   7947         MOV     R1,#0x47
+   \   00000A   12....       LCALL   ??SendByte?relay
+    137              for (i=0; i<2; i++)                      //Á¬Ðø¶ÁÈ¡2¸öµØÖ·Êý¾Ý£¬´æ´¢ÖÐBUF
+   \   00000D   7E00         MOV     R6,#0x0
+    138              {
+    139                  BUF[i] = RecvByte();          //BUF[0]´æ´¢0x32µØÖ·ÖÐµÄÊý¾Ý
+   \                     ??Multiple_Read_0:
+   \   00000F                ; Setup parameters for call to function RecvByte
+   \   00000F   12....       LCALL   ??RecvByte?relay
+   \   000012   8E..         MOV     ?V0 + 0,R6
+   \   000014   74..         MOV     A,#BUF & 0xff
+   \   000016   25..         ADD     A,?V0 + 0
+   \   000018   F582         MOV     DPL,A
+   \   00001A   74..         MOV     A,#(BUF >> 8) & 0xff
+   \   00001C   3400         ADDC    A,#0x0
+   \   00001E   F583         MOV     DPH,A
+   \   000020   E9           MOV     A,R1
+   \   000021   F0           MOVX    @DPTR,A
+    140                  if (i == 1)
+   \   000022   7401         MOV     A,#0x1
+   \   000024   6E           XRL     A,R6
+   \   000025   7004         JNZ     ??Multiple_Read_1
+    141                  {
+    142                     SendACK(1);                //×îºóÒ»¸öÊý¾ÝÐèÒª»ØNOACK
+   \   000027                ; Setup parameters for call to function SendACK
+   \   000027   7901         MOV     R1,#0x1
+   \   000029   8002         SJMP    ??Multiple_Read_2
+    143                  }
+    144                  else
+    145                  {		
+    146                     SendACK(0);                //»ØÓ¦ACK
+   \                     ??Multiple_Read_1:
+   \   00002B                ; Setup parameters for call to function SendACK
+   \   00002B   7900         MOV     R1,#0x0
+   \                     ??Multiple_Read_2:
+   \   00002D   12....       LCALL   ??SendACK?relay
+    147                 }
+    148             }
+   \   000030   0E           INC     R6
+   \   000031   EE           MOV     A,R6
+   \   000032   C3           CLR     C
+   \   000033   9402         SUBB    A,#0x2
+   \   000035   40D8         JC      ??Multiple_Read_0
+    149              Stop();                          //Í£Ö¹ÐÅºÅ
+   \   000037                ; Setup parameters for call to function Stop
+   \   000037   12....       LCALL   ??Stop?relay
+    150          }
+   \   00003A   7F02         MOV     R7,#0x2
+   \   00003C   02....       LJMP    ?BANKED_LEAVE_XDATA
+    151          
+    152          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    153          void lux(void)
+   \                     lux:
+    154          {  
+   \   000000   74F0         MOV     A,#-0x10
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 16
+   \   000005                ; Auto size: 0
+    155             double temp=0;
+    156             Light=0;
+    157          
+    158              P1DIR |= 0x0c;
+   \   000005   43FE0C       ORL     0xfe,#0xc
+    159              P1SEL &= ~0x0c;
+   \   000008   53F4F3       ANL     0xf4,#0xf3
+    160              P1INP &= ~0x0c;
+   \   00000B   53F6F3       ANL     0xf6,#0xf3
+    161             
+    162             delayms(1);
+   \   00000E                ; Setup parameters for call to function delayms
+   \   00000E   12....       LCALL   ?Subroutine3 & 0xFFFF
+    163             
+    164             Single_Write(0x01);
+    165             delayms(1);
+   \                     ??CrossCallReturnLabel_0:
+   \   000011                ; Setup parameters for call to function delayms
+   \   000011   12....       LCALL   ?Subroutine3 & 0xFFFF
+    166               
+    167              Single_Write(0x01);   // power on
+    168              Single_Write(0x10);   // H- resolution mode
+   \                     ??CrossCallReturnLabel_1:
+   \   000014                ; Setup parameters for call to function Single_Write
+   \   000014   7910         MOV     R1,#0x10
+   \   000016   12....       LCALL   ??Single_Write?relay
+    169              delayms(10);              //ÑÓÊ±180ms
+   \   000019                ; Setup parameters for call to function delayms
+   \   000019   790A         MOV     R1,#0xa
+   \   00001B   12....       LCALL   ??delayms?relay
+    170              Multiple_Read();       //Á¬Ðø¶Á³öÊý¾Ý£¬´æ´¢ÔÚBUFÖÐ
+   \   00001E                ; Setup parameters for call to function Multiple_Read
+   \   00001E   12....       LCALL   ??Multiple_Read?relay
+    171              dis_data=BUF[0];
+    172          
+    173              dis_data=(dis_data<<8)+BUF[1];//ºÏ³ÉÊý¾Ý£¬¼´¹âÕÕÊý¾Ý   
+   \   000021   90....       MOV     DPTR,#BUF
+   \   000024   E0           MOVX    A,@DPTR
+   \   000025   F9           MOV     R1,A
+   \   000026   A3           INC     DPTR
+   \   000027   E0           MOVX    A,@DPTR
+   \   000028   90....       MOV     DPTR,#dis_data
+   \   00002B   F0           MOVX    @DPTR,A
+   \   00002C   A3           INC     DPTR
+   \   00002D   E9           MOV     A,R1
+   \   00002E   F0           MOVX    @DPTR,A
+    174              temp=(((double)dis_data)/1.2)*2.12346245;
+    175              Light=(uint16)temp;   
+   \   00002F   90....       MOV     DPTR,#dis_data
+   \   000032   E0           MOVX    A,@DPTR
+   \   000033   F5..         MOV     ?V0 + 0,A
+   \   000035   A3           INC     DPTR
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   F5..         MOV     ?V0 + 1,A
+   \   000039   E4           CLR     A
+   \   00003A   F5..         MOV     ?V0 + 2,A
+   \   00003C   F5..         MOV     ?V0 + 3,A
+   \   00003E   78..         MOV     R0,#?V0 + 0
+   \   000040   12....       LCALL   ?UL_TO_FLT
+   \   000043   90....       MOV     DPTR,#__Constant_3f99999a
+   \   000046   78..         MOV     R0,#?V0 + 4
+   \   000048   12....       LCALL   ?L_MOV_X
+   \   00004B   78..         MOV     R0,#?V0 + 0
+   \   00004D   79..         MOV     R1,#?V0 + 4
+   \   00004F   12....       LCALL   ?FLT_DIV
+   \   000052   90....       MOV     DPTR,#__Constant_4007e6cf
+   \   000055   78..         MOV     R0,#?V0 + 4
+   \   000057   12....       LCALL   ?L_MOV_X
+   \   00005A   78..         MOV     R0,#?V0 + 0
+   \   00005C   79..         MOV     R1,#?V0 + 4
+   \   00005E   12....       LCALL   ?FLT_MUL
+   \   000061   78..         MOV     R0,#?V0 + 0
+   \   000063   12....       LCALL   ?FLT_TO_L
+   \   000066   90....       MOV     DPTR,#Light
+   \   000069   E5..         MOV     A,?V0 + 0
+   \   00006B   F0           MOVX    @DPTR,A
+   \   00006C   A3           INC     DPTR
+   \   00006D   E5..         MOV     A,?V0 + 1
+   \   00006F   F0           MOVX    @DPTR,A
+    176          }
+   \   000070   7F08         MOV     R7,#0x8
+   \   000072   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000075                REQUIRE P1DIR
+   \   000075                REQUIRE P1SEL
+   \   000075                REQUIRE P1INP
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   7901         MOV     R1,#0x1
+   \   000002   12....       LCALL   ??delayms?relay
+   \   000005                ; Setup parameters for call to function Single_Write
+   \   000005                ; Setup parameters for call to function Single_Write
+   \   000005   7901         MOV     R1,#0x1
+   \   000007   12....       LCALL   ??Single_Write?relay
+   \   00000A   22           RET
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_3f99999a:
+   \   000000   9A99993F     DD 3F99999AH
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_4007e6cf:
+   \   000000   CFE60740     DD 4007E6CFH
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??delayms?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    delayms
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Start?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Start
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Stop?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Stop
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??SendACK?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    SendACK
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??RecvACK?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    RecvACK
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??SendByte?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    SendByte
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??RecvByte?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    RecvByte
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Single_Write?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Single_Write
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Multiple_Read?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Multiple_Read
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??lux?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    lux
+    177              
+    178              
+    179          
+
+   Maximum stack usage in bytes:
+
+     Function           ISTACK PSTACK XSTACK
+     --------           ------ ------ ------
+     Multiple_Read          1      0     26
+       -> Start             0      0     20
+       -> SendByte          0      0     20
+       -> RecvByte          0      0     20
+       -> SendACK           0      0     20
+       -> SendACK           0      0     20
+       -> Stop              0      0     20
+     RecvACK                2      0      9
+       -> delayms           4      0      0
+       -> delayms           4      0      0
+       -> delayms           4      0      0
+       -> delayms           4      0      0
+     RecvByte               0      0     19
+       -> delayms           0      0     18
+       -> delayms           0      0     18
+       -> delayms           0      0     18
+     SendACK                0      0     19
+       -> delayms           0      0     18
+       -> delayms           0      0     18
+     SendByte               0      0     19
+       -> delayms           0      0     18
+       -> RecvACK           0      0     18
+     Single_Write           0      0     25
+       -> Start             0      0     18
+       -> SendByte          0      0     18
+       -> SendByte          0      0     18
+       -> Stop              0      0     18
+     Start                  2      0     10
+       -> delayms           4      0      0
+       -> delayms           4      0      0
+       -> delayms           4      0      0
+     Stop                   2      0     10
+       -> delayms           4      0      0
+       -> delayms           4      0      0
+     delayms                0      0     16
+     lux                    0      0     16
+       -> delayms           0      0     32
+       -> Single_Write      0      0     32
+       -> delayms           0      0     32
+       -> Single_Write      0      0     32
+       -> Single_Write      0      0     32
+       -> delayms           0      0     32
+       -> Multiple_Read     0      0     32
+
+
+   Segment part sizes:
+
+     Function/Label        Bytes
+     --------------        -----
+     _A_P1                    1
+     P1SEL                    1
+     P1INP                    1
+     P1DIR                    1
+     BUF                      3
+     dis_data                 2
+     Light                    2
+     LUXerror                 1
+     delayms                 12
+     Start                   18
+     ?Subroutine0            12
+     ??Subroutine5_0          8
+     Stop                    17
+     SendACK                 20
+     ?Subroutine2             2
+     ?Subroutine1             5
+     RecvACK                 39
+     ?Subroutine4            11
+     SendByte                35
+     RecvByte                40
+     Single_Write            25
+     Multiple_Read           63
+     lux                    117
+     ?Subroutine3            11
+     __Constant_3f99999a      4
+     __Constant_4007e6cf      4
+     ??delayms?relay          6
+     ??Start?relay            6
+     ??Stop?relay             6
+     ??SendACK?relay          6
+     ??RecvACK?relay          6
+     ??SendByte?relay         6
+     ??RecvByte?relay         6
+     ??Single_Write?relay     6
+     ??Multiple_Read?relay    6
+     ??lux?relay              6
+
+ 
+ 435 bytes in segment BANKED_CODE
+  60 bytes in segment BANK_RELAYS
+   4 bytes in segment SFR_AN
+   8 bytes in segment XDATA_ROM_C
+   8 bytes in segment XDATA_Z
+ 
+ 495 bytes of CODE  memory
+   0 bytes of CONST memory (+ 8 bytes shared)
+   0 bytes of DATA  memory (+ 4 bytes shared)
+   8 bytes of XDATA memory
+
+Errors: none
+Warnings: none
