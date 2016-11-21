@@ -4,8 +4,8 @@
 /******************************************************************************
 引脚分配
 *******************************************************************************/
-#define DATA_P P1_5
-#define SCK_P P1_4
+#define DATA_P P0_7
+#define SCK_P P0_6
 
 /******************************************************************************
 函数原型
@@ -28,7 +28,7 @@ uint8 SHTerror=0;
 *******************************************************************************/
 void SHT_Start(void)
 {
-  P1DIR|=0x30;
+  P0DIR |= 0xc0;
   MicroWait(1000);
   SCK_P=1;
   DATA_P=1;
@@ -44,7 +44,7 @@ void SHT_Start(void)
 uint8 SHT_WritCOM(uint8 com)
 {
   uint8 i,ADRR;
-  ADRR=ADR_W;
+  ADRR = ADR_W;
 //发送地址*************************************
   for(i=0;i<8;i++)
   {
@@ -61,7 +61,7 @@ uint8 SHT_WritCOM(uint8 com)
   }
   DATA_P=1;
   //检测ASK信号
-  P1DIR &=~0x20;
+  P0DIR &= ~0x80;
   MicroWait(1000);
   SCK_P=1;
   MicroWait(5);
@@ -71,7 +71,7 @@ uint8 SHT_WritCOM(uint8 com)
   SCK_P=0;
   MicroWait(20);
 //发送命令******************************************  
-  P1DIR |=0x20;
+  P0DIR |= 0x80;
   MicroWait(1000);
   for(i=0;i<8;i++)
   {
@@ -88,7 +88,7 @@ uint8 SHT_WritCOM(uint8 com)
   }
   DATA_P=1;
   //检测ASK信号
-  P1DIR &=~0x20;
+  P0DIR &= ~0x80;
   MicroWait(1000);
   SCK_P=1;
   MicroWait(5);
@@ -125,7 +125,7 @@ uint16 SHT_ReadData(void)
   }
   DATA_P=1;
   //检测ASK信号
-  P1DIR &=~0x20;
+  P0DIR &=~0x80;
   MicroWait(1000);
   SCK_P=1;
   MicroWait(5);
@@ -136,7 +136,7 @@ uint16 SHT_ReadData(void)
   MicroWait(10);
   
   SCK_P=1;
-  P1DIR &=~0x10;
+  P0DIR &= ~0x40;
   MicroWait(1000);
   
   for(i=0;i<150;i++) //等待150ms
@@ -148,7 +148,7 @@ uint16 SHT_ReadData(void)
   if(SCK_P==0)
     SHTerror=1;          //检测应答  错误返回error=1
 //读取高字节****************************************************************  
-  P1DIR|=0x10;
+  P0DIR |= 0x40;
   MicroWait(1000);
 
   DATA_P=1;
@@ -163,7 +163,7 @@ uint16 SHT_ReadData(void)
     MicroWait(10);
   }
 //回复ASK********************************************************************
-  P1DIR |=0x20;
+  P0DIR |= 0x80;
   MicroWait(1000);
   DATA_P=0;
   MicroWait(5);
@@ -172,7 +172,7 @@ uint16 SHT_ReadData(void)
   SCK_P=0;
   MicroWait(10);
 //读取低字节*****************************************************************
-  P1DIR &=~0x20;
+  P0DIR &=~0x80;
   MicroWait(1000);
   for(i=0;i<8;i++)
   {
@@ -185,7 +185,7 @@ uint16 SHT_ReadData(void)
     MicroWait(10);
   }
 //回应ASK*****************************************************************
-  P1DIR |=0x20;
+  P0DIR |=0x80;
   MicroWait(1000);
   DATA_P=1;
   MicroWait(5);

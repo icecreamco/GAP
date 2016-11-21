@@ -22,7 +22,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -129,11 +129,11 @@ static CODE const macPib_t macPibDefaults =
 
   /* Proprietary */
 #if defined (HAL_PA_LNA)
-  19,                                         /* phyTransmitPower for CC2591 */
+  20,                                         /* phyTransmitPower for CC2591 */
 #elif defined (HAL_PA_LNA_CC2590)
   11,                                         /* phyTransmitPower for CC2590 */
 #else
-  0,                                          /* phyTransmitPower without frontend */
+  3,                                          /* phyTransmitPower without frontend */
 #endif
   MAC_CHAN_11,                                /* logicalChannel */
   {0, SADDR_MODE_EXT},                        /* extendedAddress */

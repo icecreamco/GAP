@@ -74,6 +74,7 @@
 #include "hal_lcd.h"
 #include "hal_led.h"
 #include "hal_key.h"
+#include "hal_sleep.h"
 
 #include "MT_UART.h"
 #include "hal_uart.h"
@@ -222,17 +223,17 @@ void SampleApp_Init( uint8 task_id )
   P1DIR &= ~0X01;          //P1_0设置为输入
   P1INP |= 0X01;          //P1_0设置为高阻态
 
-  P1DIR &= ~0X30;          //设置P1_4 P1_5为输入
   P1DIR &= ~0X0C;          //设置P1_3 P1_2为输入
-  P1INP |= 0X30;           //设置P1_4 P1_5为高阻态
   P1INP |= 0X0C;           //设置P1_3 P1_2为高阻态
  
   //读取节点地址//
+  // P0_0 - P0_5
   P0SEL = 0X00;
   P0DIR = 0X00;            //设置P0为输入
   P0INP = 0X00;
   Delay_ms( 1000 );          //延时1000MS
   ADDR = P0;
+  ADDR &= 0x3f;
   if(ADDR == 0)
     ADDR = 1;
   delayt = Delaybet * ADDR;
@@ -352,6 +353,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
               || (SampleApp_NwkState == DEV_END_DEVICE) 
                 )
           {
+			startSleepTime = DEFAULT_START_SLEEP_TIME;
 //*******************定时器开启***********************************************//
         // Start sending the periodic message in a regular interval.
             pf = 0;                             //定时器事件标志位清零
@@ -399,7 +401,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
       SWLED = 0;                             //LED关闭
       
 //**************连上网直接发一次数据******************************************//
-      P1INP &= ~0X30;                        //取消P1_5 P1_4的高阻态模式
+      P0INP &= ~0Xc0;                        //取消P0_6 P0_7的高阻态模式
       P1INP &= ~0X0C;                        //取消P1_3 P1_2的高阻态模式
       P1DIR |= 0X01;                         //设置P1_0为输出
       Delay_ms( 1 );
@@ -411,9 +413,9 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
       P1DIR &= ~0X01;                        //设置P1_0为输入
       P1INP |= 0X01;                       //设置P1_0为高阻态
        
-      P1DIR &= ~0X30;                        //设置P1_4 P1_5为输入
+      P0DIR &= ~0Xc0;                        //设置P0_6 P0_7为输入
       P1DIR &= ~0X0C;                        //设置P1_3 P1_2为输入
-      P1INP |= 0X30;                         //设置P1_4 P1_5为高阻态
+      P0INP |= 0Xc0;                         //设置P0_6 P0_7为高阻态
       P1INP |= 0X0C;                         //设置P1_3 P1_2为高阻态          
 
 //***************设置rate   进入低功耗****************************************//
@@ -430,7 +432,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
       {
         TX_Flag = 0;                          //发送标志位清零
 //*****************发送采集数据***********************************************//        
-        P1INP &= ~0X30;           
+        P0INP &= ~0Xc0;           
         P1INP &= ~0X0C;
         P1DIR |= 0X01;
         Delay_ms( 1 );
@@ -442,9 +444,9 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
         P1DIR &= ~0X01;
         P1INP |= 0X01;
          
-        P1DIR &= ~0X30;                    
+        P0DIR &= ~0Xc0;                    
         P1DIR &= ~0X0C;
-        P1INP |= 0X30;
+        P0INP |= 0Xc0;
         P1INP |= 0X0C;
       }
       osal_start_timerEx( SampleApp_TaskID, SAMPLEAPP_SEND_PERIODIC_MSG_EVT,

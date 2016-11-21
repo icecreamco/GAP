@@ -69,8 +69,10 @@
 #include "ZGlobals.h"
 #endif
 
-#define MaxSleepTime 64000            //每次睡眠的最大时间
-uint32 Time_Interval=3600000;         //数据采集间隔
+uint8 sleepMode = FREE_SLEEP;						// 开机联网睡眠或是采集睡眠
+uint32 startSleepTime = DEFAULT_START_SLEEP_TIME;				// 开机联网失败的睡眠时间
+uint32 Time_Interval = 0;         //数据采集间隔
+#define MAXSLEEPTIME 64000
 /* ------------------------------------------------------------------------------------------------
  *                                           Macros
  * ------------------------------------------------------------------------------------------------
@@ -308,7 +310,7 @@ void halSleep( uint16 osal_timeout )
   /* HAL_SLEEP_PM2 is entered only if the timeout is zero and
    * the device is a stimulated device.
    */
-  halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
+	halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
 
   /* DEEP sleep can only be entered when zgPollRate == 0.
    * This is to eliminate any possibility of entering PM3 between
@@ -355,40 +357,34 @@ void halSleep( uint16 osal_timeout )
 //***********************设置睡眠时间*****************************************//
       if (timeout != 0)
       {
-          if(CountF==1)                                //如果计算睡眠时间标志位为1 计算睡眠时间
+          if(CountF == 1)                                //如果计算睡眠时间标志位为1 计算睡眠时间
           {
-            CountF=0;                                  //消除标志位
-            if(Mode=='M')                              //调试模式采集间隔为2min
-              Time_Interval=120000;
-            else if(Mode=='C')                         //正常模式采集间隔为1h
-              Time_Interval=3600000;  
-            
-            SleepTime=Time_Interval-(osal_systemClock%Time_Interval)+(uint32)delayt;
-            
-            TCount=(uint8)(SleepTime/MaxSleepTime);    //最大睡眠时间的个数
-            SleepTime=(uint32)(SleepTime%MaxSleepTime);//剩余的睡眠时间
+            	CountF = 0;                                  //消除标志位
+				if(sleepMode == DATA_SLEEP) {
+				  	if(Mode == 'M')                              //调试模式采集间隔为2min
+              			Time_Interval = 120000;
+            		else if(Mode == 'C')                        //正常模式采集间隔为1h
+              			Time_Interval = 3600000; 
+					
+					SleepTime = Time_Interval-(osal_systemClock % Time_Interval) + (uint32)delayt;
+				} else if (sleepMode == START_SLEEP) {
+				  	SleepTime = startSleepTime;
+				}             
+                      
+            	TCount = (uint8)(SleepTime / MAXSLEEPTIME);    //最大睡眠时间的个数
+            	SleepTime = (uint32)(SleepTime % MAXSLEEPTIME);//剩余的睡眠时间
           }
-          if(Requestflag==1)                           //网络重连睡眠
-         {
-           if(Mode=='M')                               //调试模式睡眠5S
-             SleepTime_MS=5000;     
-           else if(Mode=='C')                          //正常模式睡眠1h
-            SleepTime_MS=360000;
-         }
-         else
-         {
-             if(TCount>0)
-             {
+		  
+          if(TCount > 0) {
                TCount--;
-               SleepTime_MS=MaxSleepTime;
-             }
-             else
-             {
-               SleepTime_MS=SleepTime;
-               TX_Flag=1;
-               CountF=1;
-             }
-         }
+               SleepTime_MS = MAXSLEEPTIME;
+          } else {
+               SleepTime_MS = SleepTime;
+               CountF = 1;
+			   if(sleepMode == DATA_SLEEP) {	// 若是数据睡眠，则到了采集发送的时间
+			   		TX_Flag=1;
+			   }
+          }
 //****************设置睡眠定时器 单位为MS*************************************//
          halSleepSetTimer(HAL_SLEEP_MS_TO_320US(SleepTime_MS));
         

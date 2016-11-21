@@ -22,7 +22,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -58,7 +58,7 @@
  *                        Note that only one of them can be defined
  * ------------------------------------------------------------------------------------------------
  */
-#define xHAL_PA_LNA
+#define HAL_PA_LNA
 #define xHAL_PA_LNA_CC2590
 
 
@@ -277,7 +277,7 @@ extern void MAC_RfFrontendSetup(void);
   LED1_DDR |= LED1_BV;                                           \
                                                                  \
   /* Set PA/LNA HGM control P0_7 */                              \
-  P0DIR |= BV(7);                                                \
+ // P0DIR |= BV(7);                                                \
                                                                  \
   /* configure tristates */                                      \
   P0INP |= PUSH2_BV;                                             \

@@ -169,8 +169,7 @@ pfnZdoCb zdoCBFunc[MAX_ZDO_CB_FUNC];
 /*********************************************************************
  * EXTERNAL VARIABLES
  */
-uint8 Requestflag=0;          //联网不成功的睡眠标志位
-uint8 CountRequest=0;         //联网次数
+
 /*********************************************************************
  * EXTERNAL FUNCTIONS
  */
@@ -1136,37 +1135,36 @@ void ZDApp_ProcessOSALMsg( osal_event_hdr_t *msgPtr )
             ZDApp_NetworkInit( MANAGEDSCAN_DELAY_BETWEEN_SCANS );
     #else
 //********睡眠然后重连********************************************************//
-//* 连续失败3次后进入睡眠
-//* 睡眠分为两种情况：调试模式--5S   正常模式--1h
+//* 失败后进入睡眠
+//* 初始睡眠时间为5S，之后每次翻倍，当睡眠时间大于一个小时，则设置睡眠时间为一个小时
             zdoDiscCounter++;
-           
-            CountRequest++;                 //联网次数计数
-            if(CountRequest>3)              //联网失败3次后进去睡眠模式
-            {
-               CountRequest=0;              //次数清零
-               P1DIR|=0X03;                 
-               SWLED=0;                     //LED关闭
-               NLME_SetPollRate(0);         
-               NLME_SetQueuedPollRate(0);
-               NLME_SetResponseRate(0);
-               Requestflag=1;               //联网睡眠标志位置1 开启睡眠
-               if(Mode=='M')
-               {
-                 halSleep(1000);            //时间在函数中设定  5S
-               }
-               else if(Mode=='C')
-               {
-                 for(i=0;i<10;i++)          //时间在函数中设定  1h
-                 {
-                   halSleep(1000);          
-                 }
-               }
-               Requestflag=0;               //联网睡眠标志位置0  解除睡眠
-               NLME_SetPollRate(1000);
-               NLME_SetQueuedPollRate(100);
-               NLME_SetResponseRate(100);
-               SWLED=1;                     //LED开启
-            } 
+
+            P1DIR |= 0X03;                 
+            SWLED = 0;                     //LED关闭
+			   
+            NLME_SetPollRate(0);         
+            NLME_SetQueuedPollRate(0);
+            NLME_SetResponseRate(0);
+			  
+			// 设置睡眠所用参数
+			sleepMode = START_SLEEP;
+			CountF = 1;
+			// 初始睡眠时间为5S，之后每次翻倍，当睡眠时间大于一个小时，则设置睡眠时间为一个小时
+			startSleepTime *= 2;  
+			if(startSleepTime > 3600000) {
+				startSleepTime = 3600000;
+			}
+			halSleep(1000);		// 睡眠函数，参数无意义
+			while(CountF == 0) {
+				halSleep(1000);
+			}
+            sleepMode = FREE_SLEEP;
+			
+            NLME_SetPollRate(1000);
+            NLME_SetQueuedPollRate(100);
+            NLME_SetResponseRate(100);
+            
+			SWLED = 1;                     //LED开启
             ZDApp_NetworkInit( (uint16)(BEACON_REQUEST_DELAY
                   + ((uint16)(osal_rand()& BEACON_REQ_DELAY_MASK))) );
     #endif
@@ -2419,23 +2417,7 @@ void ZDO_JoinConfirmCB( uint16 PanId, ZStatus_t Status )
   }
   else                    //超次处理  5次
   {  
-/*     SWLED=0;
-     CountRequest++;
-     if(CountRequest>5)
-     {
-       CountRequest=0;
-       
-       NLME_SetPollRate(0);
-       NLME_SetQueuedPollRate(0);
-       NLME_SetResponseRate(0);
-       Requestflag=1;
-       halSleep(1000);         //时间在函数中设定  5分钟
-       Requestflag=0;
-       NLME_SetPollRate(1000);
-       NLME_SetQueuedPollRate(100);
-       NLME_SetResponseRate(100);
-       SWLED=1;
-     }     */            
+
 #if defined(BLINK_LEDS)
     HalLedSet ( HAL_LED_3, HAL_LED_MODE_FLASH );  // Flash LED to show failure
 #endif

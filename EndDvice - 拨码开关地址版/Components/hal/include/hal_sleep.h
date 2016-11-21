@@ -22,7 +22,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -45,6 +45,14 @@ extern "C"
 {
 #endif
 
+extern uint8 sleepMode;						// ¿ª»úÁªÍøË¯Ãß»òÊÇ²É¼¯Ë¯Ãß
+#define FREE_SLEEP 0
+#define START_SLEEP 1					// ¿ª»úÁªÍøÊ§°ÜË¯Ãß
+#define DATA_SLEEP 2					// ²É¼¯Êý¾ÝË¯Ãß
+#define DEFAULT_START_SLEEP_TIME 5000
+extern uint32 startSleepTime;				// ¿ª»úÁªÍøÊ§°ÜµÄË¯ÃßÊ±¼ä
+extern uint32 Time_Interval;         //Êý¾Ý²É¼¯¼ä¸ô
+  
 /*********************************************************************
  * FUNCTIONS
  */
