@@ -215,6 +215,7 @@ void ZDApp_InitZdoCBFunc(void);
 /*********************************************************************
  * LOCAL VARIABLES
  */
+uint8 linkedCount = 0;
 
 uint8 ZDAppTaskID;
 uint8 nwkStatus;
@@ -1020,7 +1021,7 @@ void ZDApp_ProcessOSALMsg( osal_event_hdr_t *msgPtr )
   uint8 sentEP;       // This should always be 0
   uint8 sentStatus;
   afDataConfirm_t *afDataConfirm;
-  uint8 tmp,i;
+  uint8 tmp;
 
   switch ( msgPtr->event )
   {
@@ -1138,33 +1139,37 @@ void ZDApp_ProcessOSALMsg( osal_event_hdr_t *msgPtr )
 //* 失败后进入睡眠
 //* 初始睡眠时间为5S，之后每次翻倍，当睡眠时间大于一个小时，则设置睡眠时间为一个小时
             zdoDiscCounter++;
-
-            P1DIR |= 0X03;                 
-            SWLED = 0;                     //LED关闭
-			   
-            NLME_SetPollRate(0);         
-            NLME_SetQueuedPollRate(0);
-            NLME_SetResponseRate(0);
-			  
-			// 设置睡眠所用参数
-			sleepMode = START_SLEEP;
-			CountF = 1;
-			// 初始睡眠时间为5S，之后每次翻倍，当睡眠时间大于一个小时，则设置睡眠时间为一个小时
-			startSleepTime *= 2;  
-			if(startSleepTime > 3600000) {
-				startSleepTime = 3600000;
-			}
-			halSleep(1000);		// 睡眠函数，参数无意义
-			while(CountF == 0) {
-				halSleep(1000);
-			}
-            sleepMode = FREE_SLEEP;
+			linkedCount++;
 			
-            NLME_SetPollRate(1000);
-            NLME_SetQueuedPollRate(100);
-            NLME_SetResponseRate(100);
-            
-			SWLED = 1;                     //LED开启
+			if(linkedCount > 3) {
+			  	linkedCount = 0;
+			  	P1DIR |= 0X03;                 
+				SWLED = 0;                     //LED关闭
+				   
+				NLME_SetPollRate(0);         
+				NLME_SetQueuedPollRate(0);
+				NLME_SetResponseRate(0);
+				  
+				// 设置睡眠所用参数
+				sleepMode = START_SLEEP;
+				CountF = 1;
+				// 初始睡眠时间为5S，之后每次翻倍，当睡眠时间大于一个小时，则设置睡眠时间为一个小时
+				startSleepTime *= 2;  
+				if(startSleepTime > 3600000) {
+					startSleepTime = 3600000;
+				}
+				halSleep(1000);		// 睡眠函数，参数无意义
+				while(CountF == 0) {
+					halSleep(1000);
+				}
+				sleepMode = FREE_SLEEP;
+				
+				NLME_SetPollRate(1000);
+				NLME_SetQueuedPollRate(100);
+				NLME_SetResponseRate(100);
+				
+				SWLED = 1;                     //LED开启
+			}
             ZDApp_NetworkInit( (uint16)(BEACON_REQUEST_DELAY
                   + ((uint16)(osal_rand()& BEACON_REQ_DELAY_MASK))) );
     #endif

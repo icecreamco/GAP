@@ -79,6 +79,7 @@
 #include "hal_uart.h"
 #include "Mac_low_level.h"
 
+#include "mac_rx.h"
 /*********************************************************************
  * MACROS
  */
@@ -167,6 +168,8 @@ uint8 TX_2=0;                     //第二次在线表发送标志
 uint8 LinkWait=0;                 //建网等待标志
 uint8 LinkCount=0;                //建网等待计数
 
+uint8 res16[5];
+uint8 res8[3];
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
@@ -179,6 +182,9 @@ void SampleApp_Send_P2P_Message(uint8 dat1,uint8 dat2);
 void Delayus(void);                //10us延时
 void Delayms(uint16 Time);         //n ms延时
 int isDigit(uint8 *x,uint8 n);     //判断字符串是否为纯数字 是返回1 否则返回0
+
+void convert16(uint16 data);
+void convert8(uint8 data);
 /*********************************************************************
  * NETWORK LAYER CALLBACKS
  */
@@ -573,6 +579,11 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
   uint8 data[25]={0};                                        //接收数据缓存数组
   uint8 addr_i;                                              //**************rssilevel;测强度
   int Hvalue;                                                //湿度数值
+  uint16 sourceAddr;
+  uint16 routerAddr;
+  uint8 quality;
+  uint8 info[] = "Source ADDR :      ; Router ADDR :      ; Link Quality :      ";
+  uint8 i;
   switch ( pkt->clusterId )
   {
     case SAMPLEAPP_PERIODIC_CLUSTERID:
@@ -581,15 +592,29 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       
     case SAMPLEAPP_P2P_CLUSTERID:
        osal_memcpy(data,pkt->cmd.Data,pkt->cmd.DataLength);  //接收数据放入缓存数组
-
-//检测信号强度**********************************************************
-       //rssilevel=macRadioEnergyDetectStop();               //停止检测 串口输出强度值
-       //rssi[0]=rssilevel/100+0x30;
-       // rssi[1]=rssilevel%100/10+0x30;
-       //rssi[2]=rssilevel%10+0x30;
-       //HalUARTWrite(0,rssi ,3);
-       //macRadioEnergyDetectStart();                        //再次开始检测
-       
+		
+	    sourceAddr = pkt->srcAddr.addr.shortAddr;
+		convert16(sourceAddr);
+		for(i = 0; i < 5; i++) {
+			info[14 + i] = res16[i];
+		}
+		routerAddr = lastDeviceShortAddr;
+		if(routerAddr == sourceAddr) {
+			for(i = 0; i < 5; i++) {
+				info[35 + i] = ' ';
+			}
+		} else {
+			convert16(routerAddr);
+			for(i = 0; i < 5; i++) {
+				info[35 + i] = res16[i];
+			}
+		}
+		quality = pkt->LinkQuality;
+		convert8(quality);
+		for(i = 0; i < 3; i++) {
+				info[57 + i] = res8[i];
+		}		
+       HalUARTWrite(0, info, 62);  
 //**************************湿度爆表处理***********************************
        if(data[12]==' ')
        {
@@ -649,11 +674,14 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
        if((data[0]=='D') && (pkt->cmd.DataLength==21))                 //若数据首字符为'D' 长度为21 为采集数据
        {
          HalUARTWrite(0, data, pkt->cmd.DataLength);                   //串口上传接收数据
+		 HalUARTWrite(0, "\n", 1);
          addr_i=(data[1]-0x41)*ABLen+(data[2]-0x30)*10+(data[3]-0x30); //计算节点地址标号
          DataFlag[addr_i-1]++;                                         //相应地址标号的在线标志位加1
        }
        else if(data[0]=='T')                                           //若数据首字符为'T' 为时钟同步请求
        {
+		 HalUARTWrite(0, "clock synchronize!", 18);
+		 HalUARTWrite(0, "\n", 1);
          SampleApp_SendPeriodicMessage((data[1]-0x41)*ABLen+(data[2]-0x30)*10+(data[3]-0x30),0x01);
        }
       break;  
@@ -663,6 +691,25 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       HalLedBlink( HAL_LED_4, 4, 50, (flashTime / 4) );
       break;
   }
+}
+
+void convert16(uint16 data) {
+	res16[0] = data / 10000 + 0x30;
+	data %= 10000;
+	res16[1] = data / 1000 + 0x30;
+	data %= 1000;
+	res16[2] = data / 100 + 0x30;
+	data %= 100;
+	res16[3] = data / 10 + 0x30;
+	data %= 10;
+	res16[4] = data + 0x30;
+}
+void convert8(uint8 data) {
+	res8[0] = data / 100 + 0x30;
+	data %= 100;
+	res8[1] = data / 10 + 0x30;
+	data %= 10;
+	res8[2] = data + 0x30;
 }
 
 /*********************************************************************

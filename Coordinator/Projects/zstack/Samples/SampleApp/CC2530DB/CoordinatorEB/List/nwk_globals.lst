@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         26/Aug/2016  18:41:16 #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         22/Nov/2016  17:02:34 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -9,20 +9,20 @@
 #    Calling convention =  xdata reentrant                                    #
 #    Constant location  =  data_rom                                           #
 #    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Co #
-#                          mponents\stack\nwk\nwk_globals.c                   #
-#    Command line       =  -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\Tools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ         #
+#    Source file        =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Compon #
+#                          ents\stack\nwk\nwk_globals.c                       #
+#    Command line       =  -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pro #
+#                          jects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T #
+#                          ools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ             #
 #                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
 #                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
 #                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO       #
+#                          -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pro #
+#                          jects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T #
+#                          ools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO           #
 #                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
 #                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0x0101                       #
+#                          -DZDAPP_CONFIG_PAN_ID=0x2222                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
 #                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
@@ -43,94 +43,92 @@
 #                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 C:\Users\icecreamco\Desktop #
-#                          \GAP-1.0\Coordinator\Components\stack\nwk\nwk_glob #
-#                          als.c -D ZTOOL_P1 -D HAL_UART=TRUE -D AUTO_RESET   #
-#                          -D xMT_TASK -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D     #
+#                          \GAP\Coordinator\Components\stack\nwk\nwk_globals. #
+#                          c -D ZTOOL_P1 -D HAL_UART=TRUE -D AUTO_RESET -D    #
+#                          xMT_TASK -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D        #
 #                          xLCD_SUPPORTED=DEBUG -lC                           #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\List\ -lA C:\Users\icecreamco\Desktop\GAP-1.0 #
-#                          \Coordinator\Projects\zstack\Samples\SampleApp\CC2 #
-#                          530DB\CoordinatorEB\List\ --diag_suppress          #
-#                          Pe001,Pa010 -o C:\Users\icecreamco\Desktop\GAP-1.0 #
-#                          \Coordinator\Projects\zstack\Samples\SampleApp\CC2 #
-#                          530DB\CoordinatorEB\Obj\ -e --no_code_motion       #
-#                          --debug --core=plain --dptr=16,1                   #
-#                          --data_model=large --code_model=banked             #
-#                          --calling_convention=xdata_reentrant               #
-#                          --place_constants=data_rom --nr_virtual_regs 16    #
-#                          -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\ -I    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\Source #
-#                          \ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinat #
-#                          or\Projects\zstack\Samples\SampleApp\CC2530DB\..\. #
-#                          .\..\ZMain\TI2530DB\ -I C:\Users\icecreamco\Deskto #
-#                          p\GAP-1.0\Coordinator\Projects\zstack\Samples\Samp #
-#                          leApp\CC2530DB\..\..\..\..\..\Components\hal\inclu #
-#                          de\ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordin #
-#                          ator\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\target\CC2530EB\ -I    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\include\ -I                   #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\high_level\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\low_level\srf04\ -I           #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\low_level\srf04\single_chip\  #
-#                          -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\..\..\Components\mt\ -I                         #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\osal\include\ -I                  #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\services\saddr\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\services\sdata\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\af\ -I                      #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\nwk\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sapi\ -I                    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sec\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sys\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\zdo\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\zmac\ -I                          #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\zmac\f8w\ -Ohz                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \List\ -lA C:\Users\icecreamco\Desktop\GAP\Coordin #
+#                          ator\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
+#                          ordinatorEB\List\ --diag_suppress Pe001,Pa010 -o   #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \Obj\ -e --no_code_motion --debug --core=plain     #
+#                          --dptr=16,1 --data_model=large                     #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data_rom                  #
+#                          --nr_virtual_regs 16 -I C:\Users\icecreamco\Deskto #
+#                          p\GAP\Coordinator\Projects\zstack\Samples\SampleAp #
+#                          p\CC2530DB\ -I C:\Users\icecreamco\Desktop\GAP\Coo #
+#                          rdinator\Projects\zstack\Samples\SampleApp\CC2530D #
+#                          B\..\Source\ -I C:\Users\icecreamco\Desktop\GAP\Co #
+#                          ordinator\Projects\zstack\Samples\SampleApp\CC2530 #
+#                          DB\..\..\..\ZMain\TI2530DB\ -I                     #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\hal\include\ -I                       #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\hal\target\CC2530EB\ -I               #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\include\ -I                       #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\high_level\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\low_level\srf04\ -I               #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\low_level\srf04\single_chip\ -I   #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mt\ -I C:\Users\icecreamco\Desktop\GA #
+#                          P\Coordinator\Projects\zstack\Samples\SampleApp\CC #
+#                          2530DB\..\..\..\..\..\Components\osal\include\ -I  #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\services\saddr\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\services\sdata\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\af\ -I                          #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\nwk\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sapi\ -I                        #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sec\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sys\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\zdo\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\zmac\ -I C:\Users\icecreamco\Desktop\ #
+#                          GAP\Coordinator\Projects\zstack\Samples\SampleApp\ #
+#                          CC2530DB\..\..\..\..\..\Components\zmac\f8w\ -Ohz  #
 #                          --require_prototypes                               #
-#    List file          =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\List\nwk_globals.lst                          #
-#    Object file        =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\Obj\nwk_globals.r51                           #
+#    List file          =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \List\nwk_globals.lst                              #
+#    Object file        =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \Obj\nwk_globals.r51                               #
 #                                                                             #
 #                                                                             #
 ###############################################################################
 
-C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals.c
+C:\Users\icecreamco\Desktop\GAP\Coordinator\Components\stack\nwk\nwk_globals.c
       1          /**************************************************************************************************
       2            Filename:       nwk_globals.c
       3            Revised:        $Date: 2012-03-07 01:04:58 -0800 (Wed, 07 Mar 2012) $
@@ -263,7 +261,7 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
    \                                 In  segment CODE_C, align 1
     115          CONST uint8 gNWK_MAX_SLEEPING_END_DEVICES = NWK_MAX_DEVICES - NWK_MAX_ROUTERS;
    \                     gNWK_MAX_SLEEPING_END_DEVICES:
-   \   000000   1B           DB 27
+   \   000000   21           DB 33
     116          
     117          // Variables for MAX data buffer levels
 
@@ -313,26 +311,27 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
    \   000002                REQUIRE __INIT_XDATA_Z
     130          
     131          #if ( STACK_PROFILE_ID == ZIGBEEPRO_PROFILE )
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
     132            uint8 CskipRtrs[1] = {0};
-   \                     CskipRtrs:
-   \   000000                DS 1
-   \   000001                REQUIRE __INIT_XDATA_Z
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
     133            uint8 CskipChldrn[1] = {0};
-   \                     CskipChldrn:
-   \   000000                DS 1
-   \   000001                REQUIRE __INIT_XDATA_Z
     134          #elif ( STACK_PROFILE_ID == HOME_CONTROLS )
     135            uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {6,6,6,6,6,0};
     136            uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {20,20,20,20,20,20};
     137          #elif ( STACK_PROFILE_ID == GENERIC_STAR )
     138          //  uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
     139          //  uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
     140            uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {0,0};
+   \                     CskipRtrs:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
     141            uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {32,0};
+   \                     CskipChldrn:
+   \   000000                DS 2
+   \   000002                REQUIRE `?<Initializer for CskipChldrn>`
+   \   000002                REQUIRE __INIT_XDATA_I
     142          #elif ( STACK_PROFILE_ID == NETWORK_SPECIFIC )
     143            uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
     144            uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
@@ -791,17 +790,12 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
    \   000011   F0           MOVX    @DPTR,A
     374            _NIB.MaxDepth = MAX_NODE_DEPTH;
    \   000012   90....       MOV     DPTR,#_NIB + 4
-   \   000015   7414         MOV     A,#0x14
-   \   000017   F0           MOVX    @DPTR,A
+   \   000015   14           DEC     A
+   \   000016   F0           MOVX    @DPTR,A
     375          
     376          #if ( NWK_MODE == NWK_MODE_MESH )
     377            _NIB.beaconOrder = BEACON_ORDER_NO_BEACONS;
-   \   000018   90....       MOV     DPTR,#_NIB + 40
-   \   00001B   740F         MOV     A,#0xf
-   \   00001D   F0           MOVX    @DPTR,A
     378            _NIB.superFrameOrder = BEACON_ORDER_NO_BEACONS;
-   \   00001E   A3           INC     DPTR
-   \   00001F   F0           MOVX    @DPTR,A
     379          #endif
     380          
     381            // BROADCAST SETTINGS:
@@ -813,35 +807,35 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
     387            //   Passive Ack Timeout
     388            //     - set to multiples of 100ms
     389            _NIB.BroadcastDeliveryTime = zgBcastDeliveryTime;
-   \   000020   90....       MOV     DPTR,#zgBcastDeliveryTime
-   \   000023   E0           MOVX    A,@DPTR
-   \   000024   90....       MOV     DPTR,#_NIB + 7
-   \   000027   F0           MOVX    @DPTR,A
+   \   000017   90....       MOV     DPTR,#zgBcastDeliveryTime
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   90....       MOV     DPTR,#_NIB + 7
+   \   00001E   F0           MOVX    @DPTR,A
     390            _NIB.PassiveAckTimeout     = zgPassiveAckTimeout;
-   \   000028   90....       MOV     DPTR,#zgPassiveAckTimeout
-   \   00002B   E0           MOVX    A,@DPTR
-   \   00002C   90....       MOV     DPTR,#_NIB + 1
-   \   00002F   F0           MOVX    @DPTR,A
+   \   00001F   90....       MOV     DPTR,#zgPassiveAckTimeout
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   90....       MOV     DPTR,#_NIB + 1
+   \   000026   F0           MOVX    @DPTR,A
     391            _NIB.MaxBroadcastRetries   = zgMaxBcastRetires;
-   \   000030   90....       MOV     DPTR,#zgMaxBcastRetires
-   \   000033   E0           MOVX    A,@DPTR
-   \   000034   90....       MOV     DPTR,#_NIB + 2
-   \   000037   F0           MOVX    @DPTR,A
+   \   000027   90....       MOV     DPTR,#zgMaxBcastRetires
+   \   00002A   E0           MOVX    A,@DPTR
+   \   00002B   90....       MOV     DPTR,#_NIB + 2
+   \   00002E   F0           MOVX    @DPTR,A
     392          
     393            _NIB.ReportConstantCost = 0;
-   \   000038   90....       MOV     DPTR,#_NIB + 8
-   \   00003B   E4           CLR     A
-   \   00003C   F0           MOVX    @DPTR,A
+   \   00002F   90....       MOV     DPTR,#_NIB + 8
+   \   000032   E4           CLR     A
+   \   000033   F0           MOVX    @DPTR,A
     394            _NIB.RouteDiscRetries = 0;
-   \   00003D   A3           INC     DPTR
-   \   00003E   F0           MOVX    @DPTR,A
+   \   000034   A3           INC     DPTR
+   \   000035   F0           MOVX    @DPTR,A
     395            _NIB.SecureAllFrames = USE_NWK_SECURITY;
-   \   00003F   90....       MOV     DPTR,#_NIB + 11
-   \   000042   F0           MOVX    @DPTR,A
+   \   000036   90....       MOV     DPTR,#_NIB + 11
+   \   000039   F0           MOVX    @DPTR,A
     396            _NIB.nwkAllFresh = NWK_ALL_FRESH;
-   \   000043   90....       MOV     DPTR,#_NIB + 104
-   \   000046   04           INC     A
-   \   000047   F0           MOVX    @DPTR,A
+   \   00003A   90....       MOV     DPTR,#_NIB + 104
+   \   00003D   04           INC     A
+   \   00003E   F0           MOVX    @DPTR,A
     397          
     398            if ( ZG_SECURE_ENABLED )
     399            {
@@ -850,127 +844,127 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
     402            else
     403            {
     404              _NIB.SecurityLevel = 0;
-   \   000048   90....       MOV     DPTR,#_NIB + 12
-   \   00004B   E4           CLR     A
-   \   00004C   F0           MOVX    @DPTR,A
+   \   00003F   90....       MOV     DPTR,#_NIB + 12
+   \   000042   E4           CLR     A
+   \   000043   F0           MOVX    @DPTR,A
     405            }
     406          
     407          #if defined ( ZIGBEEPRO )
     408            _NIB.SymLink = FALSE;
-   \   00004D   A3           INC     DPTR
-   \   00004E   F0           MOVX    @DPTR,A
+   \   000044   A3           INC     DPTR
+   \   000045   F0           MOVX    @DPTR,A
     409          #else
     410            _NIB.SymLink = TRUE;
     411          #endif
     412          
     413            _NIB.CapabilityFlags = ZDO_Config_Node_Descriptor.CapabilityFlags;
-   \   00004F   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
-   \   000052   E0           MOVX    A,@DPTR
-   \   000053   90....       MOV     DPTR,#_NIB + 14
-   \   000056   F0           MOVX    @DPTR,A
+   \   000046   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
+   \   000049   E0           MOVX    A,@DPTR
+   \   00004A   90....       MOV     DPTR,#_NIB + 14
+   \   00004D   F0           MOVX    @DPTR,A
     414          
     415            _NIB.TransactionPersistenceTime = zgIndirectMsgTimeout;
-   \   000057   90....       MOV     DPTR,#zgIndirectMsgTimeout
-   \   00005A   E0           MOVX    A,@DPTR
-   \   00005B   90....       MOV     DPTR,#_NIB + 15
-   \   00005E   F0           MOVX    @DPTR,A
-   \   00005F   A3           INC     DPTR
-   \   000060   E4           CLR     A
-   \   000061   F0           MOVX    @DPTR,A
+   \   00004E   90....       MOV     DPTR,#zgIndirectMsgTimeout
+   \   000051   E0           MOVX    A,@DPTR
+   \   000052   90....       MOV     DPTR,#_NIB + 15
+   \   000055   F0           MOVX    @DPTR,A
+   \   000056   A3           INC     DPTR
+   \   000057   E4           CLR     A
+   \   000058   F0           MOVX    @DPTR,A
     416          
     417            _NIB.RouteDiscoveryTime = zgRouteDiscoveryTime;
-   \   000062   90....       MOV     DPTR,#zgRouteDiscoveryTime
-   \   000065   E0           MOVX    A,@DPTR
-   \   000066   90....       MOV     DPTR,#_NIB + 18
-   \   000069   F0           MOVX    @DPTR,A
+   \   000059   90....       MOV     DPTR,#zgRouteDiscoveryTime
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   90....       MOV     DPTR,#_NIB + 18
+   \   000060   F0           MOVX    @DPTR,A
     418            _NIB.RouteExpiryTime = zgRouteExpiryTime;
-   \   00006A   90....       MOV     DPTR,#zgRouteExpiryTime
-   \   00006D   E0           MOVX    A,@DPTR
-   \   00006E   90....       MOV     DPTR,#_NIB + 19
-   \   000071   12....       LCALL   ?Subroutine1 & 0xFFFF
+   \   000061   90....       MOV     DPTR,#zgRouteExpiryTime
+   \   000064   E0           MOVX    A,@DPTR
+   \   000065   90....       MOV     DPTR,#_NIB + 19
+   \   000068   12....       LCALL   ?Subroutine1 & 0xFFFF
     419          
     420            _NIB.nwkDevAddress = INVALID_NODE_ADDR;
     421            _NIB.nwkLogicalChannel = 0;
    \                     ??CrossCallReturnLabel_0:
-   \   000074   A3           INC     DPTR
-   \   000075   E4           CLR     A
-   \   000076   12....       LCALL   ?Subroutine1 & 0xFFFF
+   \   00006B   A3           INC     DPTR
+   \   00006C   E4           CLR     A
+   \   00006D   12....       LCALL   ?Subroutine1 & 0xFFFF
     422            _NIB.nwkCoordAddress = INVALID_NODE_ADDR;
     423            osal_memset( _NIB.nwkCoordExtAddress, 0, Z_EXTADDR_LEN );
    \                     ??CrossCallReturnLabel_1:
-   \   000079                ; Setup parameters for call to function osal_memset
-   \   000079   7C08         MOV     R4,#0x8
-   \   00007B   7D00         MOV     R5,#0x0
-   \   00007D   7900         MOV     R1,#0x0
-   \   00007F   7A..         MOV     R2,#(_NIB + 25) & 0xff
-   \   000081   7B..         MOV     R3,#((_NIB + 25) >> 8) & 0xff
-   \   000083   12....       LCALL   ??osal_memset?relay
+   \   000070                ; Setup parameters for call to function osal_memset
+   \   000070   7C08         MOV     R4,#0x8
+   \   000072   7D00         MOV     R5,#0x0
+   \   000074   7900         MOV     R1,#0x0
+   \   000076   7A..         MOV     R2,#(_NIB + 25) & 0xff
+   \   000078   7B..         MOV     R3,#((_NIB + 25) >> 8) & 0xff
+   \   00007A   12....       LCALL   ??osal_memset?relay
     424            _NIB.nwkPanId = INVALID_NODE_ADDR;
-   \   000086   90....       MOV     DPTR,#_NIB + 33
-   \   000089   74FE         MOV     A,#-0x2
-   \   00008B   F0           MOVX    @DPTR,A
-   \   00008C   A3           INC     DPTR
-   \   00008D   04           INC     A
-   \   00008E   F0           MOVX    @DPTR,A
+   \   00007D   90....       MOV     DPTR,#_NIB + 33
+   \   000080   74FE         MOV     A,#-0x2
+   \   000082   F0           MOVX    @DPTR,A
+   \   000083   A3           INC     DPTR
+   \   000084   04           INC     A
+   \   000085   F0           MOVX    @DPTR,A
     425          
     426            osal_cpyExtAddr( _NIB.extendedPANID, zgExtendedPANID );
-   \   00008F                ; Setup parameters for call to function sAddrExtCpy
-   \   00008F   7C..         MOV     R4,#zgExtendedPANID & 0xff
-   \   000091   7D..         MOV     R5,#(zgExtendedPANID >> 8) & 0xff
-   \   000093   7A..         MOV     R2,#(_NIB + 53) & 0xff
-   \   000095   7B..         MOV     R3,#((_NIB + 53) >> 8) & 0xff
-   \   000097   12....       LCALL   ??sAddrExtCpy?relay
+   \   000086                ; Setup parameters for call to function sAddrExtCpy
+   \   000086   7C..         MOV     R4,#zgExtendedPANID & 0xff
+   \   000088   7D..         MOV     R5,#(zgExtendedPANID >> 8) & 0xff
+   \   00008A   7A..         MOV     R2,#(_NIB + 53) & 0xff
+   \   00008C   7B..         MOV     R3,#((_NIB + 53) >> 8) & 0xff
+   \   00008E   12....       LCALL   ??sAddrExtCpy?relay
     427          
     428            _NIB.nwkKeyLoaded = FALSE;
-   \   00009A   90....       MOV     DPTR,#_NIB + 61
-   \   00009D   E4           CLR     A
-   \   00009E   F0           MOVX    @DPTR,A
+   \   000091   90....       MOV     DPTR,#_NIB + 61
+   \   000094   E4           CLR     A
+   \   000095   F0           MOVX    @DPTR,A
     429          
     430          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
     431            _NIB.nwkAddrAlloc  = NWK_ADDRESSING_STOCHASTIC;
-   \   00009F   90....       MOV     DPTR,#_NIB + 96
-   \   0000A2   7402         MOV     A,#0x2
-   \   0000A4   F0           MOVX    @DPTR,A
+   \   000096   90....       MOV     DPTR,#_NIB + 96
+   \   000099   7402         MOV     A,#0x2
+   \   00009B   F0           MOVX    @DPTR,A
     432            _NIB.nwkUniqueAddr = FALSE;
-   \   0000A5   A3           INC     DPTR
-   \   0000A6   E4           CLR     A
-   \   0000A7   F0           MOVX    @DPTR,A
+   \   00009C   A3           INC     DPTR
+   \   00009D   E4           CLR     A
+   \   00009E   F0           MOVX    @DPTR,A
     433          #else
     434            _NIB.nwkAddrAlloc  = NWK_ADDRESSING_DISTRIBUTED;
     435            _NIB.nwkUniqueAddr = TRUE;
     436          #endif
     437          
     438            _NIB.nwkLinkStatusPeriod = NWK_LINK_STATUS_PERIOD;
-   \   0000A8   A3           INC     DPTR
-   \   0000A9   740F         MOV     A,#0xf
-   \   0000AB   F0           MOVX    @DPTR,A
+   \   00009F   A3           INC     DPTR
+   \   0000A0   740F         MOV     A,#0xf
+   \   0000A2   F0           MOVX    @DPTR,A
     439            _NIB.nwkRouterAgeLimit = NWK_ROUTE_AGE_LIMIT;
-   \   0000AC   A3           INC     DPTR
-   \   0000AD   7403         MOV     A,#0x3
-   \   0000AF   F0           MOVX    @DPTR,A
+   \   0000A3   A3           INC     DPTR
+   \   0000A4   7403         MOV     A,#0x3
+   \   0000A6   F0           MOVX    @DPTR,A
     440          
     441            //MTO and source routing
     442            _NIB.nwkConcentratorDiscoveryTime = zgConcentratorDiscoveryTime;
-   \   0000B0   90....       MOV     DPTR,#zgConcentratorDiscoveryTime
-   \   0000B3   E0           MOVX    A,@DPTR
-   \   0000B4   90....       MOV     DPTR,#_NIB + 102
-   \   0000B7   F0           MOVX    @DPTR,A
+   \   0000A7   90....       MOV     DPTR,#zgConcentratorDiscoveryTime
+   \   0000AA   E0           MOVX    A,@DPTR
+   \   0000AB   90....       MOV     DPTR,#_NIB + 102
+   \   0000AE   F0           MOVX    @DPTR,A
     443            _NIB.nwkIsConcentrator = zgConcentratorEnable;
-   \   0000B8   90....       MOV     DPTR,#zgConcentratorEnable
-   \   0000BB   E0           MOVX    A,@DPTR
-   \   0000BC   90....       MOV     DPTR,#_NIB + 101
-   \   0000BF   F0           MOVX    @DPTR,A
+   \   0000AF   90....       MOV     DPTR,#zgConcentratorEnable
+   \   0000B2   E0           MOVX    A,@DPTR
+   \   0000B3   90....       MOV     DPTR,#_NIB + 101
+   \   0000B6   F0           MOVX    @DPTR,A
     444            _NIB.nwkConcentratorRadius = zgConcentratorRadius;
-   \   0000C0   90....       MOV     DPTR,#zgConcentratorRadius
-   \   0000C3   E0           MOVX    A,@DPTR
-   \   0000C4   90....       MOV     DPTR,#_NIB + 103
-   \   0000C7   F0           MOVX    @DPTR,A
+   \   0000B7   90....       MOV     DPTR,#zgConcentratorRadius
+   \   0000BA   E0           MOVX    A,@DPTR
+   \   0000BB   90....       MOV     DPTR,#_NIB + 103
+   \   0000BE   F0           MOVX    @DPTR,A
     445          
     446          #if defined ( ZIGBEE_MULTICAST )
     447            _NIB.nwkUseMultiCast = TRUE;
-   \   0000C8   90....       MOV     DPTR,#_NIB + 100
-   \   0000CB   7401         MOV     A,#0x1
-   \   0000CD   F0           MOVX    @DPTR,A
+   \   0000BF   90....       MOV     DPTR,#_NIB + 100
+   \   0000C2   7401         MOV     A,#0x1
+   \   0000C4   F0           MOVX    @DPTR,A
     448          #else
     449            _NIB.nwkUseMultiCast = FALSE;
     450          #endif
@@ -981,34 +975,34 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
     455          #endif
     456            {
     457              _NIB.nwkManagerAddr = 0x0000;
-   \   0000CE   90....       MOV     DPTR,#_NIB + 105
-   \   0000D1   E4           CLR     A
-   \   0000D2   F0           MOVX    @DPTR,A
-   \   0000D3   A3           INC     DPTR
-   \   0000D4   F0           MOVX    @DPTR,A
+   \   0000C5   90....       MOV     DPTR,#_NIB + 105
+   \   0000C8   E4           CLR     A
+   \   0000C9   F0           MOVX    @DPTR,A
+   \   0000CA   A3           INC     DPTR
+   \   0000CB   F0           MOVX    @DPTR,A
     458            }
     459          
     460            _NIB.nwkUpdateId = 0;
-   \   0000D5   90....       MOV     DPTR,#_NIB + 109
-   \   0000D8   F0           MOVX    @DPTR,A
+   \   0000CC   90....       MOV     DPTR,#_NIB + 109
+   \   0000CF   F0           MOVX    @DPTR,A
     461            _NIB.nwkTotalTransmissions = 0;
-   \   0000D9   90....       MOV     DPTR,#_NIB + 107
-   \   0000DC   F0           MOVX    @DPTR,A
-   \   0000DD   A3           INC     DPTR
-   \   0000DE   F0           MOVX    @DPTR,A
+   \   0000D0   90....       MOV     DPTR,#_NIB + 107
+   \   0000D3   F0           MOVX    @DPTR,A
+   \   0000D4   A3           INC     DPTR
+   \   0000D5   F0           MOVX    @DPTR,A
     462          
     463            if ( ZSTACK_ROUTER_BUILD )
     464            {
     465          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
     466              NLME_InitStochasticAddressing();
-   \   0000DF                ; Setup parameters for call to function NLME_InitStochasticAddressing
-   \   0000DF   12....       LCALL   ??NLME_InitStochasticAddressing?relay
+   \   0000D6                ; Setup parameters for call to function NLME_InitStochasticAddressing
+   \   0000D6   12....       LCALL   ??NLME_InitStochasticAddressing?relay
     467          #else
     468              NLME_InitTreeAddressing();
     469          #endif
     470            }
     471          }
-   \   0000E2   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   0000D9   02....       LJMP    ?Subroutine0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
@@ -1173,6 +1167,11 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
    \   000000   02....       LJMP    ?BRET
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for CskipChldrn>`:
+   \   000000   20           DB 32
+   \   000001   00           DB 0
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for gMIN_TREE_LINK_COST>`:
    \   000000   06           DB 6
 
@@ -1233,8 +1232,8 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
      gNWK_INDIRECT_MSG_MAX_PER                 1
      gNWK_INDIRECT_MSG_MAX_ALL                 1
      Cskip                                     2
-     CskipRtrs                                 1
-     CskipChldrn                               1
+     CskipRtrs                                 2
+     CskipChldrn                               2
      gMIN_TREE_LINK_COST                       1
      AssociatedDevList                       594
      gNWK_MIN_ROUTER_CHILDREN                  2
@@ -1275,10 +1274,11 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
      defaultTCLinkKey                         16
      nwk_globals_init                         17
      ?Subroutine0                              7
-     NIB_init                                229
+     NIB_init                                220
      ?Subroutine1                              9
      nwk_Status                               25
      nwk_UpdateStatistics                      3
+     ?<Initializer for CskipChldrn>            2
      ?<Initializer for gMIN_TREE_LINK_COST>    1
      ??nwk_globals_init?relay                  6
      ??NIB_init?relay                          6
@@ -1286,17 +1286,17 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals
      ??nwk_UpdateStatistics?relay              6
 
  
-   290 bytes in segment BANKED_CODE
+   281 bytes in segment BANKED_CODE
     24 bytes in segment BANK_RELAYS
     73 bytes in segment CODE_C
      2 bytes in segment SFR_AN
-     1 byte  in segment XDATA_I
-     1 byte  in segment XDATA_ID
+     3 bytes in segment XDATA_I
+     3 bytes in segment XDATA_ID
  1 234 bytes in segment XDATA_Z
  
-   388 bytes of CODE  memory
+   381 bytes of CODE  memory
      0 bytes of DATA  memory (+ 2 bytes shared)
- 1 235 bytes of XDATA memory
+ 1 237 bytes of XDATA memory
 
 Errors: none
 Warnings: none

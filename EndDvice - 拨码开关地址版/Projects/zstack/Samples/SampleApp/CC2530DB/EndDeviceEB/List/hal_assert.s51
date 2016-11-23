@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        15/Nov/2016  16:51:08 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  12:35:04 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -22,7 +22,7 @@
 //                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0808                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=500             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -154,10 +154,8 @@
 
         EXTERN ?ALLOC_XSTACK8
         EXTERN ?BANKED_ENTER_XDATA
-        EXTERN ?BANKED_LEAVE_XDATA
         EXTERN ?BDISPATCH
         EXTERN ?BRET
-        EXTERN ?DEALLOC_XSTACK8
         EXTERN ?L_ADD_TO_X
         EXTERN ?L_MOV_X
         EXTERN ?S_SHL
@@ -167,7 +165,6 @@
         EXTERN ?XSP
         EXTERN ?XSTACK_DISP0_8
         EXTERN ?XSTORE_R2345
-        EXTERN __INIT_XDATA_Z
 
         PUBLIC ??halAssertHandler?relay
         FUNCTION ??halAssertHandler?relay,0203H
@@ -190,7 +187,7 @@
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 2, STACK
         PUBLIC halAssertHazardLights
-        FUNCTION halAssertHazardLights,080203H
+        FUNCTION halAssertHazardLights,0a1203H
         ARGFRAME XSTACK, 0, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
@@ -352,11 +349,22 @@
         CFI ?RET_LOW Frame(CFA_SP, 1)
         CFI EndCommon cfiCommon1
         
+MAC_RfFrontendSetup SYMBOL "MAC_RfFrontendSetup"
+??MAC_RfFrontendSetup?relay SYMBOL "?relay", MAC_RfFrontendSetup
 halAssertHandler    SYMBOL "halAssertHandler"
 ??halAssertHandler?relay SYMBOL "?relay", halAssertHandler
 halAssertHazardLights SYMBOL "halAssertHazardLights"
 ??halAssertHazardLights?relay SYMBOL "?relay", halAssertHazardLights
 
+        EXTERN MAC_RfFrontendSetup
+        FUNCTION MAC_RfFrontendSetup,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 22, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN ??MAC_RfFrontendSetup?relay
+        FUNCTION ??MAC_RfFrontendSetup?relay,00H
         EXTERN macRxActive
         EXTERN macTxActive
 
@@ -555,6 +563,17 @@ halAssertHazardLights:
         CFI Function halAssertHazardLights
         CODE
 //   99 {
+        FUNCALL halAssertHazardLights, MAC_RfFrontendSetup
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 22, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 22, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
         MOV     A,#-0xc
         LCALL   ?BANKED_ENTER_XDATA
         CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
@@ -631,20 +650,17 @@ halAssertHazardLights:
         MOV     DPTR,#0x6270
         MOV     A,#0x8
         MOVX    @DPTR,A
-        CLR     0x90.0
         ORL     0xfe,#0x1
-        CLR     0x90.1
-        ORL     0xfe,#0x2
-        CLR     0x90.4
-        ORL     0xfe,#0x10
         ORL     0x8f,#0x1
+        ; Setup parameters for call to function MAC_RfFrontendSetup
+        LCALL   ??MAC_RfFrontendSetup?relay
 //  127 
 //  128   HAL_TURN_OFF_LED1();
         CLR     0x90.0
 //  129   HAL_TURN_OFF_LED2();
-        CLR     0x90.1
+        CLR     0x90.0
 //  130   HAL_TURN_OFF_LED3();
-        CLR     0x90.4
+        CLR     0x90.0
 //  131   HAL_TURN_OFF_LED4();
         SJMP    ??halAssertHazardLights_3
 //  132 
@@ -862,32 +878,6 @@ halAssertHazardLights:
 ??halAssertHazardLights_11:
         SETB    0x90.0
 ??halAssertHazardLights_12:
-        MOV     C,0x90.1
-        JNC     ??halAssertHazardLights_13
-        CLR     0x90.1
-        SJMP    ??halAssertHazardLights_14
-??halAssertHazardLights_13:
-        SETB    0x90.1
-??halAssertHazardLights_14:
-        MOV     C,0x90.4
-        JNC     ??halAssertHazardLights_15
-        CLR     0x90.4
-        SJMP    ??halAssertHazardLights_16
-??halAssertHazardLights_15:
-        SETB    0x90.4
-??halAssertHazardLights_16:
-        MOV     DPTR,#??escape
-        MOVX    A,@DPTR
-        JZ      ??halAssertHazardLights_17
-        CLR     A
-        MOVX    @DPTR,A
-        MOV     A,#0xa
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 12)
-        MOV     R7,#0x4
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI CFA_XSP16 add(XSP16, 22)
-??halAssertHazardLights_17:
         MOV     C,0x80.1
         JNC     ??halAssertHazardLights_7
         INC     R1
@@ -895,20 +885,20 @@ halAssertHazardLights:
         XRL     A,R1
         JNZ     ??halAssertHazardLights_8
         CLR     0x90.0
-        CLR     0x90.1
-        CLR     0x90.4
+        CLR     0x90.0
+        CLR     0x90.0
         CLR     0x90.0
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_18:
+??halAssertHazardLights_13:
         MOV     C,0x80.1
-        JNC     ??halAssertHazardLights_19
+        JNC     ??halAssertHazardLights_14
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_19:
+??halAssertHazardLights_14:
         LCALL   ?Subroutine0 & 0xFFFF
 ??CrossCallReturnLabel_0:
-        JC      ??halAssertHazardLights_18
+        JC      ??halAssertHazardLights_13
         MOV     DPTR,#0x61a3
         MOVX    A,@DPTR
         PUSH    A
@@ -951,29 +941,29 @@ halAssertHazardLights:
         MOV     C,0x80.1
         JNC     ??halAssertHazardLights_6
         SETB    0x90.0
-        SETB    0x90.1
-        SETB    0x90.4
-        MOV     A,R3
-        JNZ     ??halAssertHazardLights_20
         SETB    0x90.0
-        SJMP    ??halAssertHazardLights_21
-??halAssertHazardLights_20:
+        SETB    0x90.0
+        MOV     A,R3
+        JNZ     ??halAssertHazardLights_15
+        SETB    0x90.0
+        SJMP    ??halAssertHazardLights_16
+??halAssertHazardLights_15:
         CLR     0x90.0
-??halAssertHazardLights_21:
+??halAssertHazardLights_16:
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_22:
+??halAssertHazardLights_17:
         MOV     C,0x80.1
-        JNC     ??halAssertHazardLights_23
+        JNC     ??halAssertHazardLights_18
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_23:
+??halAssertHazardLights_18:
         LCALL   ?Subroutine0 & 0xFFFF
 ??CrossCallReturnLabel_1:
-        JC      ??halAssertHazardLights_22
+        JC      ??halAssertHazardLights_17
         CLR     0x90.0
-        CLR     0x90.1
-        CLR     0x90.4
+        CLR     0x90.0
+        CLR     0x90.0
         CLR     0x90.0
         MOV     ?V0 + 0,#0x1
         MOV     ?V0 + 1,#0x0
@@ -1003,9 +993,9 @@ halAssertHazardLights:
         REQUIRE SLEEPSTA
         REQUIRE CLKCONCMD
         REQUIRE CLKCONSTA
-        REQUIRE _A_P1
         REQUIRE P1DIR
         REQUIRE P0INP
+        REQUIRE _A_P1
         REQUIRE _A_P0
 //  289   }
 //  290 }
@@ -1068,12 +1058,6 @@ halAssertHazardLights:
         CFI EndBlock cfiCond3
         CFI EndBlock cfiPicker4
 
-        RSEG XDATA_Z:XDATA:NOROOT(0)
-        DATA8
-??escape:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
-
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA32
 __Constant_0:
@@ -1121,16 +1105,14 @@ __Constant_5800:
 //  307 /**************************************************************************************************
 //  308 */
 // 
-// 440 bytes in segment BANKED_CODE
+// 393 bytes in segment BANKED_CODE
 //  12 bytes in segment BANK_RELAYS
 //   9 bytes in segment SFR_AN
 //  12 bytes in segment XDATA_ROM_C
-//   1 byte  in segment XDATA_Z
 // 
-// 452 bytes of CODE  memory
+// 405 bytes of CODE  memory
 //   0 bytes of CONST memory (+ 12 bytes shared)
 //   0 bytes of DATA  memory (+  9 bytes shared)
-//   1 byte  of XDATA memory
 //
 //Errors: none
 //Warnings: none

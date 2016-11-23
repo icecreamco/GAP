@@ -139,13 +139,15 @@ extern "C" {
   #define MAX_CHANNELS_24GHZ    0x07FFF800
 #endif
 
-#if defined ( ZIGBEEPRO )
+/*#if defined ( ZIGBEEPRO )
   #define STACK_PROFILE_ID      ZIGBEEPRO_PROFILE
 #else
   #define STACK_PROFILE_ID      HOME_CONTROLS
   
-#endif
+#endif*/
 
+#define STACK_PROFILE_ID      GENERIC_STAR
+  
 #if ( STACK_PROFILE_ID == ZIGBEEPRO_PROFILE )
     #define MAX_NODE_DEPTH      20
     #define NWK_MODE            NWK_MODE_MESH
@@ -233,7 +235,7 @@ extern "C" {
 //  NWK_MAX_DEVICE_LIST above
 #define NWK_MAX_DEVICES   ( NWK_MAX_DEVICE_LIST + 1 )    // One extra space for parent
 
-  #define NWK_MAX_ROUTERS           6
+  #define NWK_MAX_ROUTERS           0
 
 // Number of reserved places for router and end device children, to be used in stochastic addressing.
 #if !defined ( NWK_MIN_ROUTER_CHILDREN )

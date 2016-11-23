@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        15/Nov/2016  16:51:10 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  12:35:05 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -23,7 +23,7 @@
 //                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0808                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=500             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -162,7 +162,6 @@
         FUNCTION MAC_RfFrontendSetup,021203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 2, STACK
-        PUBWEAK _A_P0
         
         CFI Names cfiNames0
         CFI StackFrame CFA_SP SP IDATA
@@ -313,12 +312,6 @@ MAC_RfFrontendSetup SYMBOL "MAC_RfFrontendSetup"
 //   43  */
 //   44 #include "hal_types.h"
 //   45 #include "hal_board_cfg.h"
-
-        ASEGN SFR_AN:DATA:NOROOT,080H
-// union <unnamed> volatile __sfr _A_P0
-_A_P0:
-        DATA8
-        DS 1
 //   46 #include "hal_assert.h"
 //   47 #include "mac_api.h"
 //   48 #include "mac_radio_defs.h"
@@ -389,7 +382,6 @@ MAC_RfFrontendSetup:
 //   88    *   P0_7 -> HGM
 //   89    */
 //   90   HAL_PA_LNA_RX_HGM();
-        SETB    0x80.7
 //   91   
 //   92   /* Raises the CCA threshold to about -70 dBm input level.
 //   93    */
@@ -413,7 +405,6 @@ MAC_RfFrontendSetup:
         CFI CFA_SP SP+-3
         LJMP    ?BRET
         CFI EndBlock cfiBlock0
-        REQUIRE _A_P0
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
 ??MAC_RfFrontendSetup?relay:
@@ -426,12 +417,10 @@ MAC_RfFrontendSetup:
 //  100 /**************************************************************************************************
 //  101  */
 // 
-// 26 bytes in segment BANKED_CODE
+// 24 bytes in segment BANKED_CODE
 //  6 bytes in segment BANK_RELAYS
-//  1 byte  in segment SFR_AN
 // 
-// 32 bytes of CODE memory
-//  0 bytes of DATA memory (+ 1 byte shared)
+// 30 bytes of CODE memory
 //
 //Errors: none
 //Warnings: none

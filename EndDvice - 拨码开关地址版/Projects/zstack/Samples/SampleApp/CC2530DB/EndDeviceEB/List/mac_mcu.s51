@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        15/Nov/2016  16:50:54 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  12:34:51 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -23,7 +23,7 @@
 //                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0808                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=500             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -1124,9 +1124,6 @@ macMcuInit:
 //  163   /* Raises the CCA threshold from about -108 dBm to about -80 dBm input level.
 //  164    */
 //  165   CCACTRL0 = CCA_THR;
-        MOV     DPTR,#0x6196
-        MOV     A,#-0x4
-        MOVX    @DPTR,A
 //  166 #endif
 //  167 
 //  168 #ifdef CC2591_COMPRESSION_WORKAROUND
@@ -3969,7 +3966,7 @@ __Constant_0:
 // 1015 /**************************************************************************************************
 // 1016 */
 // 
-// 1 339 bytes in segment BANKED_CODE
+// 1 333 bytes in segment BANKED_CODE
 //    96 bytes in segment BANK_RELAYS
 //     9 bytes in segment INTVEC
 //   245 bytes in segment NEAR_CODE
@@ -3977,7 +3974,7 @@ __Constant_0:
 //     8 bytes in segment XDATA_ROM_C
 //    17 bytes in segment XDATA_Z
 // 
-// 1 680 bytes of CODE  memory (+  9 bytes shared)
+// 1 674 bytes of CODE  memory (+  9 bytes shared)
 //     0 bytes of CONST memory (+  8 bytes shared)
 //     0 bytes of DATA  memory (+ 22 bytes shared)
 //    17 bytes of XDATA memory

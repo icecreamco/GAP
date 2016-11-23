@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        15/Nov/2016  16:51:07 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  12:35:02 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -23,7 +23,7 @@
 //                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0808                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=500             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -483,7 +483,9 @@ macRadioUpdateTxPower SYMBOL "macRadioUpdateTxPower"
         EXTERN ??macRxOnRequest?relay
         FUNCTION ??macRxOnRequest?relay,00H
         EXTERN macPib
-        EXTERN macRadioDefsTxPwrBare
+        EXTERN macRadioDefsRefTableId
+        EXTERN macRadioDefsRssiAdj
+        EXTERN macRadioDefsTxPwrTables
         EXTERN macRxFilter
         EXTERN macRxOutgoingAckFlag
         EXTERN macSleepState
@@ -1043,13 +1045,21 @@ macRadioSetTxPower:
 //  243   const uint8 CODE *pTable = macRadioDefsTxPwrTables[macRadioDefsRefTableId >> 4];
 //  244 #elif defined HAL_PA_LNA || defined HAL_PA_LNA_CC2590
 //  245   const uint8 CODE *pTable = macRadioDefsTxPwrTables[0];
+        MOV     DPTR,#macRadioDefsTxPwrTables
+        CLR     A
+        MOVC    A,@A+DPTR
+        MOV     R0,A
+        MOV     A,#0x1
+        MOVC    A,@A+DPTR
+        MOV     R1,A
 //  246 #else
 //  247   const uint8 CODE *pTable = macRadioDefsTxPwrBare;
 //  248 #endif
 //  249 
 //  250   /* if the selected dBm is out of range, use the closest available */
 //  251   if ((int8)txPower > (int8)pTable[MAC_RADIO_DEFS_TBL_TXPWR_FIRST_ENTRY])
-        MOV     DPTR,#macRadioDefsTxPwrBare
+        MOV     DPL,R0
+        MOV     DPH,R1
         CLR     A
         MOVC    A,@A+DPTR
         CLR     C
@@ -1066,10 +1076,10 @@ macRadioSetTxPower:
         INC     DPTR
         CLR     A
         MOVC    A,@A+DPTR
-        MOV     R0,A
+        MOV     R2,A
         MOV     A,R6
         CLR     C
-        SUBB    A,R0
+        SUBB    A,R2
         MOV     C,0xD0 /* PSW */.2
         XRL     A,PSW
         RLC     A
@@ -1077,6 +1087,9 @@ macRadioSetTxPower:
 //  257   {
 //  258     /* smaller than the lowest power level -- out of table range */
 //  259     txPower = pTable[MAC_RADIO_DEFS_TBL_TXPWR_LAST_ENTRY];
+        MOV     DPL,R0
+        MOV     DPH,R1
+        INC     DPTR
 ??macRadioSetTxPower_0:
         CLR     A
         MOVC    A,@A+DPTR
@@ -1093,7 +1106,7 @@ macRadioSetTxPower:
 //  269   HAL_ENTER_CRITICAL_SECTION(s);
 ??macRadioSetTxPower_1:
         MOV     A,0xa8
-        MOV     R2,A
+        MOV     R4,A
         CLR     0xa8.7
 //  270   /* When calculating index to the power register value table,
 //  271    * either txPower (of uint8 type) has to be explicitly type-casted to int8
@@ -1105,17 +1118,18 @@ macRadioSetTxPower:
 //  277     uint8 index = pTable[MAC_RADIO_DEFS_TBL_TXPWR_FIRST_ENTRY] - txPower
 //  278       + MAC_RADIO_DEFS_TBL_TXPWR_ENTRIES;
 //  279     reqTxPower = pTable[index];
-        MOV     DPTR,#macRadioDefsTxPwrBare
+        MOV     DPL,R0
+        MOV     DPH,R1
         CLR     A
         MOVC    A,@A+DPTR
         CLR     C
         SUBB    A,R6
         ADD     A,#0x2
-        MOV     R0,A
-        MOV     A,#macRadioDefsTxPwrBare & 0xff
-        ADD     A,R0
+        MOV     R2,A
+        MOV     A,R0
+        ADD     A,R2
         MOV     DPL,A
-        MOV     A,#(macRadioDefsTxPwrBare >> 8) & 0xff
+        MOV     A,R1
         ADDC    A,#0x0
         MOV     DPH,A
         CLR     A
@@ -1124,7 +1138,7 @@ macRadioSetTxPower:
         MOVX    @DPTR,A
 //  280   }
 //  281   HAL_EXIT_CRITICAL_SECTION(s);
-        MOV     A,R2
+        MOV     A,R4
         MOV     C,0xE0 /* A   */.7
         MOV     0xa8.7,C
 //  282 
@@ -1807,6 +1821,10 @@ macRadioEnergyDetectStop:
 //  517   uint8 energyDetectMeasurement;
 //  518 
 //  519   rssiDbm = MAC_RADIO_RECORD_MAX_RSSI_STOP() + MAC_RADIO_RSSI_OFFSET;
+        ; Setup parameters for call to function macMcuRecordMaxRssiStop
+        LCALL   ??macMcuRecordMaxRssiStop?relay
+        MOV     A,R1
+        MOV     R2,A
 //  520   MAC_RADIO_RSSI_LNA_OFFSET(rssiDbm);
 //  521   energyDetectMeasurement = radioComputeED(rssiDbm);
 //  522 
@@ -1815,9 +1833,19 @@ macRadioEnergyDetectStop:
 //  525 
 //  526   return(energyDetectMeasurement);
         ; Setup parameters for call to function radioComputeED
-        ; Setup parameters for call to function macMcuRecordMaxRssiStop
-        LCALL   ??macMcuRecordMaxRssiStop?relay
-        MOV     A,R1
+        MOV     DPTR,#macRadioDefsRefTableId
+        MOVX    A,@DPTR
+        ANL     A,#0xf
+        MOV     R0,A
+        MOV     A,#macRadioDefsRssiAdj & 0xff
+        ADD     A,R0
+        MOV     DPL,A
+        MOV     A,#(macRadioDefsRssiAdj >> 8) & 0xff
+        ADDC    A,#0x0
+        MOV     DPH,A
+        CLR     A
+        MOVC    A,@A+DPTR
+        ADD     A,R2
         ADD     A,#-0x49
         MOV     R1,A
         LCALL   ??radioComputeED?relay
@@ -2088,12 +2116,12 @@ macRadioComputeLQI:
 //  593 /**************************************************************************************************
 //  594 */
 // 
-// 603 bytes in segment BANKED_CODE
+// 640 bytes in segment BANKED_CODE
 // 102 bytes in segment BANK_RELAYS
 //   1 byte  in segment SFR_AN
 //   4 bytes in segment XDATA_Z
 // 
-// 705 bytes of CODE  memory
+// 742 bytes of CODE  memory
 //   0 bytes of DATA  memory (+ 1 byte shared)
 //   4 bytes of XDATA memory
 //

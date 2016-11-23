@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         26/Aug/2016  18:41:08 #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         22/Nov/2016  17:02:26 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -9,20 +9,20 @@
 #    Calling convention =  xdata reentrant                                    #
 #    Constant location  =  data_rom                                           #
 #    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Co #
-#                          mponents\stack\zdo\ZDApp.c                         #
-#    Command line       =  -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\Tools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ         #
+#    Source file        =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Compon #
+#                          ents\stack\zdo\ZDApp.c                             #
+#    Command line       =  -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pro #
+#                          jects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T #
+#                          ools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ             #
 #                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
 #                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
 #                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO       #
+#                          -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pro #
+#                          jects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T #
+#                          ools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO           #
 #                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
 #                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0x0101                       #
+#                          -DZDAPP_CONFIG_PAN_ID=0x2222                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
 #                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
@@ -43,94 +43,92 @@
 #                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 C:\Users\icecreamco\Desktop #
-#                          \GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c  #
-#                          -D ZTOOL_P1 -D HAL_UART=TRUE -D AUTO_RESET -D      #
+#                          \GAP\Coordinator\Components\stack\zdo\ZDApp.c -D   #
+#                          ZTOOL_P1 -D HAL_UART=TRUE -D AUTO_RESET -D         #
 #                          xMT_TASK -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D        #
 #                          xLCD_SUPPORTED=DEBUG -lC                           #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\List\ -lA C:\Users\icecreamco\Desktop\GAP-1.0 #
-#                          \Coordinator\Projects\zstack\Samples\SampleApp\CC2 #
-#                          530DB\CoordinatorEB\List\ --diag_suppress          #
-#                          Pe001,Pa010 -o C:\Users\icecreamco\Desktop\GAP-1.0 #
-#                          \Coordinator\Projects\zstack\Samples\SampleApp\CC2 #
-#                          530DB\CoordinatorEB\Obj\ -e --no_code_motion       #
-#                          --debug --core=plain --dptr=16,1                   #
-#                          --data_model=large --code_model=banked             #
-#                          --calling_convention=xdata_reentrant               #
-#                          --place_constants=data_rom --nr_virtual_regs 16    #
-#                          -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\ -I    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\Source #
-#                          \ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinat #
-#                          or\Projects\zstack\Samples\SampleApp\CC2530DB\..\. #
-#                          .\..\ZMain\TI2530DB\ -I C:\Users\icecreamco\Deskto #
-#                          p\GAP-1.0\Coordinator\Projects\zstack\Samples\Samp #
-#                          leApp\CC2530DB\..\..\..\..\..\Components\hal\inclu #
-#                          de\ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordin #
-#                          ator\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\target\CC2530EB\ -I    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\include\ -I                   #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\high_level\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\low_level\srf04\ -I           #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\low_level\srf04\single_chip\  #
-#                          -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\..\..\Components\mt\ -I                         #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\osal\include\ -I                  #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\services\saddr\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\services\sdata\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\af\ -I                      #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\nwk\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sapi\ -I                    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sec\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sys\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\zdo\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\zmac\ -I                          #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\zmac\f8w\ -Ohz                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \List\ -lA C:\Users\icecreamco\Desktop\GAP\Coordin #
+#                          ator\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
+#                          ordinatorEB\List\ --diag_suppress Pe001,Pa010 -o   #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \Obj\ -e --no_code_motion --debug --core=plain     #
+#                          --dptr=16,1 --data_model=large                     #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data_rom                  #
+#                          --nr_virtual_regs 16 -I C:\Users\icecreamco\Deskto #
+#                          p\GAP\Coordinator\Projects\zstack\Samples\SampleAp #
+#                          p\CC2530DB\ -I C:\Users\icecreamco\Desktop\GAP\Coo #
+#                          rdinator\Projects\zstack\Samples\SampleApp\CC2530D #
+#                          B\..\Source\ -I C:\Users\icecreamco\Desktop\GAP\Co #
+#                          ordinator\Projects\zstack\Samples\SampleApp\CC2530 #
+#                          DB\..\..\..\ZMain\TI2530DB\ -I                     #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\hal\include\ -I                       #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\hal\target\CC2530EB\ -I               #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\include\ -I                       #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\high_level\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\low_level\srf04\ -I               #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\low_level\srf04\single_chip\ -I   #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mt\ -I C:\Users\icecreamco\Desktop\GA #
+#                          P\Coordinator\Projects\zstack\Samples\SampleApp\CC #
+#                          2530DB\..\..\..\..\..\Components\osal\include\ -I  #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\services\saddr\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\services\sdata\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\af\ -I                          #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\nwk\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sapi\ -I                        #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sec\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sys\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\zdo\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\zmac\ -I C:\Users\icecreamco\Desktop\ #
+#                          GAP\Coordinator\Projects\zstack\Samples\SampleApp\ #
+#                          CC2530DB\..\..\..\..\..\Components\zmac\f8w\ -Ohz  #
 #                          --require_prototypes                               #
-#    List file          =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\List\ZDApp.lst                                #
-#    Object file        =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\Obj\ZDApp.r51                                 #
+#    List file          =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \List\ZDApp.lst                                    #
+#    Object file        =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \Obj\ZDApp.r51                                     #
 #                                                                             #
 #                                                                             #
 ###############################################################################
 
-C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c
+C:\Users\icecreamco\Desktop\GAP\Coordinator\Components\stack\zdo\ZDApp.c
       1          /**************************************************************************************************
       2            Filename:       ZDApp.c
       3            Revised:        $Date: 2012-02-16 16:04:32 -0800 (Thu, 16 Feb 2012) $
@@ -5168,7 +5166,7 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c
    \   000171   90....       MOV     DPTR,#_NIB + 96
    \   000174   E0           MOVX    A,@DPTR
    \   000175   6402         XRL     A,#0x2
-   \   000177   7030         JNZ     ??ZDO_beaconNotifyIndCB_10
+   \   000177   702D         JNZ     ??ZDO_beaconNotifyIndCB_10
    2264                {
    2265                  if ( ((pBeacon->LQI   > pNwkDesc->chosenRouterLinkQuality) &&
    2266                        (pBeacon->depth < MAX_NODE_DEPTH)) ||
@@ -5188,33 +5186,34 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c
    \   000186   E0           MOVX    A,@DPTR
    \   000187   C3           CLR     C
    \   000188   98           SUBB    A,R0
-   \   000189   500D         JNC     ??ZDO_beaconNotifyIndCB_11
+   \   000189   500A         JNC     ??ZDO_beaconNotifyIndCB_11
    \   00018B   12....       LCALL   ?Subroutine32 & 0xFFFF
    \                     ??CrossCallReturnLabel_41:
    \   00018E   12....       LCALL   ??Subroutine53_0 & 0xFFFF
    \                     ??CrossCallReturnLabel_112:
-   \   000191   C3           CLR     C
-   \   000192   9414         SUBB    A,#0x14
-   \   000194   402D         JC      ??ZDO_beaconNotifyIndCB_12
-   \   000196   802C         SJMP    ??ZDO_beaconNotifyIndCB_13
+   \   000191   602D         JZ      ??ZDO_beaconNotifyIndCB_12
+   \   000193   802C         SJMP    ??ZDO_beaconNotifyIndCB_13
    \                     ??ZDO_beaconNotifyIndCB_11:
-   \   000198   8E82         MOV     DPL,R6
-   \   00019A   8F83         MOV     DPH,R7
+   \   000195   8E82         MOV     DPL,R6
+   \   000197   8F83         MOV     DPH,R7
+   \   000199   A3           INC     DPTR
+   \   00019A   A3           INC     DPTR
+   \   00019B   A3           INC     DPTR
    \   00019C   A3           INC     DPTR
    \   00019D   A3           INC     DPTR
    \   00019E   A3           INC     DPTR
    \   00019F   A3           INC     DPTR
    \   0001A0   A3           INC     DPTR
    \   0001A1   A3           INC     DPTR
-   \   0001A2   A3           INC     DPTR
-   \   0001A3   A3           INC     DPTR
-   \   0001A4   A3           INC     DPTR
-   \   0001A5   E0           MOVX    A,@DPTR
-   \   0001A6   68           XRL     A,R0
-   \   0001A7   701B         JNZ     ??ZDO_beaconNotifyIndCB_13
+   \   0001A2   E0           MOVX    A,@DPTR
+   \   0001A3   68           XRL     A,R0
+   \   0001A4   701B         JNZ     ??ZDO_beaconNotifyIndCB_13
    \                     ??ZDO_beaconNotifyIndCB_10:
-   \   0001A9   8E82         MOV     DPL,R6
-   \   0001AB   8F83         MOV     DPH,R7
+   \   0001A6   8E82         MOV     DPL,R6
+   \   0001A8   8F83         MOV     DPH,R7
+   \   0001AA   A3           INC     DPTR
+   \   0001AB   A3           INC     DPTR
+   \   0001AC   A3           INC     DPTR
    \   0001AD   A3           INC     DPTR
    \   0001AE   A3           INC     DPTR
    \   0001AF   A3           INC     DPTR
@@ -5222,22 +5221,19 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c
    \   0001B1   A3           INC     DPTR
    \   0001B2   A3           INC     DPTR
    \   0001B3   A3           INC     DPTR
-   \   0001B4   A3           INC     DPTR
-   \   0001B5   A3           INC     DPTR
-   \   0001B6   A3           INC     DPTR
-   \   0001B7   E0           MOVX    A,@DPTR
-   \   0001B8   F8           MOV     R0,A
-   \   0001B9   12....       LCALL   ?Subroutine32 & 0xFFFF
+   \   0001B4   E0           MOVX    A,@DPTR
+   \   0001B5   F8           MOV     R0,A
+   \   0001B6   12....       LCALL   ?Subroutine32 & 0xFFFF
    \                     ??CrossCallReturnLabel_42:
-   \   0001BC   12....       LCALL   ??Subroutine53_0 & 0xFFFF
+   \   0001B9   12....       LCALL   ??Subroutine53_0 & 0xFFFF
    \                     ??CrossCallReturnLabel_113:
-   \   0001BF   C3           CLR     C
-   \   0001C0   98           SUBB    A,R0
-   \   0001C1   5001         JNC     ??ZDO_beaconNotifyIndCB_13
+   \   0001BC   C3           CLR     C
+   \   0001BD   98           SUBB    A,R0
+   \   0001BE   5001         JNC     ??ZDO_beaconNotifyIndCB_13
    2269                  {
    2270                    selected = TRUE;
    \                     ??ZDO_beaconNotifyIndCB_12:
-   \   0001C3   09           INC     R1
+   \   0001C0   09           INC     R1
    2271                  }
    2272                }
    2273                else
@@ -5259,109 +5255,109 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c
    2289          
    2290                if ( (capacity) && (selected) )
    \                     ??ZDO_beaconNotifyIndCB_13:
-   \   0001C4   85..82       MOV     DPL,?V0 + 0
-   \   0001C7   85..83       MOV     DPH,?V0 + 1
+   \   0001C1   85..82       MOV     DPL,?V0 + 0
+   \   0001C4   85..83       MOV     DPH,?V0 + 1
+   \   0001C7   A3           INC     DPTR
+   \   0001C8   A3           INC     DPTR
+   \   0001C9   A3           INC     DPTR
    \   0001CA   A3           INC     DPTR
    \   0001CB   A3           INC     DPTR
    \   0001CC   A3           INC     DPTR
-   \   0001CD   A3           INC     DPTR
-   \   0001CE   A3           INC     DPTR
-   \   0001CF   A3           INC     DPTR
-   \   0001D0   E0           MOVX    A,@DPTR
-   \   0001D1   6035         JZ      ??ZDO_beaconNotifyIndCB_14
-   \   0001D3   E9           MOV     A,R1
-   \   0001D4   A2E0         MOV     C,0xE0 /* A   */.0
-   \   0001D6   5030         JNC     ??ZDO_beaconNotifyIndCB_14
+   \   0001CD   E0           MOVX    A,@DPTR
+   \   0001CE   6035         JZ      ??ZDO_beaconNotifyIndCB_14
+   \   0001D0   E9           MOV     A,R1
+   \   0001D1   A2E0         MOV     C,0xE0 /* A   */.0
+   \   0001D3   5030         JNC     ??ZDO_beaconNotifyIndCB_14
    2291                {
    2292                  // this is the new chosen router for joining...
    2293                  pNwkDesc->chosenRouter            = pBeacon->sourceAddr;
-   \   0001D8   85..82       MOV     DPL,?V0 + 0
-   \   0001DB   85..83       MOV     DPH,?V0 + 1
-   \   0001DE   12....       LCALL   ??Subroutine46_0 & 0xFFFF
+   \   0001D5   85..82       MOV     DPL,?V0 + 0
+   \   0001D8   85..83       MOV     DPH,?V0 + 1
+   \   0001DB   12....       LCALL   ??Subroutine46_0 & 0xFFFF
    \                     ??CrossCallReturnLabel_80:
-   \   0001E1   8E82         MOV     DPL,R6
-   \   0001E3   8F83         MOV     DPH,R7
+   \   0001DE   8E82         MOV     DPL,R6
+   \   0001E0   8F83         MOV     DPH,R7
+   \   0001E2   A3           INC     DPTR
+   \   0001E3   A3           INC     DPTR
+   \   0001E4   A3           INC     DPTR
    \   0001E5   A3           INC     DPTR
    \   0001E6   A3           INC     DPTR
    \   0001E7   A3           INC     DPTR
    \   0001E8   A3           INC     DPTR
-   \   0001E9   A3           INC     DPTR
-   \   0001EA   A3           INC     DPTR
+   \   0001E9   E8           MOV     A,R0
+   \   0001EA   F0           MOVX    @DPTR,A
    \   0001EB   A3           INC     DPTR
-   \   0001EC   E8           MOV     A,R0
-   \   0001ED   F0           MOVX    @DPTR,A
-   \   0001EE   A3           INC     DPTR
-   \   0001EF   E9           MOV     A,R1
-   \   0001F0   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \   0001EC   E9           MOV     A,R1
+   \   0001ED   12....       LCALL   ?Subroutine10 & 0xFFFF
    2294                  pNwkDesc->chosenRouterLinkQuality = pBeacon->LQI;
    \                     ??CrossCallReturnLabel_3:
+   \   0001F0   A3           INC     DPTR
+   \   0001F1   A3           INC     DPTR
+   \   0001F2   A3           INC     DPTR
    \   0001F3   A3           INC     DPTR
    \   0001F4   A3           INC     DPTR
    \   0001F5   A3           INC     DPTR
-   \   0001F6   A3           INC     DPTR
-   \   0001F7   A3           INC     DPTR
-   \   0001F8   A3           INC     DPTR
-   \   0001F9   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   0001F6   12....       LCALL   ?Subroutine19 & 0xFFFF
    \                     ??CrossCallReturnLabel_18:
-   \   0001FC   F0           MOVX    @DPTR,A
+   \   0001F9   F0           MOVX    @DPTR,A
    2295                  pNwkDesc->chosenRouterDepth       = pBeacon->depth;
-   \   0001FD   12....       LCALL   ?Subroutine32 & 0xFFFF
+   \   0001FA   12....       LCALL   ?Subroutine32 & 0xFFFF
    2296                }
    \                     ??CrossCallReturnLabel_43:
-   \   000200   12....       LCALL   ??Subroutine51_0 & 0xFFFF
+   \   0001FD   12....       LCALL   ??Subroutine51_0 & 0xFFFF
    \                     ??CrossCallReturnLabel_105:
-   \   000203   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   000200   12....       LCALL   ?Subroutine19 & 0xFFFF
    \                     ??CrossCallReturnLabel_19:
-   \   000206   A3           INC     DPTR
-   \   000207   F0           MOVX    @DPTR,A
+   \   000203   A3           INC     DPTR
+   \   000204   F0           MOVX    @DPTR,A
    2297          
    2298                if ( pBeacon->deviceCapacity )
    \                     ??ZDO_beaconNotifyIndCB_14:
-   \   000208   85..82       MOV     DPL,?V0 + 0
-   \   00020B   85..83       MOV     DPH,?V0 + 1
+   \   000205   85..82       MOV     DPL,?V0 + 0
+   \   000208   85..83       MOV     DPH,?V0 + 1
+   \   00020B   A3           INC     DPTR
+   \   00020C   A3           INC     DPTR
+   \   00020D   A3           INC     DPTR
    \   00020E   A3           INC     DPTR
    \   00020F   A3           INC     DPTR
    \   000210   A3           INC     DPTR
    \   000211   A3           INC     DPTR
-   \   000212   A3           INC     DPTR
-   \   000213   A3           INC     DPTR
-   \   000214   A3           INC     DPTR
-   \   000215   E0           MOVX    A,@DPTR
-   \   000216   600B         JZ      ??ZDO_beaconNotifyIndCB_15
+   \   000212   E0           MOVX    A,@DPTR
+   \   000213   600B         JZ      ??ZDO_beaconNotifyIndCB_15
    2299                  pNwkDesc->deviceCapacity = 1;
-   \   000218   8E82         MOV     DPL,R6
-   \   00021A   8F83         MOV     DPH,R7
+   \   000215   8E82         MOV     DPL,R6
+   \   000217   8F83         MOV     DPH,R7
+   \   000219   A3           INC     DPTR
+   \   00021A   A3           INC     DPTR
+   \   00021B   A3           INC     DPTR
    \   00021C   A3           INC     DPTR
-   \   00021D   A3           INC     DPTR
-   \   00021E   A3           INC     DPTR
-   \   00021F   A3           INC     DPTR
-   \   000220   7401         MOV     A,#0x1
-   \   000222   F0           MOVX    @DPTR,A
+   \   00021D   7401         MOV     A,#0x1
+   \   00021F   F0           MOVX    @DPTR,A
    2300          
    2301                if ( pBeacon->routerCapacity )
    \                     ??ZDO_beaconNotifyIndCB_15:
-   \   000223   85..82       MOV     DPL,?V0 + 0
-   \   000226   85..83       MOV     DPH,?V0 + 1
+   \   000220   85..82       MOV     DPL,?V0 + 0
+   \   000223   85..83       MOV     DPH,?V0 + 1
+   \   000226   A3           INC     DPTR
+   \   000227   A3           INC     DPTR
+   \   000228   A3           INC     DPTR
    \   000229   A3           INC     DPTR
    \   00022A   A3           INC     DPTR
    \   00022B   A3           INC     DPTR
-   \   00022C   A3           INC     DPTR
-   \   00022D   A3           INC     DPTR
-   \   00022E   A3           INC     DPTR
-   \   00022F   E0           MOVX    A,@DPTR
-   \   000230   600A         JZ      ??ZDO_beaconNotifyIndCB_1
+   \   00022C   E0           MOVX    A,@DPTR
+   \   00022D   600A         JZ      ??ZDO_beaconNotifyIndCB_1
    2302                  pNwkDesc->routerCapacity = 1;
-   \   000232   8E82         MOV     DPL,R6
-   \   000234   8F83         MOV     DPH,R7
-   \   000236   A3           INC     DPTR
-   \   000237   A3           INC     DPTR
-   \   000238   A3           INC     DPTR
-   \   000239   7401         MOV     A,#0x1
-   \   00023B   F0           MOVX    @DPTR,A
+   \   00022F   8E82         MOV     DPL,R6
+   \   000231   8F83         MOV     DPH,R7
+   \   000233   A3           INC     DPTR
+   \   000234   A3           INC     DPTR
+   \   000235   A3           INC     DPTR
+   \   000236   7401         MOV     A,#0x1
+   \   000238   F0           MOVX    @DPTR,A
    2303              }
    2304            }
    \                     ??ZDO_beaconNotifyIndCB_1:
-   \   00023C   02....       LJMP    ?Subroutine5 & 0xFFFF
+   \   000239   02....       LJMP    ?Subroutine5 & 0xFFFF
    2305          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
@@ -7738,7 +7734,7 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c
      ?Subroutine0                                   3
      ZDO_NetworkFormationConfirmCB                 34
      ?Subroutine33                                 19
-     ZDO_beaconNotifyIndCB                        575
+     ZDO_beaconNotifyIndCB                        572
      ?Subroutine32                                  9
      ?Subroutine24                                  4
      ?Subroutine35                                 11
@@ -7856,14 +7852,14 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\zdo\ZDApp.c
      ??ZDO_DeregisterForZdoCB?relay                 6
 
  
- 5 207 bytes in segment BANKED_CODE
+ 5 204 bytes in segment BANKED_CODE
    390 bytes in segment BANK_RELAYS
     12 bytes in segment XDATA_I
     12 bytes in segment XDATA_ID
      8 bytes in segment XDATA_ROM_C
     53 bytes in segment XDATA_Z
  
- 5 609 bytes of CODE  memory
+ 5 606 bytes of CODE  memory
      0 bytes of CONST memory (+ 8 bytes shared)
     65 bytes of XDATA memory
 

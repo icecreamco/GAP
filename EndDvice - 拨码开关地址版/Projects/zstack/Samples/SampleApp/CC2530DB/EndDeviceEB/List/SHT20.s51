@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        15/Nov/2016  16:51:05 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  12:35:01 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -23,7 +23,7 @@
 //                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0808                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=500             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -187,7 +187,7 @@
         FUNCTION Delay_ms,021203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME XSTACK, 9, STACK
-        PUBWEAK P1DIR
+        PUBWEAK P0DIR
         PUBLIC SHT_DataRevise
         FUNCTION SHT_DataRevise,021203H
         ARGFRAME XSTACK, 0, STACK
@@ -211,7 +211,7 @@
         ARGFRAME DOVERLAY, 0, STATIC
         LOCFRAME XSTACK, 9, STACK
         PUBLIC SHTerror
-        PUBWEAK _A_P1
+        PUBWEAK _A_P0
         PUBWEAK __Constant_0
         PUBWEAK __Constant_37800000
         PUBWEAK __Constant_42fa0000
@@ -404,15 +404,15 @@ SHT_WritCOM         SYMBOL "SHT_WritCOM"
 // C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Samples\SampleApp\CC2530DB\SHT20.c
 //    1 #include "ioCC2530.h"
 
-        ASEGN SFR_AN:DATA:NOROOT,090H
-// union <unnamed> volatile __sfr _A_P1
-_A_P1:
+        ASEGN SFR_AN:DATA:NOROOT,080H
+// union <unnamed> volatile __sfr _A_P0
+_A_P0:
         DATA8
         DS 1
 
-        ASEGN SFR_AN:DATA:NOROOT,0feH
-// unsigned char volatile __sfr P1DIR
-P1DIR:
+        ASEGN SFR_AN:DATA:NOROOT,0fdH
+// unsigned char volatile __sfr P0DIR
+P0DIR:
         DATA8
         DS 1
 //    2 #include "OnBoard.h"
@@ -420,8 +420,8 @@ P1DIR:
 //    4 /******************************************************************************
 //    5 引脚分配
 //    6 *******************************************************************************/
-//    7 #define DATA_P P1_5
-//    8 #define SCK_P P1_4
+//    7 #define DATA_P P0_7
+//    8 #define SCK_P P0_6
 //    9 
 //   10 /******************************************************************************
 //   11 函数原型
@@ -520,37 +520,37 @@ SHT_Start:
         CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//   31   P1DIR|=0x30;
-        ORL     0xfe,#0x30
+//   31   P0DIR |= 0xc0;
+        ORL     0xfd,#0xc0
 //   32   MicroWait(1000);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#-0x18
         MOV     R3,#0x3
         LCALL   ??Onboard_wait?relay
 //   33   SCK_P=1;
-        SETB    0x90.4
+        SETB    0x80.6
 //   34   DATA_P=1;
-        SETB    0x90.5
+        SETB    0x80.7
 //   35   MicroWait(10);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0xa
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
 //   36   DATA_P=0;
-        CLR     0x90.5
+        CLR     0x80.7
 //   37   MicroWait(10);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0xa
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
 //   38   SCK_P=0;
-        CLR     0x90.4
+        CLR     0x80.6
         CFI EndBlock cfiBlock0
 //   39   MicroWait(10);
         ; Setup parameters for call to function Onboard_wait
         REQUIRE ?Subroutine0
-        REQUIRE P1DIR
-        REQUIRE _A_P1
+        REQUIRE P0DIR
+        REQUIRE _A_P0
         ; // Fall through to label ?Subroutine0
 //   40 }
 
@@ -766,7 +766,7 @@ SHT_WritCOM:
         MOV     A,R1
         MOV     R7,A
 //   46   uint8 i,ADRR;
-//   47   ADRR=ADR_W;
+//   47   ADRR = ADR_W;
         MOV     ?V0 + 0,#-0x80
 //   48 //发送地址*************************************
 //   49   for(i=0;i<8;i++)
@@ -778,12 +778,12 @@ SHT_WritCOM:
         MOV     C,0xE0 /* A   */.7
         JNC     ??SHT_WritCOM_1
 //   52       DATA_P=1;
-        SETB    0x90.5
+        SETB    0x80.7
         SJMP    ??SHT_WritCOM_2
 //   53     else
 //   54       DATA_P=0;
 ??SHT_WritCOM_1:
-        CLR     0x90.5
+        CLR     0x80.7
 //   55     MicroWait(5);
 ??SHT_WritCOM_2:
         ; Setup parameters for call to function Onboard_wait
@@ -805,7 +805,7 @@ SHT_WritCOM:
 //   62   DATA_P=1;
         LCALL   ?Subroutine3 & 0xFFFF
 //   63   //检测ASK信号
-//   64   P1DIR &=~0x20;
+//   64   P0DIR &= ~0x80;
 //   65   MicroWait(1000);
 //   66   SCK_P=1;
 //   67   MicroWait(5);
@@ -823,7 +823,7 @@ SHT_WritCOM:
 //   71   SCK_P=0;
 //   72   MicroWait(20);
 //   73 //发送命令******************************************  
-//   74   P1DIR |=0x20;
+//   74   P0DIR |= 0x80;
 ??CrossCallReturnLabel_13:
         LCALL   ?Subroutine5 & 0xFFFF
 //   75   MicroWait(1000);
@@ -837,12 +837,12 @@ SHT_WritCOM:
         MOV     C,0xE0 /* A   */.7
         JNC     ??SHT_WritCOM_5
 //   79       DATA_P=1;
-        SETB    0x90.5
+        SETB    0x80.7
         SJMP    ??SHT_WritCOM_6
 //   80     else
 //   81       DATA_P=0;
 ??SHT_WritCOM_5:
-        CLR     0x90.5
+        CLR     0x80.7
 //   82     MicroWait(5);
 ??SHT_WritCOM_6:
         ; Setup parameters for call to function Onboard_wait
@@ -864,7 +864,7 @@ SHT_WritCOM:
 //   89   DATA_P=1;
         LCALL   ?Subroutine3 & 0xFFFF
 //   90   //检测ASK信号
-//   91   P1DIR &=~0x20;
+//   91   P0DIR &= ~0x80;
 //   92   MicroWait(1000);
 //   93   SCK_P=1;
 //   94   MicroWait(5);
@@ -887,8 +887,8 @@ SHT_WritCOM:
         MOV     R1,#0x0
         CFI EndBlock cfiBlock2
         REQUIRE ?Subroutine1
-        REQUIRE _A_P1
-        REQUIRE P1DIR
+        REQUIRE _A_P0
+        REQUIRE P0DIR
         ; // Fall through to label ?Subroutine1
 //  102 }
 
@@ -947,7 +947,7 @@ SHT_WritCOM:
         MOV     R2,#0x5
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
-        CLR     0x90.4
+        CLR     0x80.6
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0x14
@@ -1307,12 +1307,12 @@ SHT_ReadData:
         MOV     C,0xE0 /* A   */.7
         JNC     ??SHT_ReadData_1
 //  116       DATA_P=1;
-        SETB    0x90.5
+        SETB    0x80.7
         SJMP    ??SHT_ReadData_2
 //  117     else
 //  118       DATA_P=0;
 ??SHT_ReadData_1:
-        CLR     0x90.5
+        CLR     0x80.7
 //  119     MicroWait(5);
 ??SHT_ReadData_2:
         ; Setup parameters for call to function Onboard_wait
@@ -1334,7 +1334,7 @@ SHT_ReadData:
 //  126   DATA_P=1;
         LCALL   ?Subroutine3 & 0xFFFF
 //  127   //检测ASK信号
-//  128   P1DIR &=~0x20;
+//  128   P0DIR &=~0x80;
 //  129   MicroWait(1000);
 //  130   SCK_P=1;
 //  131   MicroWait(5);
@@ -1354,9 +1354,9 @@ SHT_ReadData:
 //  137   
 //  138   SCK_P=1;
 ??CrossCallReturnLabel_19:
-        SETB    0x90.4
-//  139   P1DIR &=~0x10;
-        ANL     0xfe,#0xef
+        SETB    0x80.6
+//  139   P0DIR &= ~0x40;
+        ANL     0xfd,#0xbf
 //  140   MicroWait(1000);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#-0x18
@@ -1373,7 +1373,7 @@ SHT_ReadData:
         MOV     R3,#0x3
         LCALL   ??Onboard_wait?relay
 //  145     if(SCK_P==1)
-        MOV     C,0x90.4
+        MOV     C,0x80.6
         JC      ??SHT_ReadData_5
 //  146       break;
 //  147   }
@@ -1382,16 +1382,16 @@ SHT_ReadData:
         JNZ     ??SHT_ReadData_4
 //  148   if(SCK_P==0)
 ??SHT_ReadData_5:
-        MOV     C,0x90.4
+        MOV     C,0x80.6
         JC      ??SHT_ReadData_6
 //  149     SHTerror=1;          //检测应答  错误返回error=1
         MOV     DPTR,#SHTerror
         MOV     A,#0x1
         MOVX    @DPTR,A
 //  150 //读取高字节****************************************************************  
-//  151   P1DIR|=0x10;
+//  151   P0DIR |= 0x40;
 ??SHT_ReadData_6:
-        ORL     0xfe,#0x10
+        ORL     0xfd,#0x40
 //  152   MicroWait(1000);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#-0x18
@@ -1399,7 +1399,7 @@ SHT_ReadData:
         LCALL   ??Onboard_wait?relay
 //  153 
 //  154   DATA_P=1;
-        SETB    0x90.5
+        SETB    0x80.7
 //  155   for(i=0;i<8;i++)
         MOV     ?V0 + 0,#0x8
 //  156   {
@@ -1416,12 +1416,12 @@ SHT_ReadData:
 ??CrossCallReturnLabel_8:
         JNZ     ??SHT_ReadData_7
 //  165 //回复ASK********************************************************************
-//  166   P1DIR |=0x20;
+//  166   P0DIR |= 0x80;
         LCALL   ?Subroutine5 & 0xFFFF
 //  167   MicroWait(1000);
 //  168   DATA_P=0;
 ??CrossCallReturnLabel_11:
-        CLR     0x90.5
+        CLR     0x80.7
 //  169   MicroWait(5);
         ; Setup parameters for call to function Onboard_wait
         LCALL   ?Subroutine2 & 0xFFFF
@@ -1430,7 +1430,7 @@ SHT_ReadData:
 //  172   SCK_P=0;
 //  173   MicroWait(10);
 //  174 //读取低字节*****************************************************************
-//  175   P1DIR &=~0x20;
+//  175   P0DIR &=~0x80;
 ??CrossCallReturnLabel_3:
         LCALL   ?Subroutine9 & 0xFFFF
 //  176   MicroWait(1000);
@@ -1451,12 +1451,12 @@ SHT_ReadData:
 ??CrossCallReturnLabel_9:
         JNZ     ??SHT_ReadData_8
 //  187 //回应ASK*****************************************************************
-//  188   P1DIR |=0x20;
+//  188   P0DIR |=0x80;
         LCALL   ?Subroutine5 & 0xFFFF
 //  189   MicroWait(1000);
 //  190   DATA_P=1;
 ??CrossCallReturnLabel_12:
-        SETB    0x90.5
+        SETB    0x80.7
 //  191   MicroWait(5);
         ; Setup parameters for call to function Onboard_wait
         LCALL   ?Subroutine2 & 0xFFFF
@@ -1467,23 +1467,23 @@ SHT_ReadData:
 //  196 //结束信号****************************************************************
 //  197   DATA_P=0;
 ??CrossCallReturnLabel_4:
-        CLR     0x90.5
+        CLR     0x80.7
 //  198   SCK_P=0;
-        CLR     0x90.4
+        CLR     0x80.6
 //  199   MicroWait(5);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0x5
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
 //  200   SCK_P=1;
-        SETB    0x90.4
+        SETB    0x80.6
 //  201   MicroWait(10);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0xa
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
 //  202   DATA_P=1;
-        SETB    0x90.5
+        SETB    0x80.7
 //  203   MicroWait(10);
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0xa
@@ -1498,8 +1498,8 @@ SHT_ReadData:
         MOV     R7,#0x2
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock7
-        REQUIRE _A_P1
-        REQUIRE P1DIR
+        REQUIRE _A_P0
+        REQUIRE P0DIR
 //  206 }
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
@@ -1685,7 +1685,7 @@ SHT_ReadData:
         CFI (cfiPicker20) Picker
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
-        CLR     0x90.4
+        CLR     0x80.6
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
@@ -1757,7 +1757,7 @@ SHT_ReadData:
         CFI Block cfiPicker24 Using cfiCommon1
         CFI (cfiPicker24) NoFunction
         CFI (cfiPicker24) Picker
-        ORL     0xfe,#0x20
+        ORL     0xfd,#0x80
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
@@ -1805,7 +1805,7 @@ SHT_ReadData:
         CFI Block cfiPicker27 Using cfiCommon1
         CFI (cfiPicker27) NoFunction
         CFI (cfiPicker27) Picker
-        SETB    0x90.4
+        SETB    0x80.6
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0x5
@@ -1818,7 +1818,7 @@ SHT_ReadData:
         MOV     A,R7
         RLC     A
         MOV     R7,A
-        MOV     C,0x90.5
+        MOV     C,0x80.7
         CLR     A
         RLC     A
         MOV     R0,A
@@ -1884,17 +1884,17 @@ SHT_ReadData:
         CFI Block cfiPicker31 Using cfiCommon1
         CFI (cfiPicker31) NoFunction
         CFI (cfiPicker31) Picker
-        SETB    0x90.5
+        SETB    0x80.7
         LCALL   ?Subroutine9 & 0xFFFF
 ??CrossCallReturnLabel_18:
-        SETB    0x90.4
+        SETB    0x80.6
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         MOV     R2,#0x5
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
-        MOV     C,0x90.5
+        MOV     C,0x80.7
         RET
         CFI EndBlock cfiCond28
         CFI EndBlock cfiCond29
@@ -1964,7 +1964,7 @@ SHT_ReadData:
         CFI Block cfiPicker36 Using cfiCommon1
         CFI (cfiPicker36) NoFunction
         CFI (cfiPicker36) Picker
-        ANL     0xfe,#0xdf
+        ANL     0xfd,#0x7f
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
@@ -2060,7 +2060,7 @@ SHT_ReadData:
         MOV     R2,#0x5
         MOV     R3,#0x0
         LCALL   ??Onboard_wait?relay
-        SETB    0x90.4
+        SETB    0x80.6
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait
         ; Setup parameters for call to function Onboard_wait

@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         15/Nov/2016  16:51:05 #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         22/Nov/2016  12:35:01 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -23,7 +23,7 @@
 #                          8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0              #
 #                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
 #                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0x0808                       #
+#                          -DZDAPP_CONFIG_PAN_ID=0x2222                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=500               #
 #                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
@@ -138,22 +138,22 @@
 C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Samples\SampleApp\CC2530DB\SHT20.c
       1          #include "ioCC2530.h"
 
-   \                                 In  segment SFR_AN, at 0x90
-   \   union <unnamed> volatile __sfr _A_P1
-   \                     _A_P1:
+   \                                 In  segment SFR_AN, at 0x80
+   \   union <unnamed> volatile __sfr _A_P0
+   \                     _A_P0:
    \   000000                DS 1
 
-   \                                 In  segment SFR_AN, at 0xfe
-   \   unsigned char volatile __sfr P1DIR
-   \                     P1DIR:
+   \                                 In  segment SFR_AN, at 0xfd
+   \   unsigned char volatile __sfr P0DIR
+   \                     P0DIR:
    \   000000                DS 1
       2          #include "OnBoard.h"
       3          
       4          /******************************************************************************
       5          引脚分配
       6          *******************************************************************************/
-      7          #define DATA_P P1_5
-      8          #define SCK_P P1_4
+      7          #define DATA_P P0_7
+      8          #define SCK_P P0_6
       9          
      10          /******************************************************************************
      11          函数原型
@@ -198,36 +198,36 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000002   C083         PUSH    DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
-     31            P1DIR|=0x30;
-   \   000004   43FE30       ORL     0xfe,#0x30
+     31            P0DIR |= 0xc0;
+   \   000004   43FDC0       ORL     0xfd,#0xc0
      32            MicroWait(1000);
    \   000007                ; Setup parameters for call to function Onboard_wait
    \   000007   7AE8         MOV     R2,#-0x18
    \   000009   7B03         MOV     R3,#0x3
    \   00000B   12....       LCALL   ??Onboard_wait?relay
      33            SCK_P=1;
-   \   00000E   D294         SETB    0x90.4
+   \   00000E   D286         SETB    0x80.6
      34            DATA_P=1;
-   \   000010   D295         SETB    0x90.5
+   \   000010   D287         SETB    0x80.7
      35            MicroWait(10);
    \   000012                ; Setup parameters for call to function Onboard_wait
    \   000012   7A0A         MOV     R2,#0xa
    \   000014   7B00         MOV     R3,#0x0
    \   000016   12....       LCALL   ??Onboard_wait?relay
      36            DATA_P=0;
-   \   000019   C295         CLR     0x90.5
+   \   000019   C287         CLR     0x80.7
      37            MicroWait(10);
    \   00001B                ; Setup parameters for call to function Onboard_wait
    \   00001B   7A0A         MOV     R2,#0xa
    \   00001D   7B00         MOV     R3,#0x0
    \   00001F   12....       LCALL   ??Onboard_wait?relay
      38            SCK_P=0;
-   \   000022   C294         CLR     0x90.4
+   \   000022   C286         CLR     0x80.6
      39            MicroWait(10);
    \   000024                ; Setup parameters for call to function Onboard_wait
    \   000024                REQUIRE ?Subroutine0
-   \   000024                REQUIRE P1DIR
-   \   000024                REQUIRE _A_P1
+   \   000024                REQUIRE P0DIR
+   \   000024                REQUIRE _A_P0
    \   000024                ; // Fall through to label ?Subroutine0
      40          }
 
@@ -254,7 +254,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000005   E9           MOV     A,R1
    \   000006   FF           MOV     R7,A
      46            uint8 i,ADRR;
-     47            ADRR=ADR_W;
+     47            ADRR = ADR_W;
    \   000007   75..80       MOV     ?V0 + 0,#-0x80
      48          //发送地址*************************************
      49            for(i=0;i<8;i++)
@@ -266,12 +266,12 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   00000E   A2E7         MOV     C,0xE0 /* A   */.7
    \   000010   5004         JNC     ??SHT_WritCOM_1
      52                DATA_P=1;
-   \   000012   D295         SETB    0x90.5
+   \   000012   D287         SETB    0x80.7
    \   000014   8002         SJMP    ??SHT_WritCOM_2
      53              else
      54                DATA_P=0;
    \                     ??SHT_WritCOM_1:
-   \   000016   C295         CLR     0x90.5
+   \   000016   C287         CLR     0x80.7
      55              MicroWait(5);
    \                     ??SHT_WritCOM_2:
    \   000018                ; Setup parameters for call to function Onboard_wait
@@ -293,7 +293,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
      62            DATA_P=1;
    \   000025   12....       LCALL   ?Subroutine3 & 0xFFFF
      63            //检测ASK信号
-     64            P1DIR &=~0x20;
+     64            P0DIR &= ~0x80;
      65            MicroWait(1000);
      66            SCK_P=1;
      67            MicroWait(5);
@@ -311,7 +311,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
      71            SCK_P=0;
      72            MicroWait(20);
      73          //发送命令******************************************  
-     74            P1DIR |=0x20;
+     74            P0DIR |= 0x80;
    \                     ??CrossCallReturnLabel_13:
    \   000033   12....       LCALL   ?Subroutine5 & 0xFFFF
      75            MicroWait(1000);
@@ -325,12 +325,12 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000039   A2E7         MOV     C,0xE0 /* A   */.7
    \   00003B   5004         JNC     ??SHT_WritCOM_5
      79                DATA_P=1;
-   \   00003D   D295         SETB    0x90.5
+   \   00003D   D287         SETB    0x80.7
    \   00003F   8002         SJMP    ??SHT_WritCOM_6
      80              else
      81                DATA_P=0;
    \                     ??SHT_WritCOM_5:
-   \   000041   C295         CLR     0x90.5
+   \   000041   C287         CLR     0x80.7
      82              MicroWait(5);
    \                     ??SHT_WritCOM_6:
    \   000043                ; Setup parameters for call to function Onboard_wait
@@ -352,7 +352,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
      89            DATA_P=1;
    \   00004E   12....       LCALL   ?Subroutine3 & 0xFFFF
      90            //检测ASK信号
-     91            P1DIR &=~0x20;
+     91            P0DIR &= ~0x80;
      92            MicroWait(1000);
      93            SCK_P=1;
      94            MicroWait(5);
@@ -374,8 +374,8 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \                     ??CrossCallReturnLabel_14:
    \   00005C   7900         MOV     R1,#0x0
    \   00005E                REQUIRE ?Subroutine1
-   \   00005E                REQUIRE _A_P1
-   \   00005E                REQUIRE P1DIR
+   \   00005E                REQUIRE _A_P0
+   \   00005E                REQUIRE P0DIR
    \   00005E                ; // Fall through to label ?Subroutine1
     102          }
 
@@ -389,7 +389,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000000   7A05         MOV     R2,#0x5
    \   000002   7B00         MOV     R3,#0x0
    \   000004   12....       LCALL   ??Onboard_wait?relay
-   \   000007   C294         CLR     0x90.4
+   \   000007   C286         CLR     0x80.6
    \   000009                ; Setup parameters for call to function Onboard_wait
    \   000009                ; Setup parameters for call to function Onboard_wait
    \   000009   7A14         MOV     R2,#0x14
@@ -401,7 +401,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \                     ??Subroutine10_0:
    \   000000   7B00         MOV     R3,#0x0
    \   000002   12....       LCALL   ??Onboard_wait?relay
-   \   000005   C294         CLR     0x90.4
+   \   000005   C286         CLR     0x80.6
    \   000007                ; Setup parameters for call to function Onboard_wait
    \   000007                ; Setup parameters for call to function Onboard_wait
    \   000007                ; Setup parameters for call to function Onboard_wait
@@ -417,7 +417,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine5:
-   \   000000   43FE20       ORL     0xfe,#0x20
+   \   000000   43FD80       ORL     0xfd,#0x80
    \   000003                ; Setup parameters for call to function Onboard_wait
    \   000003                ; Setup parameters for call to function Onboard_wait
    \   000003                ; Setup parameters for call to function Onboard_wait
@@ -428,22 +428,22 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine3:
-   \   000000   D295         SETB    0x90.5
+   \   000000   D287         SETB    0x80.7
    \   000002   12....       LCALL   ?Subroutine9 & 0xFFFF
    \                     ??CrossCallReturnLabel_18:
-   \   000005   D294         SETB    0x90.4
+   \   000005   D286         SETB    0x80.6
    \   000007                ; Setup parameters for call to function Onboard_wait
    \   000007                ; Setup parameters for call to function Onboard_wait
    \   000007                ; Setup parameters for call to function Onboard_wait
    \   000007   7A05         MOV     R2,#0x5
    \   000009   7B00         MOV     R3,#0x0
    \   00000B   12....       LCALL   ??Onboard_wait?relay
-   \   00000E   A295         MOV     C,0x90.5
+   \   00000E   A287         MOV     C,0x80.7
    \   000010   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine9:
-   \   000000   53FEDF       ANL     0xfe,#0xdf
+   \   000000   53FD7F       ANL     0xfd,#0x7f
    \   000003                ; Setup parameters for call to function Onboard_wait
    \   000003                ; Setup parameters for call to function Onboard_wait
    \   000003                ; Setup parameters for call to function Onboard_wait
@@ -458,7 +458,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000000   7A05         MOV     R2,#0x5
    \   000002   7B00         MOV     R3,#0x0
    \   000004   12....       LCALL   ??Onboard_wait?relay
-   \   000007   D294         SETB    0x90.4
+   \   000007   D286         SETB    0x80.6
    \   000009                ; Setup parameters for call to function Onboard_wait
    \   000009                ; Setup parameters for call to function Onboard_wait
    \   000009                ; Setup parameters for call to function Onboard_wait
@@ -495,12 +495,12 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   00000D   A2E7         MOV     C,0xE0 /* A   */.7
    \   00000F   5004         JNC     ??SHT_ReadData_1
     116                DATA_P=1;
-   \   000011   D295         SETB    0x90.5
+   \   000011   D287         SETB    0x80.7
    \   000013   8002         SJMP    ??SHT_ReadData_2
     117              else
     118                DATA_P=0;
    \                     ??SHT_ReadData_1:
-   \   000015   C295         CLR     0x90.5
+   \   000015   C287         CLR     0x80.7
     119              MicroWait(5);
    \                     ??SHT_ReadData_2:
    \   000017                ; Setup parameters for call to function Onboard_wait
@@ -522,7 +522,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
     126            DATA_P=1;
    \   000026   12....       LCALL   ?Subroutine3 & 0xFFFF
     127            //检测ASK信号
-    128            P1DIR &=~0x20;
+    128            P0DIR &=~0x80;
     129            MicroWait(1000);
     130            SCK_P=1;
     131            MicroWait(5);
@@ -542,9 +542,9 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
     137            
     138            SCK_P=1;
    \                     ??CrossCallReturnLabel_19:
-   \   000034   D294         SETB    0x90.4
-    139            P1DIR &=~0x10;
-   \   000036   53FEEF       ANL     0xfe,#0xef
+   \   000034   D286         SETB    0x80.6
+    139            P0DIR &= ~0x40;
+   \   000036   53FDBF       ANL     0xfd,#0xbf
     140            MicroWait(1000);
    \   000039                ; Setup parameters for call to function Onboard_wait
    \   000039   7AE8         MOV     R2,#-0x18
@@ -561,7 +561,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000045   7B03         MOV     R3,#0x3
    \   000047   12....       LCALL   ??Onboard_wait?relay
     145              if(SCK_P==1)
-   \   00004A   A294         MOV     C,0x90.4
+   \   00004A   A286         MOV     C,0x80.6
    \   00004C   4006         JC      ??SHT_ReadData_5
     146                break;
     147            }
@@ -570,16 +570,16 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000052   70EF         JNZ     ??SHT_ReadData_4
     148            if(SCK_P==0)
    \                     ??SHT_ReadData_5:
-   \   000054   A294         MOV     C,0x90.4
+   \   000054   A286         MOV     C,0x80.6
    \   000056   4006         JC      ??SHT_ReadData_6
     149              SHTerror=1;          //检测应答  错误返回error=1
    \   000058   90....       MOV     DPTR,#SHTerror
    \   00005B   7401         MOV     A,#0x1
    \   00005D   F0           MOVX    @DPTR,A
     150          //读取高字节****************************************************************  
-    151            P1DIR|=0x10;
+    151            P0DIR |= 0x40;
    \                     ??SHT_ReadData_6:
-   \   00005E   43FE10       ORL     0xfe,#0x10
+   \   00005E   43FD40       ORL     0xfd,#0x40
     152            MicroWait(1000);
    \   000061                ; Setup parameters for call to function Onboard_wait
    \   000061   7AE8         MOV     R2,#-0x18
@@ -587,7 +587,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   000065   12....       LCALL   ??Onboard_wait?relay
     153          
     154            DATA_P=1;
-   \   000068   D295         SETB    0x90.5
+   \   000068   D287         SETB    0x80.7
     155            for(i=0;i<8;i++)
    \   00006A   75..08       MOV     ?V0 + 0,#0x8
     156            {
@@ -604,12 +604,12 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \                     ??CrossCallReturnLabel_8:
    \   000070   70FB         JNZ     ??SHT_ReadData_7
     165          //回复ASK********************************************************************
-    166            P1DIR |=0x20;
+    166            P0DIR |= 0x80;
    \   000072   12....       LCALL   ?Subroutine5 & 0xFFFF
     167            MicroWait(1000);
     168            DATA_P=0;
    \                     ??CrossCallReturnLabel_11:
-   \   000075   C295         CLR     0x90.5
+   \   000075   C287         CLR     0x80.7
     169            MicroWait(5);
    \   000077                ; Setup parameters for call to function Onboard_wait
    \   000077   12....       LCALL   ?Subroutine2 & 0xFFFF
@@ -618,7 +618,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
     172            SCK_P=0;
     173            MicroWait(10);
     174          //读取低字节*****************************************************************
-    175            P1DIR &=~0x20;
+    175            P0DIR &=~0x80;
    \                     ??CrossCallReturnLabel_3:
    \   00007A   12....       LCALL   ?Subroutine9 & 0xFFFF
     176            MicroWait(1000);
@@ -639,12 +639,12 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \                     ??CrossCallReturnLabel_9:
    \   000083   70FB         JNZ     ??SHT_ReadData_8
     187          //回应ASK*****************************************************************
-    188            P1DIR |=0x20;
+    188            P0DIR |=0x80;
    \   000085   12....       LCALL   ?Subroutine5 & 0xFFFF
     189            MicroWait(1000);
     190            DATA_P=1;
    \                     ??CrossCallReturnLabel_12:
-   \   000088   D295         SETB    0x90.5
+   \   000088   D287         SETB    0x80.7
     191            MicroWait(5);
    \   00008A                ; Setup parameters for call to function Onboard_wait
    \   00008A   12....       LCALL   ?Subroutine2 & 0xFFFF
@@ -655,23 +655,23 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
     196          //结束信号****************************************************************
     197            DATA_P=0;
    \                     ??CrossCallReturnLabel_4:
-   \   00008D   C295         CLR     0x90.5
+   \   00008D   C287         CLR     0x80.7
     198            SCK_P=0;
-   \   00008F   C294         CLR     0x90.4
+   \   00008F   C286         CLR     0x80.6
     199            MicroWait(5);
    \   000091                ; Setup parameters for call to function Onboard_wait
    \   000091   7A05         MOV     R2,#0x5
    \   000093   7B00         MOV     R3,#0x0
    \   000095   12....       LCALL   ??Onboard_wait?relay
     200            SCK_P=1;
-   \   000098   D294         SETB    0x90.4
+   \   000098   D286         SETB    0x80.6
     201            MicroWait(10);
    \   00009A                ; Setup parameters for call to function Onboard_wait
    \   00009A   7A0A         MOV     R2,#0xa
    \   00009C   7B00         MOV     R3,#0x0
    \   00009E   12....       LCALL   ??Onboard_wait?relay
     202            DATA_P=1;
-   \   0000A1   D295         SETB    0x90.5
+   \   0000A1   D287         SETB    0x80.7
     203            MicroWait(10);
    \   0000A3                ; Setup parameters for call to function Onboard_wait
    \   0000A3   7A0A         MOV     R2,#0xa
@@ -685,8 +685,8 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   0000AD   FB           MOV     R3,A
    \   0000AE   7F02         MOV     R7,#0x2
    \   0000B0   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   0000B3                REQUIRE _A_P1
-   \   0000B3                REQUIRE P1DIR
+   \   0000B3                REQUIRE _A_P0
+   \   0000B3                REQUIRE P0DIR
     206          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
@@ -697,7 +697,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine4:
-   \   000000   D294         SETB    0x90.4
+   \   000000   D286         SETB    0x80.6
    \   000002                ; Setup parameters for call to function Onboard_wait
    \   000002                ; Setup parameters for call to function Onboard_wait
    \   000002   7A05         MOV     R2,#0x5
@@ -710,7 +710,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
    \   00000D   EF           MOV     A,R7
    \   00000E   33           RLC     A
    \   00000F   FF           MOV     R7,A
-   \   000010   A295         MOV     C,0x90.5
+   \   000010   A287         MOV     C,0x80.7
    \   000012   E4           CLR     A
    \   000013   33           RLC     A
    \   000014   F8           MOV     R0,A
@@ -1040,8 +1040,8 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Projects\zstack\Sample
 
      Function/Label         Bytes
      --------------         -----
-     _A_P1                     1
-     P1DIR                     1
+     _A_P0                     1
+     P0DIR                     1
      temper                    4
      humid                     4
      SHTerror                  1

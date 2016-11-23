@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         15/Nov/2016  16:51:10 #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         22/Nov/2016  12:35:05 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -23,7 +23,7 @@
 #                          8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0              #
 #                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
 #                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0x0808                       #
+#                          -DZDAPP_CONFIG_PAN_ID=0x2222                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=500               #
 #                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
@@ -181,11 +181,6 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\mac\low_lev
      43           */
      44          #include "hal_types.h"
      45          #include "hal_board_cfg.h"
-
-   \                                 In  segment SFR_AN, at 0x80
-   \   union <unnamed> volatile __sfr _A_P0
-   \                     _A_P0:
-   \   000000                DS 1
      46          #include "hal_assert.h"
      47          #include "mac_api.h"
      48          #include "mac_radio_defs.h"
@@ -238,26 +233,24 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\mac\low_lev
      88             *   P0_7 -> HGM
      89             */
      90            HAL_PA_LNA_RX_HGM();
-   \   000004   D287         SETB    0x80.7
      91            
      92            /* Raises the CCA threshold to about -70 dBm input level.
      93             */
      94            CCACTRL0 = CCA_THR_HGM;
-   \   000006   906196       MOV     DPTR,#0x6196
-   \   000009   7406         MOV     A,#0x6
-   \   00000B   F0           MOVX    @DPTR,A
+   \   000004   906196       MOV     DPTR,#0x6196
+   \   000007   7406         MOV     A,#0x6
+   \   000009   F0           MOVX    @DPTR,A
      95          
      96            /* Select power register value table and RSSI adjustment value table */
      97            MAC_SetRadioRegTable(MAC_CC2591_TX_PWR_TABLE_IDX, MAC_CC2591_HGM_RSSI_ADJ_IDX);
-   \   00000C                ; Setup parameters for call to function MAC_SetRadioRegTable
-   \   00000C   7A01         MOV     R2,#0x1
-   \   00000E   7901         MOV     R1,#0x1
-   \   000010   12....       LCALL   ??MAC_SetRadioRegTable?relay
+   \   00000A                ; Setup parameters for call to function MAC_SetRadioRegTable
+   \   00000A   7A01         MOV     R2,#0x1
+   \   00000C   7901         MOV     R1,#0x1
+   \   00000E   12....       LCALL   ??MAC_SetRadioRegTable?relay
      98          }
-   \   000013   D083         POP     DPH
-   \   000015   D082         POP     DPL
-   \   000017   02....       LJMP    ?BRET
-   \   00001A                REQUIRE _A_P0
+   \   000011   D083         POP     DPH
+   \   000013   D082         POP     DPL
+   \   000015   02....       LJMP    ?BRET
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??MAC_RfFrontendSetup?relay:
@@ -279,17 +272,14 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\mac\low_lev
 
      Function/Label              Bytes
      --------------              -----
-     _A_P0                          1
-     MAC_RfFrontendSetup           26
+     MAC_RfFrontendSetup           24
      ??MAC_RfFrontendSetup?relay    6
 
  
- 26 bytes in segment BANKED_CODE
+ 24 bytes in segment BANKED_CODE
   6 bytes in segment BANK_RELAYS
-  1 byte  in segment SFR_AN
  
- 32 bytes of CODE memory
-  0 bytes of DATA memory (+ 1 byte shared)
+ 30 bytes of CODE memory
 
 Errors: none
 Warnings: none

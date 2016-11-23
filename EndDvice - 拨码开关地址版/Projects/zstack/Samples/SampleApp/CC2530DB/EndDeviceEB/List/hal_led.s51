@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        15/Nov/2016  16:51:06 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  12:35:02 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -23,7 +23,7 @@
 //                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0808                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=500             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -1682,14 +1682,14 @@ HalLedOnOff:
         JNZ     ??HalLedOnOff_3
 //  395     {
 //  396       HAL_TURN_ON_LED2();
-        SETB    0x90.1
+        SETB    0x90.0
         SJMP    ??HalLedOnOff_2
 //  397     }
 //  398     else
 //  399     {
 //  400       HAL_TURN_OFF_LED2();
 ??HalLedOnOff_3:
-        CLR     0x90.1
+        CLR     0x90.0
 //  401     }
 //  402   }
 //  403 
@@ -1705,14 +1705,14 @@ HalLedOnOff:
         JNZ     ??HalLedOnOff_5
 //  407     {
 //  408       HAL_TURN_ON_LED3();
-        SETB    0x90.4
+        SETB    0x90.0
         SJMP    ??HalLedOnOff_4
 //  409     }
 //  410     else
 //  411     {
 //  412       HAL_TURN_OFF_LED3();
 ??HalLedOnOff_5:
-        CLR     0x90.4
+        CLR     0x90.0
 //  413     }
 //  414   }
 //  415 
@@ -1905,39 +1905,22 @@ HalLedEnterSleep:
         MOV     A,0x90
         MOV     R1,A
 //  480   HalSleepLedState |= HAL_STATE_LED4() << 3;
-        MOV     A,0x90
+        MOV     C,0x90.0
+        CLR     A
+        RLC     A
+        RLC     A
+        RLC     A
+        RLC     A
         MOV     R2,A
-        MOV     A,R0
-        MOV     C,0xE0 /* A   */.1
-        JNC     ??HalLedEnterSleep_0
-        SETB    B.0
-        SJMP    ??HalLedEnterSleep_1
-??HalLedEnterSleep_0:
-        CLR     B.0
-??HalLedEnterSleep_1:
         MOV     A,R1
-        MOV     C,0xE0 /* A   */.4
-        JNC     ??HalLedEnterSleep_2
-        SETB    B.1
-        SJMP    ??HalLedEnterSleep_3
-??HalLedEnterSleep_2:
-        CLR     B.1
-??HalLedEnterSleep_3:
-        MOV     A,R2
         MOV     C,0xE0 /* A   */.0
         CLR     A
         RLC     A
         RLC     A
         RLC     A
-        RLC     A
-        MOV     R2,A
-        MOV     C,B.1
-        CLR     A
-        RLC     A
-        RLC     A
-        RLC     A
         MOV     R1,A
-        MOV     C,B.0
+        MOV     A,R0
+        MOV     C,0xE0 /* A   */.0
         CLR     A
         RLC     A
         RLC     A
@@ -2031,7 +2014,7 @@ HalLedExitSleep:
 //  507 #ifdef BLINK_LEDS
 //  508   /* Sleep OFF */
 //  509   HalLedStatusControl.sleepActive = FALSE;
-        LJMP    ?Subroutine0 & 0xFFFF
+        SJMP    ?Subroutine0
         CFI EndBlock cfiBlock13
 //  510 #endif /* BLINK_LEDS */
 //  511 }
@@ -2098,13 +2081,13 @@ __Constant_64:
 //  517 
 //  518 
 // 
-// 1 024 bytes in segment BANKED_CODE
-//    48 bytes in segment BANK_RELAYS
-//     1 byte  in segment SFR_AN
-//     4 bytes in segment XDATA_ROM_C
-//    40 bytes in segment XDATA_Z
+// 999 bytes in segment BANKED_CODE
+//  48 bytes in segment BANK_RELAYS
+//   1 byte  in segment SFR_AN
+//   4 bytes in segment XDATA_ROM_C
+//  40 bytes in segment XDATA_Z
 // 
-// 1 072 bytes of CODE  memory
+// 1 047 bytes of CODE  memory
 //     0 bytes of CONST memory (+ 4 bytes shared)
 //     0 bytes of DATA  memory (+ 1 byte  shared)
 //    40 bytes of XDATA memory

@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         26/Aug/2016  18:41:16 #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         22/Nov/2016  17:02:33 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -9,20 +9,20 @@
 #    Calling convention =  xdata reentrant                                    #
 #    Constant location  =  data_rom                                           #
 #    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Co #
-#                          mponents\stack\sys\ZGlobals.c                      #
-#    Command line       =  -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\Tools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ         #
+#    Source file        =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Compon #
+#                          ents\stack\sys\ZGlobals.c                          #
+#    Command line       =  -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pro #
+#                          jects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T #
+#                          ools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ             #
 #                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
 #                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
 #                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO       #
+#                          -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pro #
+#                          jects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T #
+#                          ools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO           #
 #                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
 #                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0x0101                       #
+#                          -DZDAPP_CONFIG_PAN_ID=0x2222                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
 #                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
@@ -43,94 +43,92 @@
 #                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 C:\Users\icecreamco\Desktop #
-#                          \GAP-1.0\Coordinator\Components\stack\sys\ZGlobals #
-#                          .c -D ZTOOL_P1 -D HAL_UART=TRUE -D AUTO_RESET -D   #
+#                          \GAP\Coordinator\Components\stack\sys\ZGlobals.c   #
+#                          -D ZTOOL_P1 -D HAL_UART=TRUE -D AUTO_RESET -D      #
 #                          xMT_TASK -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D        #
 #                          xLCD_SUPPORTED=DEBUG -lC                           #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\List\ -lA C:\Users\icecreamco\Desktop\GAP-1.0 #
-#                          \Coordinator\Projects\zstack\Samples\SampleApp\CC2 #
-#                          530DB\CoordinatorEB\List\ --diag_suppress          #
-#                          Pe001,Pa010 -o C:\Users\icecreamco\Desktop\GAP-1.0 #
-#                          \Coordinator\Projects\zstack\Samples\SampleApp\CC2 #
-#                          530DB\CoordinatorEB\Obj\ -e --no_code_motion       #
-#                          --debug --core=plain --dptr=16,1                   #
-#                          --data_model=large --code_model=banked             #
-#                          --calling_convention=xdata_reentrant               #
-#                          --place_constants=data_rom --nr_virtual_regs 16    #
-#                          -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\ -I    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\Source #
-#                          \ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinat #
-#                          or\Projects\zstack\Samples\SampleApp\CC2530DB\..\. #
-#                          .\..\ZMain\TI2530DB\ -I C:\Users\icecreamco\Deskto #
-#                          p\GAP-1.0\Coordinator\Projects\zstack\Samples\Samp #
-#                          leApp\CC2530DB\..\..\..\..\..\Components\hal\inclu #
-#                          de\ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordin #
-#                          ator\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\target\CC2530EB\ -I    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\include\ -I                   #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\high_level\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\low_level\srf04\ -I           #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\mac\low_level\srf04\single_chip\  #
-#                          -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator #
-#                          \Projects\zstack\Samples\SampleApp\CC2530DB\..\..\ #
-#                          ..\..\..\Components\mt\ -I                         #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\osal\include\ -I                  #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\services\saddr\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\services\sdata\ -I                #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\af\ -I                      #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\nwk\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sapi\ -I                    #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sec\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\sys\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\stack\zdo\ -I                     #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\zmac\ -I                          #
-#                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ #
-#                          ..\..\Components\zmac\f8w\ -Ohz                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \List\ -lA C:\Users\icecreamco\Desktop\GAP\Coordin #
+#                          ator\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
+#                          ordinatorEB\List\ --diag_suppress Pe001,Pa010 -o   #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \Obj\ -e --no_code_motion --debug --core=plain     #
+#                          --dptr=16,1 --data_model=large                     #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data_rom                  #
+#                          --nr_virtual_regs 16 -I C:\Users\icecreamco\Deskto #
+#                          p\GAP\Coordinator\Projects\zstack\Samples\SampleAp #
+#                          p\CC2530DB\ -I C:\Users\icecreamco\Desktop\GAP\Coo #
+#                          rdinator\Projects\zstack\Samples\SampleApp\CC2530D #
+#                          B\..\Source\ -I C:\Users\icecreamco\Desktop\GAP\Co #
+#                          ordinator\Projects\zstack\Samples\SampleApp\CC2530 #
+#                          DB\..\..\..\ZMain\TI2530DB\ -I                     #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\hal\include\ -I                       #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\hal\target\CC2530EB\ -I               #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\include\ -I                       #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\high_level\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\low_level\srf04\ -I               #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mac\low_level\srf04\single_chip\ -I   #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\mt\ -I C:\Users\icecreamco\Desktop\GA #
+#                          P\Coordinator\Projects\zstack\Samples\SampleApp\CC #
+#                          2530DB\..\..\..\..\..\Components\osal\include\ -I  #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\services\saddr\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\services\sdata\ -I                    #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\af\ -I                          #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\nwk\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sapi\ -I                        #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sec\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\sys\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\stack\zdo\ -I                         #
+#                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. #
+#                          .\Components\zmac\ -I C:\Users\icecreamco\Desktop\ #
+#                          GAP\Coordinator\Projects\zstack\Samples\SampleApp\ #
+#                          CC2530DB\..\..\..\..\..\Components\zmac\f8w\ -Ohz  #
 #                          --require_prototypes                               #
-#    List file          =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\List\ZGlobals.lst                             #
-#    Object file        =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Pr #
-#                          ojects\zstack\Samples\SampleApp\CC2530DB\Coordinat #
-#                          orEB\Obj\ZGlobals.r51                              #
+#    List file          =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \List\ZGlobals.lst                                 #
+#    Object file        =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Projec #
+#                          ts\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB #
+#                          \Obj\ZGlobals.r51                                  #
 #                                                                             #
 #                                                                             #
 ###############################################################################
 
-C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\sys\ZGlobals.c
+C:\Users\icecreamco\Desktop\GAP\Coordinator\Components\stack\sys\ZGlobals.c
       1          /**************************************************************************************************
       2            Filename:       ZGlobals.c
       3            Revised:        $Date: 2012-04-02 17:02:19 -0700 (Mon, 02 Apr 2012) $
@@ -363,12 +361,11 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\sys\ZGlobals.c
     119          
     120          // Network mode
 
-   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
     121          uint8 zgNwkMode = NWK_MODE;
    \                     zgNwkMode:
    \   000000                DS 1
-   \   000001                REQUIRE `?<Initializer for zgNwkMode>`
-   \   000001                REQUIRE __INIT_XDATA_I
+   \   000001                REQUIRE __INIT_XDATA_Z
     122          
     123          // Many-to-one values
 
@@ -1430,7 +1427,7 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\sys\ZGlobals.c
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for zgStackProfile>`:
-   \   000000   02           DB 2
+   \   000000   03           DB 3
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for zgIndirectMsgTimeout>`:
@@ -1459,10 +1456,6 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\sys\ZGlobals.c
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for zgBcastDeliveryTime>`:
    \   000000   1E           DB 30
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for zgNwkMode>`:
-   \   000000   02           DB 2
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for zgConcentratorRadius>`:
@@ -1502,7 +1495,7 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\sys\ZGlobals.c
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for zgConfigPANID>`:
-   \   000000   0101         DW 257
+   \   000000   2222         DW 8738
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for zgStartDelay>`:
@@ -1688,7 +1681,6 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\sys\ZGlobals.c
      ?<Initializer for zgMaxBcastRetires>              1
      ?<Initializer for zgPassiveAckTimeout>            1
      ?<Initializer for zgBcastDeliveryTime>            1
-     ?<Initializer for zgNwkMode>                      1
      ?<Initializer for zgConcentratorRadius>           1
      ?<Initializer for zgNwkSrcRtgExpiryTime>          1
      ?<Initializer for zgApscMaxFrameRetries>          1
@@ -1713,11 +1705,11 @@ C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\sys\ZGlobals.c
  598 bytes in segment BANKED_CODE
   30 bytes in segment BANK_RELAYS
    6 bytes in segment CODE_C
-  41 bytes in segment XDATA_I
-  41 bytes in segment XDATA_ID
-  26 bytes in segment XDATA_Z
+  40 bytes in segment XDATA_I
+  40 bytes in segment XDATA_ID
+  27 bytes in segment XDATA_Z
  
- 675 bytes of CODE  memory
+ 674 bytes of CODE  memory
   67 bytes of XDATA memory
 
 Errors: none

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        15/Nov/2016  16:51:01 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  17:08:34 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -23,7 +23,7 @@
 //                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0808                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=500             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -174,7 +174,6 @@
         PUBWEAK P1DIR
         PUBWEAK SLEEPCMD
         PUBWEAK SLEEPSTA
-        PUBWEAK _A_P1
         PUBLIC main
         FUNCTION main,0a1a03H
         ARGFRAME XSTACK, 0, STACK
@@ -341,6 +340,7 @@
         CFI EndCommon cfiCommon1
         
 osal_int_disable    SYMBOL "osal_int_disable"
+MAC_RfFrontendSetup SYMBOL "MAC_RfFrontendSetup"
 HalAdcCheckVdd      SYMBOL "HalAdcCheckVdd"
 InitBoard           SYMBOL "InitBoard"
 HalDriverInit       SYMBOL "HalDriverInit"
@@ -362,6 +362,7 @@ osal_rand           SYMBOL "osal_rand"
 ??HalDriverInit?relay SYMBOL "?relay", HalDriverInit
 ??HalFlashRead?relay SYMBOL "?relay", HalFlashRead
 ??InitBoard?relay   SYMBOL "?relay", InitBoard
+??MAC_RfFrontendSetup?relay SYMBOL "?relay", MAC_RfFrontendSetup
 ??ZMacInit?relay    SYMBOL "?relay", ZMacInit
 ??ZMacSetReq?relay  SYMBOL "?relay", ZMacSetReq
 ??osal_init_system?relay SYMBOL "?relay", osal_init_system
@@ -381,6 +382,13 @@ main                SYMBOL "main"
 
         EXTERN osal_int_disable
         FUNCTION osal_int_disable,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN MAC_RfFrontendSetup
+        FUNCTION MAC_RfFrontendSetup,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 0, STACK
@@ -513,6 +521,8 @@ main                SYMBOL "main"
         FUNCTION ??HalFlashRead?relay,00H
         EXTERN ??InitBoard?relay
         FUNCTION ??InitBoard?relay,00H
+        EXTERN ??MAC_RfFrontendSetup?relay
+        FUNCTION ??MAC_RfFrontendSetup?relay,00H
         EXTERN ??ZMacInit?relay
         FUNCTION ??ZMacInit?relay,00H
         EXTERN ??ZMacSetReq?relay
@@ -599,12 +609,6 @@ P0INP:
         DATA8
         DS 1
 
-        ASEGN SFR_AN:DATA:NOROOT,090H
-// union <unnamed> volatile __sfr _A_P1
-_A_P1:
-        DATA8
-        DS 1
-
         ASEGN SFR_AN:DATA:NOROOT,09dH
 // unsigned char volatile __sfr SLEEPSTA
 SLEEPSTA:
@@ -673,6 +677,17 @@ main:
         CODE
 //   80 {
         FUNCALL main, osal_int_disable
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL main, MAC_RfFrontendSetup
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
         LOCFRAME XSTACK, 0, STACK
@@ -840,13 +855,10 @@ main:
         MOV     DPTR,#0x6270
         MOV     A,#0x8
         MOVX    @DPTR,A
-        CLR     0x90.0
         ORL     0xfe,#0x1
-        CLR     0x90.1
-        ORL     0xfe,#0x2
-        CLR     0x90.4
-        ORL     0xfe,#0x10
         ORL     0x8f,#0x1
+        ; Setup parameters for call to function MAC_RfFrontendSetup
+        LCALL   ??MAC_RfFrontendSetup?relay
 //   86 
 //   87   // Make sure supply voltage is high enough to run
 //   88   zmain_vdd_check();
@@ -947,7 +959,6 @@ main:
         REQUIRE SLEEPSTA
         REQUIRE CLKCONCMD
         REQUIRE CLKCONSTA
-        REQUIRE _A_P1
         REQUIRE P1DIR
         REQUIRE P0INP
 //  143 } // main()
@@ -1608,14 +1619,14 @@ zmain_ext_addr:
 //  365 /*********************************************************************
 //  366 *********************************************************************/
 // 
-// 523 bytes in segment BANKED_CODE
+// 514 bytes in segment BANKED_CODE
 //  12 bytes in segment BANK_RELAYS
-//   7 bytes in segment SFR_AN
+//   6 bytes in segment SFR_AN
 //   8 bytes in segment XDATA_ROM_C
 // 
-// 535 bytes of CODE  memory
+// 526 bytes of CODE  memory
 //   8 bytes of CONST memory
-//   0 bytes of DATA  memory (+ 7 bytes shared)
+//   0 bytes of DATA  memory (+ 6 bytes shared)
 //
 //Errors: none
 //Warnings: none

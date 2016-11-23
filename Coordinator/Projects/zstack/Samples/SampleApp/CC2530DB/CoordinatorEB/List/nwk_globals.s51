@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        26/Aug/2016  18:41:16 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        22/Nov/2016  17:02:34 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -9,20 +9,20 @@
 //    Calling convention =  xdata reentrant                                   /
 //    Constant location  =  data_rom                                          /
 //    Dptr setup         =  1,16                                              /
-//    Source file        =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\C /
-//                          omponents\stack\nwk\nwk_globals.c                 /
-//    Command line       =  -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinato /
-//                          r\Projects\zstack\Samples\SampleApp\CC2530DB\..\. /
-//                          .\..\Tools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ      /
+//    Source file        =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Compo /
+//                          nents\stack\nwk\nwk_globals.c                     /
+//    Command line       =  -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pr /
+//                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\.. /
+//                          \Tools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ          /
 //                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TR /
 //                          UE -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8     /
 //                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)   /
-//                          -f C:\Users\icecreamco\Desktop\GAP-1.0\Coordinato /
-//                          r\Projects\zstack\Samples\SampleApp\CC2530DB\..\. /
-//                          .\..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO    /
+//                          -f C:\Users\icecreamco\Desktop\GAP\Coordinator\Pr /
+//                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\.. /
+//                          \Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO        /
 //                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR      /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x0101                      /
+//                          -DZDAPP_CONFIG_PAN_ID=0x2222                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -43,87 +43,86 @@
 //                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000       /
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 C:\Users\icecreamco\Deskto /
-//                          p\GAP-1.0\Coordinator\Components\stack\nwk\nwk_gl /
-//                          obals.c -D ZTOOL_P1 -D HAL_UART=TRUE -D           /
-//                          AUTO_RESET -D xMT_TASK -D xMT_SYS_FUNC -D         /
-//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC          /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\Coordin /
-//                          atorEB\List\ -lA C:\Users\icecreamco\Desktop\GAP- /
-//                          1.0\Coordinator\Projects\zstack\Samples\SampleApp /
-//                          \CC2530DB\CoordinatorEB\List\ --diag_suppress     /
-//                          Pe001,Pa010 -o C:\Users\icecreamco\Desktop\GAP-1. /
-//                          0\Coordinator\Projects\zstack\Samples\SampleApp\C /
-//                          C2530DB\CoordinatorEB\Obj\ -e --no_code_motion    /
+//                          p\GAP\Coordinator\Components\stack\nwk\nwk_global /
+//                          s.c -D ZTOOL_P1 -D HAL_UART=TRUE -D AUTO_RESET    /
+//                          -D xMT_TASK -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D    /
+//                          xLCD_SUPPORTED=DEBUG -lC                          /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\Coordinator /
+//                          EB\List\ -lA C:\Users\icecreamco\Desktop\GAP\Coor /
+//                          dinator\Projects\zstack\Samples\SampleApp\CC2530D /
+//                          B\CoordinatorEB\List\ --diag_suppress             /
+//                          Pe001,Pa010 -o C:\Users\icecreamco\Desktop\GAP\Co /
+//                          ordinator\Projects\zstack\Samples\SampleApp\CC253 /
+//                          0DB\CoordinatorEB\Obj\ -e --no_code_motion        /
 //                          --debug --core=plain --dptr=16,1                  /
 //                          --data_model=large --code_model=banked            /
 //                          --calling_convention=xdata_reentrant              /
 //                          --place_constants=data_rom --nr_virtual_regs 16   /
-//                          -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordinato /
-//                          r\Projects\zstack\Samples\SampleApp\CC2530DB\ -I  /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\Sour /
-//                          ce\ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordi /
-//                          nator\Projects\zstack\Samples\SampleApp\CC2530DB\ /
-//                          ..\..\..\ZMain\TI2530DB\ -I                       /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\hal\include\ -I                /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\hal\target\CC2530EB\ -I        /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\mac\include\ -I                /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\mac\high_level\ -I             /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\mac\low_level\srf04\ -I        /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\mac\low_level\srf04\single_chi /
-//                          p\ -I C:\Users\icecreamco\Desktop\GAP-1.0\Coordin /
-//                          ator\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\mt\ -I                   /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\osal\include\ -I               /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\services\saddr\ -I             /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\services\sdata\ -I             /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\stack\af\ -I                   /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\stack\nwk\ -I                  /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\stack\sapi\ -I                 /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\stack\sec\ -I                  /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\stack\sys\ -I                  /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\stack\zdo\ -I                  /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\zmac\ -I                       /
-//                          C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\..\..\. /
-//                          .\..\..\Components\zmac\f8w\ -Ohz                 /
+//                          -I C:\Users\icecreamco\Desktop\GAP\Coordinator\Pr /
+//                          ojects\zstack\Samples\SampleApp\CC2530DB\ -I      /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\Source\  /
+//                          -I C:\Users\icecreamco\Desktop\GAP\Coordinator\Pr /
+//                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\.. /
+//                          \ZMain\TI2530DB\ -I C:\Users\icecreamco\Desktop\G /
+//                          AP\Coordinator\Projects\zstack\Samples\SampleApp\ /
+//                          CC2530DB\..\..\..\..\..\Components\hal\include\   /
+//                          -I C:\Users\icecreamco\Desktop\GAP\Coordinator\Pr /
+//                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\.. /
+//                          \..\..\Components\hal\target\CC2530EB\ -I         /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\mac\include\ -I                    /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\mac\high_level\ -I                 /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\mac\low_level\srf04\ -I            /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\mac\low_level\srf04\single_chip\   /
+//                          -I C:\Users\icecreamco\Desktop\GAP\Coordinator\Pr /
+//                          ojects\zstack\Samples\SampleApp\CC2530DB\..\..\.. /
+//                          \..\..\Components\mt\ -I                          /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\osal\include\ -I                   /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\services\saddr\ -I                 /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\services\sdata\ -I                 /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\stack\af\ -I                       /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\stack\nwk\ -I                      /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\stack\sapi\ -I                     /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\stack\sec\ -I                      /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\stack\sys\ -I                      /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\stack\zdo\ -I                      /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\zmac\ -I                           /
+//                          C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\.. /
+//                          \..\Components\zmac\f8w\ -Ohz                     /
 //                          --require_prototypes                              /
-//    List file          =  C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\P /
-//                          rojects\zstack\Samples\SampleApp\CC2530DB\Coordin /
-//                          atorEB\List\nwk_globals.s51                       /
+//    List file          =  C:\Users\icecreamco\Desktop\GAP\Coordinator\Proje /
+//                          cts\zstack\Samples\SampleApp\CC2530DB\Coordinator /
+//                          EB\List\nwk_globals.s51                           /
 //                                                                            /
 //                                                                            /
 ///////////////////////////////////////////////////////////////////////////////
@@ -479,7 +478,7 @@ nwk_globals_init    SYMBOL "nwk_globals_init"
         EXTERN zgRouteDiscoveryTime
         EXTERN zgRouteExpiryTime
 
-// C:\Users\icecreamco\Desktop\GAP-1.0\Coordinator\Components\stack\nwk\nwk_globals.c
+// C:\Users\icecreamco\Desktop\GAP\Coordinator\Components\stack\nwk\nwk_globals.c
 //    1 /**************************************************************************************************
 //    2   Filename:       nwk_globals.c
 //    3   Revised:        $Date: 2012-03-07 01:04:58 -0800 (Wed, 07 Mar 2012) $
@@ -616,7 +615,7 @@ gNWK_MAX_DEVICE_LIST:
         DATA8
 //  115 CONST uint8 gNWK_MAX_SLEEPING_END_DEVICES = NWK_MAX_DEVICES - NWK_MAX_ROUTERS;
 gNWK_MAX_SLEEPING_END_DEVICES:
-        DB 27
+        DB 33
 //  116 
 //  117 // Variables for MAX data buffer levels
 
@@ -674,28 +673,29 @@ Cskip:
         REQUIRE __INIT_XDATA_Z
 //  130 
 //  131 #if ( STACK_PROFILE_ID == ZIGBEEPRO_PROFILE )
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
-        DATA8
 //  132   uint8 CskipRtrs[1] = {0};
-CskipRtrs:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
-        DATA8
 //  133   uint8 CskipChldrn[1] = {0};
-CskipChldrn:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
 //  134 #elif ( STACK_PROFILE_ID == HOME_CONTROLS )
 //  135   uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {6,6,6,6,6,0};
 //  136   uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {20,20,20,20,20,20};
 //  137 #elif ( STACK_PROFILE_ID == GENERIC_STAR )
 //  138 //  uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
 //  139 //  uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
 //  140   uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {0,0};
+CskipRtrs:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
 //  141   uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {32,0};
+CskipChldrn:
+        DATA16
+        DS 2
+        REQUIRE `?<Initializer for CskipChldrn>`
+        REQUIRE __INIT_XDATA_I
 //  142 #elif ( STACK_PROFILE_ID == NETWORK_SPECIFIC )
 //  143   uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
 //  144   uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
@@ -1292,17 +1292,12 @@ NIB_init:
         MOVX    @DPTR,A
 //  374   _NIB.MaxDepth = MAX_NODE_DEPTH;
         MOV     DPTR,#_NIB + 4
-        MOV     A,#0x14
+        DEC     A
         MOVX    @DPTR,A
 //  375 
 //  376 #if ( NWK_MODE == NWK_MODE_MESH )
 //  377   _NIB.beaconOrder = BEACON_ORDER_NO_BEACONS;
-        MOV     DPTR,#_NIB + 40
-        MOV     A,#0xf
-        MOVX    @DPTR,A
 //  378   _NIB.superFrameOrder = BEACON_ORDER_NO_BEACONS;
-        INC     DPTR
-        MOVX    @DPTR,A
 //  379 #endif
 //  380 
 //  381   // BROADCAST SETTINGS:
@@ -1701,6 +1696,12 @@ nwk_UpdateStatistics:
         CFI EndBlock cfiBlock7
 
         RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for CskipChldrn>`:
+        DATA8
+        DB 32
+        DB 0
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
 `?<Initializer for gMIN_TREE_LINK_COST>`:
         DATA8
         DB 6
@@ -1734,17 +1735,17 @@ nwk_UpdateStatistics:
 //  596 /*********************************************************************
 //  597 *********************************************************************/
 // 
-//   290 bytes in segment BANKED_CODE
+//   281 bytes in segment BANKED_CODE
 //    24 bytes in segment BANK_RELAYS
 //    73 bytes in segment CODE_C
 //     2 bytes in segment SFR_AN
-//     1 byte  in segment XDATA_I
-//     1 byte  in segment XDATA_ID
+//     3 bytes in segment XDATA_I
+//     3 bytes in segment XDATA_ID
 // 1 234 bytes in segment XDATA_Z
 // 
-//   388 bytes of CODE  memory
+//   381 bytes of CODE  memory
 //     0 bytes of DATA  memory (+ 2 bytes shared)
-// 1 235 bytes of XDATA memory
+// 1 237 bytes of XDATA memory
 //
 //Errors: none
 //Warnings: none

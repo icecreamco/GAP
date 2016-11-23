@@ -408,7 +408,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
       POWER = 1;                             //打开负载电源
       Delay_ms( 1000 );                      //等待负载电压稳定
       SampleApp_Send_P2P_Message( 0x01 );    //发送采集数据  第一组
-      SampleApp_Send_P2P_Message( 0x01 );    //发送采集数据  第二组
+      //SampleApp_Send_P2P_Message( 0x01 );    //发送采集数据  第二组
       POWER = 0;                             //关掉负载电源
       P1DIR &= ~0X01;                        //设置P1_0为输入
       P1INP |= 0X01;                       //设置P1_0为高阻态
@@ -439,7 +439,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
         POWER = 1;             
         Delay_ms( 1000 );     
         SampleApp_Send_P2P_Message( 0x01 );
-        SampleApp_Send_P2P_Message( 0x01 );
+        //SampleApp_Send_P2P_Message( 0x01 );
         POWER = 0;
         P1DIR &= ~0X01;
         P1INP |= 0X01;
@@ -449,6 +449,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
         P0INP |= 0Xc0;
         P1INP |= 0X0C;
       }
+	  sleepMode = DATA_SLEEP;
       osal_start_timerEx( SampleApp_TaskID, SAMPLEAPP_SEND_PERIODIC_MSG_EVT,
          (SAMPLEAPP_SEND_PERIODIC_MSG_TIMEOUT + (osal_rand() & 0x00FF)) );
     }
