@@ -72,7 +72,7 @@
 uint8 sleepMode = FREE_SLEEP;						// 开机联网睡眠或是采集睡眠
 uint32 startSleepTime = DEFAULT_START_SLEEP_TIME;				// 开机联网失败的睡眠时间
 uint32 Time_Interval = 0;         //数据采集间隔
-#define MAXSLEEPTIME 64000
+#define MAXSLEEPTIME 65000
 /* ------------------------------------------------------------------------------------------------
  *                                           Macros
  * ------------------------------------------------------------------------------------------------
@@ -310,8 +310,9 @@ void halSleep( uint16 osal_timeout )
   /* HAL_SLEEP_PM2 is entered only if the timeout is zero and
    * the device is a stimulated device.
    */
-	halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
-
+	//halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
+  halPwrMgtMode = HAL_SLEEP_TIMER;
+  
   /* DEEP sleep can only be entered when zgPollRate == 0.
    * This is to eliminate any possibility of entering PM3 between
    * two network timers.

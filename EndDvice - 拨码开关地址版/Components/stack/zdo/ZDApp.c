@@ -1151,6 +1151,7 @@ void ZDApp_ProcessOSALMsg( osal_event_hdr_t *msgPtr )
 				NLME_SetResponseRate(0);
 				  
 				// 设置睡眠所用参数
+				shutdown();
 				sleepMode = START_SLEEP;
 				CountF = 1;
 				// 初始睡眠时间为5S，之后每次翻倍，当睡眠时间大于一个小时，则设置睡眠时间为一个小时
@@ -1158,12 +1159,12 @@ void ZDApp_ProcessOSALMsg( osal_event_hdr_t *msgPtr )
 				if(startSleepTime > 3600000) {
 					startSleepTime = 3600000;
 				}
-				halSleep(1000);		// 睡眠函数，参数无意义
+				halSleep(5000);		// 睡眠函数，参数无意义
 				while(CountF == 0) {
-					halSleep(1000);
+					halSleep(5000);
 				}
+				turnOnRFX2401C();
 				sleepMode = FREE_SLEEP;
-				
 				NLME_SetPollRate(1000);
 				NLME_SetQueuedPollRate(100);
 				NLME_SetResponseRate(100);

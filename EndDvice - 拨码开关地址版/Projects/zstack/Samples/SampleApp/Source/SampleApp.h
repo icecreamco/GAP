@@ -251,6 +251,10 @@ extern uint16 delayt;
  * FUNCTIONS
  */
 
+extern void turnOnRFX2401C(void);
+extern void shutdownRFX2401C(void);
+extern void shutdown(void);
+
 /*
  * Task Initialization for the Generic Application
  */

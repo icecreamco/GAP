@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         22/Nov/2016  17:08:37 #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         24/Nov/2016  15:46:10 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -276,7 +276,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
    \                     Time_Interval:
    \   000000                DS 4
    \   000004                REQUIRE __INIT_XDATA_Z
-     75          #define MAXSLEEPTIME 64000
+     75          #define MAXSLEEPTIME 65000
      76          /* ------------------------------------------------------------------------------------------------
      77           *                                           Macros
      78           * ------------------------------------------------------------------------------------------------
@@ -567,484 +567,470 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
    \   000029   12....       LCALL   ?UL_SHR
     294            if (timeout == 0)
    \   00002C   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_1:
-   \   00002F   7019         JNZ     ??halSleep_0
+   \                     ??CrossCallReturnLabel_0:
+   \   00002F   7005         JNZ     ??halSleep_0
     295            {
     296              timeout = MAC_PwrNextTimeout();
    \   000031                ; Setup parameters for call to function MAC_PwrNextTimeout
    \   000031   12....       LCALL   ??MAC_PwrNextTimeout?relay
-   \   000034   8A..         MOV     ?V0 + 0,R2
-   \   000036   8B..         MOV     ?V0 + 1,R3
-   \   000038   8C..         MOV     ?V0 + 2,R4
-   \   00003A   8D..         MOV     ?V0 + 3,R5
+   \   000034   801D         SJMP    ??halSleep_1
     297            }
     298            else
     299            {
     300              /* get next MAC timer expiration */
     301              macTimeout = MAC_PwrNextTimeout();
+   \                     ??halSleep_0:
+   \   000036                ; Setup parameters for call to function MAC_PwrNextTimeout
+   \   000036   12....       LCALL   ??MAC_PwrNextTimeout?relay
+   \   000039   8A..         MOV     ?V0 + 4,R2
+   \   00003B   8B..         MOV     ?V0 + 5,R3
+   \   00003D   8C..         MOV     ?V0 + 6,R4
+   \   00003F   8D..         MOV     ?V0 + 7,R5
     302          
     303              /* get lesser of two timeouts */
     304              if ((macTimeout != 0) && (macTimeout < timeout))
+   \   000041   EA           MOV     A,R2
+   \   000042   45..         ORL     A,?V0 + 5
+   \   000044   45..         ORL     A,?V0 + 6
+   \   000046   45..         ORL     A,?V0 + 7
+   \   000048   6011         JZ      ??halSleep_2
+   \   00004A   78..         MOV     R0,#?V0 + 0
+   \   00004C   79..         MOV     R1,#?V0 + 4
+   \   00004E   12....       LCALL   ?UL_GT
+   \   000051   5008         JNC     ??halSleep_2
     305              {
     306                timeout = macTimeout;
+   \                     ??halSleep_1:
+   \   000053   8A..         MOV     ?V0 + 0,R2
+   \   000055   8B..         MOV     ?V0 + 1,R3
+   \   000057   8C..         MOV     ?V0 + 2,R4
+   \   000059   8D..         MOV     ?V0 + 3,R5
     307              }
     308            }
     309          
     310            /* HAL_SLEEP_PM2 is entered only if the timeout is zero and
     311             * the device is a stimulated device.
     312             */
-    313          	halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
-   \   00003C   EA           MOV     A,R2
-   \   00003D   12....       LCALL   ??Subroutine1_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_0:
-   \   000040   702D         JNZ     ??halSleep_1
-   \   000042   90....       MOV     DPTR,#halPwrMgtMode
-   \   000045   7403         MOV     A,#0x3
-   \   000047   F0           MOVX    @DPTR,A
-   \   000048   803D         SJMP    ??halSleep_2
-   \                     ??halSleep_0:
-   \   00004A                ; Setup parameters for call to function MAC_PwrNextTimeout
-   \   00004A   12....       LCALL   ??MAC_PwrNextTimeout?relay
-   \   00004D   8A..         MOV     ?V0 + 4,R2
-   \   00004F   8B..         MOV     ?V0 + 5,R3
-   \   000051   8C..         MOV     ?V0 + 6,R4
-   \   000053   8D..         MOV     ?V0 + 7,R5
-   \   000055   EA           MOV     A,R2
-   \   000056   45..         ORL     A,?V0 + 5
-   \   000058   45..         ORL     A,?V0 + 6
-   \   00005A   45..         ORL     A,?V0 + 7
-   \   00005C   6011         JZ      ??halSleep_1
-   \   00005E   78..         MOV     R0,#?V0 + 0
-   \   000060   79..         MOV     R1,#?V0 + 4
-   \   000062   12....       LCALL   ?UL_GT
-   \   000065   5008         JNC     ??halSleep_1
-   \   000067   8A..         MOV     ?V0 + 0,R2
-   \   000069   8B..         MOV     ?V0 + 1,R3
-   \   00006B   8C..         MOV     ?V0 + 2,R4
-   \   00006D   8D..         MOV     ?V0 + 3,R5
-   \                     ??halSleep_1:
-   \   00006F   90....       MOV     DPTR,#halPwrMgtMode
-   \   000072   7402         MOV     A,#0x2
-   \   000074   F0           MOVX    @DPTR,A
-    314          
-    315            /* DEEP sleep can only be entered when zgPollRate == 0.
-    316             * This is to eliminate any possibility of entering PM3 between
-    317             * two network timers.
-    318             */
-    319          #if ZG_BUILD_ENDDEVICE_TYPE && defined (NWK_AUTO_POLL)
-    320            if ((timeout > HAL_SLEEP_MS_TO_320US(PM_MIN_SLEEP_TIME)) ||
-    321                (timeout == 0 && zgPollRate == 0))
-    322          #else
-    323            if ((timeout > HAL_SLEEP_MS_TO_320US(PM_MIN_SLEEP_TIME)) ||
-    324                (timeout == 0))
-   \   000075   90....       MOV     DPTR,#__Constant_2d
-   \   000078   78..         MOV     R0,#?V0 + 0
-   \   00007A   12....       LCALL   ?UL_GE_X
-   \   00007D   4008         JC      ??halSleep_2
-   \   00007F   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_2:
-   \   000082   6003         JZ      $+5
-   \   000084   02....       LJMP    ??halSleep_3 & 0xFFFF
-    325          #endif
-    326            {
-    327              halIntState_t ien0, ien1, ien2;
-    328          
-    329              HAL_ASSERT(HAL_INTERRUPTS_ARE_ENABLED());
+    313          	//halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
+    314            halPwrMgtMode = HAL_SLEEP_TIMER;
    \                     ??halSleep_2:
-   \   000087   A2AF         MOV     C,0xa8.7
-   \   000089   4003         JC      ??halSleep_4
-   \   00008B                ; Setup parameters for call to function halAssertHandler
-   \   00008B   12....       LCALL   ??halAssertHandler?relay
-    330              HAL_DISABLE_INTERRUPTS();
-   \                     ??halSleep_4:
-   \   00008E   C2AF         CLR     0xa8.7
-    331          
-    332              /* always use "deep sleep" to turn off radio VREG on CC2530 */
-    333              if (halSleepPconValue != 0 && MAC_PwrOffReq(MAC_PWR_SLEEP_DEEP) == MAC_SUCCESS)
-   \   000090   E5..         MOV     A,halSleepPconValue
-   \   000092   7003         JNZ     $+5
-   \   000094   02....       LJMP    ??halSleep_5 & 0xFFFF
-   \   000097                ; Setup parameters for call to function MAC_PwrOffReq
-   \   000097   7902         MOV     R1,#0x2
-   \   000099   12....       LCALL   ??MAC_PwrOffReq?relay
-   \   00009C   E9           MOV     A,R1
-   \   00009D   6003         JZ      $+5
-   \   00009F   02....       LJMP    ??halSleep_5 & 0xFFFF
-    334              {
-    335                /* The PCON value is not zero. There is no interrupt overriding the 
-    336                 * sleep decision. Also, the radio granted the sleep request.
-    337                 */
-    338          
-    339          #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
-    340                /* get peripherals ready for sleep */
-    341                HalKeyEnterSleep();
-   \   0000A2                ; Setup parameters for call to function HalKeyEnterSleep
-   \   0000A2   12....       LCALL   ??HalKeyEnterSleep?relay
-    342          #endif
-    343          
-    344          #ifdef HAL_SLEEP_DEBUG_LED
-    345                HAL_TURN_OFF_LED3();
-    346          #else
-    347                /* use this to turn LEDs off during sleep */
-    348                HalLedEnterSleep();
-   \   0000A5                ; Setup parameters for call to function HalLedEnterSleep
-   \   0000A5   12....       LCALL   ??HalLedEnterSleep?relay
-    349          #endif
-    350          
-    351                if(timeout > maxSleepLoopTime)
-   \   0000A8   90....       MOV     DPTR,#maxSleepLoopTime
-   \   0000AB   78..         MOV     R0,#?V0 + 0
-   \   0000AD   12....       LCALL   ?UL_GT_X
-   \   0000B0   5008         JNC     ??halSleep_6
-    352                {
-    353                  timeout = maxSleepLoopTime;
-   \   0000B2   90....       MOV     DPTR,#maxSleepLoopTime
-   \   0000B5   78..         MOV     R0,#?V0 + 0
-   \   0000B7   12....       LCALL   ?L_MOV_X
-    354                }  
-    355          
-    356                /* enable sleep timer interrupt */
-    357          //***********************设置睡眠时间*****************************************//
-    358                if (timeout != 0)
-   \                     ??halSleep_6:
-   \   0000BA   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_3:
-   \   0000BD   7003         JNZ     $+5
-   \   0000BF   02....       LJMP    ??halSleep_7 & 0xFFFF
-    359                {
-    360                    if(CountF == 1)                                //如果计算睡眠时间标志位为1 计算睡眠时间
-   \   0000C2   90....       MOV     DPTR,#CountF
-   \   0000C5   E0           MOVX    A,@DPTR
-   \   0000C6   6401         XRL     A,#0x1
-   \   0000C8   6003         JZ      $+5
-   \   0000CA   02....       LJMP    ??halSleep_8 & 0xFFFF
-    361                    {
-    362                      	CountF = 0;                                  //消除标志位
-   \   0000CD   E4           CLR     A
-   \   0000CE   F0           MOVX    @DPTR,A
-    363          				if(sleepMode == DATA_SLEEP) {
-   \   0000CF   90....       MOV     DPTR,#sleepMode
-   \   0000D2   E0           MOVX    A,@DPTR
-   \   0000D3   6402         XRL     A,#0x2
-   \   0000D5   7064         JNZ     ??halSleep_9
-    364          				  	if(Mode == 'M')                              //调试模式采集间隔为2min
-   \   0000D7   90....       MOV     DPTR,#Mode
-   \   0000DA   E0           MOVX    A,@DPTR
-   \   0000DB   644D         XRL     A,#0x4d
-   \   0000DD   7005         JNZ     ??halSleep_10
-    365                        			Time_Interval = 120000;
-   \   0000DF   90....       MOV     DPTR,#__Constant_1d4c0
-   \   0000E2   8008         SJMP    ??halSleep_11
-    366                      		else if(Mode == 'C')                        //正常模式采集间隔为1h
-   \                     ??halSleep_10:
-   \   0000E4   E0           MOVX    A,@DPTR
-   \   0000E5   6443         XRL     A,#0x43
-   \   0000E7   700C         JNZ     ??halSleep_12
-    367                        			Time_Interval = 3600000; 
-   \   0000E9   90....       MOV     DPTR,#__Constant_36ee80
-   \                     ??halSleep_11:
-   \   0000EC   12....       LCALL   ?XLOAD_R2345
-   \   0000EF   90....       MOV     DPTR,#Time_Interval
-   \   0000F2   12....       LCALL   ?XSTORE_R2345
-    368          					
-    369          					SleepTime = Time_Interval-(osal_systemClock % Time_Interval) + (uint32)delayt;
-   \                     ??halSleep_12:
-   \   0000F5   90....       MOV     DPTR,#Time_Interval
-   \   0000F8   78..         MOV     R0,#?V0 + 4
-   \   0000FA   12....       LCALL   ?L_MOV_X
-   \   0000FD   90....       MOV     DPTR,#osal_systemClock
-   \   000100   78..         MOV     R0,#?V0 + 0
-   \   000102   12....       LCALL   ?L_MOV_X
-   \   000105   90....       MOV     DPTR,#Time_Interval
-   \   000108   78..         MOV     R0,#?V0 + 8
-   \   00010A   12....       LCALL   ?L_MOV_X
-   \   00010D   78..         MOV     R0,#?V0 + 0
-   \   00010F   79..         MOV     R1,#?V0 + 8
-   \   000111   12....       LCALL   ?UL_DIV_MOD
-   \   000114   78..         MOV     R0,#?V0 + 4
-   \   000116   79..         MOV     R1,#?V0 + 8
-   \   000118   12....       LCALL   ?L_SUB
-   \   00011B   90....       MOV     DPTR,#delayt
-   \   00011E   E0           MOVX    A,@DPTR
-   \   00011F   F5..         MOV     ?V0 + 0,A
-   \   000121   A3           INC     DPTR
-   \   000122   E0           MOVX    A,@DPTR
-   \   000123   F5..         MOV     ?V0 + 1,A
-   \   000125   E4           CLR     A
-   \   000126   F5..         MOV     ?V0 + 2,A
-   \   000128   F5..         MOV     ?V0 + 3,A
-   \   00012A   78..         MOV     R0,#?V0 + 4
-   \   00012C   79..         MOV     R1,#?V0 + 0
-   \   00012E   12....       LCALL   ?L_ADD
-   \   000131   90....       MOV     DPTR,#SleepTime
-   \   000134   78..         MOV     R0,#?V0 + 4
-   \   000136   12....       LCALL   ?L_MOV_TO_X
-   \   000139   8011         SJMP    ??halSleep_13
-    370          				} else if (sleepMode == START_SLEEP) {
-   \                     ??halSleep_9:
-   \   00013B   E0           MOVX    A,@DPTR
-   \   00013C   6401         XRL     A,#0x1
-   \   00013E   700C         JNZ     ??halSleep_13
-    371          				  	SleepTime = startSleepTime;
-   \   000140   90....       MOV     DPTR,#startSleepTime
-   \   000143   12....       LCALL   ?XLOAD_R2345
-   \   000146   90....       MOV     DPTR,#SleepTime
-   \   000149   12....       LCALL   ?XSTORE_R2345
-    372          				}             
-    373                                
-    374                      	TCount = (uint8)(SleepTime / MAXSLEEPTIME);    //最大睡眠时间的个数
-   \                     ??halSleep_13:
-   \   00014C   90....       MOV     DPTR,#SleepTime
-   \   00014F   78..         MOV     R0,#?V0 + 0
-   \   000151   12....       LCALL   ?L_MOV_X
-   \   000154   90....       MOV     DPTR,#__Constant_fa00
-   \   000157   78..         MOV     R0,#?V0 + 4
-   \   000159   12....       LCALL   ?L_MOV_X
-   \   00015C   78..         MOV     R0,#?V0 + 0
-   \   00015E   79..         MOV     R1,#?V0 + 4
-   \   000160   12....       LCALL   ?UL_DIV_MOD
-   \   000163   E5..         MOV     A,?V0 + 0
-   \   000165   90....       MOV     DPTR,#TCount
-   \   000168   F0           MOVX    @DPTR,A
-    375                      	SleepTime = (uint32)(SleepTime % MAXSLEEPTIME);//剩余的睡眠时间
-   \   000169   90....       MOV     DPTR,#SleepTime
-   \   00016C   78..         MOV     R0,#?V0 + 0
-   \   00016E   12....       LCALL   ?L_MOV_X
-   \   000171   90....       MOV     DPTR,#__Constant_fa00
-   \   000174   78..         MOV     R0,#?V0 + 4
-   \   000176   12....       LCALL   ?L_MOV_X
-   \   000179   78..         MOV     R0,#?V0 + 0
-   \   00017B   79..         MOV     R1,#?V0 + 4
-   \   00017D   12....       LCALL   ?UL_DIV_MOD
-   \   000180   90....       MOV     DPTR,#SleepTime
-   \   000183   78..         MOV     R0,#?V0 + 4
-   \   000185   12....       LCALL   ?L_MOV_TO_X
-    376                    }
-    377          		  
-    378                    if(TCount > 0) {
-   \                     ??halSleep_8:
-   \   000188   90....       MOV     DPTR,#TCount
-   \   00018B   E0           MOVX    A,@DPTR
-   \   00018C   6010         JZ      ??halSleep_14
-    379                         TCount--;
-   \   00018E   14           DEC     A
-   \   00018F   F0           MOVX    @DPTR,A
-    380                         SleepTime_MS = MAXSLEEPTIME;
-   \   000190   90....       MOV     DPTR,#__Constant_fa00
-   \   000193   12....       LCALL   ?XLOAD_R2345
-   \   000196   90....       MOV     DPTR,#SleepTime_MS
-   \   000199   12....       LCALL   ?XSTORE_R2345
-   \   00019C   8020         SJMP    ??halSleep_15
-    381                    } else {
-    382                         SleepTime_MS = SleepTime;
-   \                     ??halSleep_14:
-   \   00019E   90....       MOV     DPTR,#SleepTime
-   \   0001A1   12....       LCALL   ?XLOAD_R2345
-   \   0001A4   90....       MOV     DPTR,#SleepTime_MS
-   \   0001A7   12....       LCALL   ?XSTORE_R2345
-    383                         CountF = 1;
-   \   0001AA   90....       MOV     DPTR,#CountF
-   \   0001AD   7401         MOV     A,#0x1
-   \   0001AF   F0           MOVX    @DPTR,A
-    384          			   if(sleepMode == DATA_SLEEP) {	// 若是数据睡眠，则到了采集发送的时间
-   \   0001B0   90....       MOV     DPTR,#sleepMode
-   \   0001B3   E0           MOVX    A,@DPTR
-   \   0001B4   6402         XRL     A,#0x2
-   \   0001B6   7006         JNZ     ??halSleep_15
-    385          			   		TX_Flag=1;
-   \   0001B8   90....       MOV     DPTR,#TX_Flag
-   \   0001BB   7401         MOV     A,#0x1
-   \   0001BD   F0           MOVX    @DPTR,A
-    386          			   }
-    387                    }
-    388          //****************设置睡眠定时器 单位为MS*************************************//
-    389                   halSleepSetTimer(HAL_SLEEP_MS_TO_320US(SleepTime_MS));
-   \                     ??halSleep_15:
-   \   0001BE                ; Setup parameters for call to function halSleepSetTimer
-   \   0001BE   90....       MOV     DPTR,#SleepTime_MS
-   \   0001C1   78..         MOV     R0,#?V0 + 0
-   \   0001C3   12....       LCALL   ?L_MOV_X
-   \   0001C6   90....       MOV     DPTR,#__Constant_64
-   \   0001C9   78..         MOV     R0,#?V0 + 4
-   \   0001CB   12....       LCALL   ?L_MOV_X
-   \   0001CE   78..         MOV     R0,#?V0 + 0
-   \   0001D0   79..         MOV     R1,#?V0 + 4
-   \   0001D2   12....       LCALL   ?L_MUL
-   \   0001D5   90....       MOV     DPTR,#__Constant_1f
-   \   0001D8   78..         MOV     R0,#?V0 + 0
-   \   0001DA   12....       LCALL   ?L_ADD_X
-   \   0001DD   7405         MOV     A,#0x5
-   \   0001DF   78..         MOV     R0,#?V0 + 0
-   \   0001E1   12....       LCALL   ?UL_SHR
-   \   0001E4   AA..         MOV     R2,?V0 + 0
-   \   0001E6   AB..         MOV     R3,?V0 + 1
-   \   0001E8   AC..         MOV     R4,?V0 + 2
-   \   0001EA   AD..         MOV     R5,?V0 + 3
-   \   0001EC   12....       LCALL   ??halSleepSetTimer?relay
-    390                  
-    391                   /* set up sleep timer interrupt */
-    392                  HAL_SLEEP_TIMER_CLEAR_INT();
-   \   0001EF   C2C7         CLR     0xc0.7
-    393                  HAL_SLEEP_TIMER_ENABLE_INT();
-   \   0001F1   D2AD         SETB    0xa8.5
-    394                }
-    395          
-    396          #ifdef HAL_SLEEP_DEBUG_LED
-    397                if (halPwrMgtMode == CC2530_PM1)
-    398                {
-    399                  HAL_TURN_ON_LED1();
-    400                }
-    401                else
-    402                {
-    403                  HAL_TURN_OFF_LED1();
-    404                }
-    405          #endif
-    406          
-    407                /* Prep CC2530 power mode */
-    408                HAL_SLEEP_PREP_POWER_MODE(halPwrMgtMode);
-   \                     ??halSleep_7:
-   \   0001F3   53BEFC       ANL     0xbe,#0xfc
-   \   0001F6   90....       MOV     DPTR,#halPwrMgtMode
-   \   0001F9   E0           MOVX    A,@DPTR
-   \   0001FA   42BE         ORL     0xbe,A
-   \                     ??halSleep_16:
-   \   0001FC   E5AD         MOV     A,0xad
-   \   0001FE   A2E0         MOV     C,0xE0 /* A   */.0
-   \   000200   50FA         JNC     ??halSleep_16
-   \   000202   75..01       MOV     halSleepPconValue,#0x1
-    409          
-    410                /* save interrupt enable registers and disable all interrupts */
-    411                HAL_SLEEP_IE_BACKUP_AND_DISABLE(ien0, ien1, ien2);
-   \   000205   E5A8         MOV     A,0xa8
-   \   000207   FE           MOV     R6,A
-   \   000208   E5B8         MOV     A,0xb8
-   \   00020A   FF           MOV     R7,A
-   \   00020B   E59A         MOV     A,0x9a
-   \   00020D   F5..         MOV     ?V0 + 0,A
-   \   00020F   53A820       ANL     0xa8,#0x20
-   \   000212   53B820       ANL     0xb8,#0x20
-   \   000215   539A12       ANL     0x9a,#0x12
-    412                HAL_ENABLE_INTERRUPTS();
-   \   000218   D2AF         SETB    0xa8.7
-    413          
-    414                /* set CC2530 power mode, interrupt is disabled after this function
-    415                 * Note that an ISR (that could wake up from power mode) which runs
-    416                 * between the previous instruction enabling interrupts and before
-    417                 * power mode is set would switch the halSleepPconValue so that
-    418                 * power mode shall not be entered in such a case. 
-    419                 */
-    420                HAL_SLEEP_SET_POWER_MODE();
-   \   00021A                ; Setup parameters for call to function halSetSleepMode
-   \   00021A   12....       LCALL   ??halSetSleepMode?relay
-    421          
-    422                /* the interrupt is disabled - see halSetSleepMode() */
-    423          
-    424                /* restore interrupt enable registers */
-    425                HAL_SLEEP_IE_RESTORE(ien0, ien1, ien2);
-   \   00021D   8EA8         MOV     0xa8,R6
-   \   00021F   8FB8         MOV     0xb8,R7
-   \   000221   85..9A       MOV     0x9a,?V0 + 0
-    426          
-    427                /* disable sleep timer interrupt */
-    428                HAL_SLEEP_TIMER_DISABLE_INT();
-   \   000224   C2AD         CLR     0xa8.5
-    429          
-    430          #ifdef HAL_SLEEP_DEBUG_LED
-    431                HAL_TURN_ON_LED3();
-    432          #else
-    433                /* use this to turn LEDs back on after sleep */
-    434                HalLedExitSleep();
-   \   000226                ; Setup parameters for call to function HalLedExitSleep
-   \   000226   12....       LCALL   ??HalLedExitSleep?relay
-    435          #endif
-    436          
-    437          #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
-    438                /* handle peripherals */
-    439                (void)HalKeyExitSleep();
-   \   000229                ; Setup parameters for call to function HalKeyExitSleep
-   \   000229   12....       LCALL   ??HalKeyExitSleep?relay
-    440          #endif
-    441          
-    442                /* power on the MAC; blocks until completion */
-    443                MAC_PwrOnReq();
-   \   00022C                ; Setup parameters for call to function MAC_PwrOnReq
-   \   00022C   12....       LCALL   ??MAC_PwrOnReq?relay
-    444          
-    445                HAL_ENABLE_INTERRUPTS();
-   \   00022F   D2AF         SETB    0xa8.7
-    446          
-    447                /* For CC2530, T2 interrupt won抰 be generated when the current count is greater than
-    448                 * the comparator. The interrupt is only generated when the current count is equal to
-    449                 * the comparator. When the CC2530 is waking up from sleep, there is a small window
-    450                 * that the count may be grater than the comparator, therefore, missing the interrupt.
-    451                 * This workaround will call the T2 ISR when the current T2 count is greater than the
-    452                 * comparator. The problem only occurs when POWER_SAVING is turned on, i.e. the 32KHz
-    453                 * drives the chip in sleep and SYNC start is used.
-    454                 */
-    455                macMcuTimer2OverflowWorkaround();
-   \   000231                ; Setup parameters for call to function macMcuTimer2OverflowWorkaround
-   \   000231   12....       LCALL   ??macMcuTimer2OverflowWorkaround?relay
-   \   000234   8002         SJMP    ??halSleep_3
-    456              }
-    457              else
-    458              {
-    459                /* An interrupt may have changed the sleep decision. Do not sleep at all. Turn on
-    460                 * the interrupt, exit normally, and the next sleep will be allowed.
-    461                 */
-    462                HAL_ENABLE_INTERRUPTS();
-   \                     ??halSleep_5:
-   \   000236   D2AF         SETB    0xa8.7
-    463              }
-    464            }
-    465          }
+   \   00005B   90....       MOV     DPTR,#halPwrMgtMode
+   \   00005E   7402         MOV     A,#0x2
+   \   000060   F0           MOVX    @DPTR,A
+    315            
+    316            /* DEEP sleep can only be entered when zgPollRate == 0.
+    317             * This is to eliminate any possibility of entering PM3 between
+    318             * two network timers.
+    319             */
+    320          #if ZG_BUILD_ENDDEVICE_TYPE && defined (NWK_AUTO_POLL)
+    321            if ((timeout > HAL_SLEEP_MS_TO_320US(PM_MIN_SLEEP_TIME)) ||
+    322                (timeout == 0 && zgPollRate == 0))
+    323          #else
+    324            if ((timeout > HAL_SLEEP_MS_TO_320US(PM_MIN_SLEEP_TIME)) ||
+    325                (timeout == 0))
+   \   000061   90....       MOV     DPTR,#__Constant_2d
+   \   000064   78..         MOV     R0,#?V0 + 0
+   \   000066   12....       LCALL   ?UL_GE_X
+   \   000069   4008         JC      ??halSleep_3
+   \   00006B   12....       LCALL   ?Subroutine0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_1:
+   \   00006E   6003         JZ      $+5
+   \   000070   02....       LJMP    ??halSleep_4 & 0xFFFF
+    326          #endif
+    327            {
+    328              halIntState_t ien0, ien1, ien2;
+    329          
+    330              HAL_ASSERT(HAL_INTERRUPTS_ARE_ENABLED());
    \                     ??halSleep_3:
-   \   000238   7F0C         MOV     R7,#0xc
-   \   00023A   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   00023D                REQUIRE _A_IEN0
-   \   00023D                REQUIRE _A_IRCON
-   \   00023D                REQUIRE SLEEPCMD
-   \   00023D                REQUIRE STLOAD
-   \   00023D                REQUIRE _A_IEN1
-   \   00023D                REQUIRE IEN2
+   \   000073   A2AF         MOV     C,0xa8.7
+   \   000075   4003         JC      ??halSleep_5
+   \   000077                ; Setup parameters for call to function halAssertHandler
+   \   000077   12....       LCALL   ??halAssertHandler?relay
+    331              HAL_DISABLE_INTERRUPTS();
+   \                     ??halSleep_5:
+   \   00007A   C2AF         CLR     0xa8.7
+    332          
+    333              /* always use "deep sleep" to turn off radio VREG on CC2530 */
+    334              if (halSleepPconValue != 0 && MAC_PwrOffReq(MAC_PWR_SLEEP_DEEP) == MAC_SUCCESS)
+   \   00007C   E5..         MOV     A,halSleepPconValue
+   \   00007E   7003         JNZ     $+5
+   \   000080   02....       LJMP    ??halSleep_6 & 0xFFFF
+   \   000083                ; Setup parameters for call to function MAC_PwrOffReq
+   \   000083   7902         MOV     R1,#0x2
+   \   000085   12....       LCALL   ??MAC_PwrOffReq?relay
+   \   000088   E9           MOV     A,R1
+   \   000089   6003         JZ      $+5
+   \   00008B   02....       LJMP    ??halSleep_6 & 0xFFFF
+    335              {
+    336                /* The PCON value is not zero. There is no interrupt overriding the 
+    337                 * sleep decision. Also, the radio granted the sleep request.
+    338                 */
+    339          
+    340          #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
+    341                /* get peripherals ready for sleep */
+    342                HalKeyEnterSleep();
+   \   00008E                ; Setup parameters for call to function HalKeyEnterSleep
+   \   00008E   12....       LCALL   ??HalKeyEnterSleep?relay
+    343          #endif
+    344          
+    345          #ifdef HAL_SLEEP_DEBUG_LED
+    346                HAL_TURN_OFF_LED3();
+    347          #else
+    348                /* use this to turn LEDs off during sleep */
+    349                HalLedEnterSleep();
+   \   000091                ; Setup parameters for call to function HalLedEnterSleep
+   \   000091   12....       LCALL   ??HalLedEnterSleep?relay
+    350          #endif
+    351          
+    352                if(timeout > maxSleepLoopTime)
+   \   000094   90....       MOV     DPTR,#maxSleepLoopTime
+   \   000097   78..         MOV     R0,#?V0 + 0
+   \   000099   12....       LCALL   ?UL_GT_X
+   \   00009C   5008         JNC     ??halSleep_7
+    353                {
+    354                  timeout = maxSleepLoopTime;
+   \   00009E   90....       MOV     DPTR,#maxSleepLoopTime
+   \   0000A1   78..         MOV     R0,#?V0 + 0
+   \   0000A3   12....       LCALL   ?L_MOV_X
+    355                }  
+    356          
+    357                /* enable sleep timer interrupt */
+    358          //***********************设置睡眠时间*****************************************//
+    359                if (timeout != 0)
+   \                     ??halSleep_7:
+   \   0000A6   12....       LCALL   ?Subroutine0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_2:
+   \   0000A9   7003         JNZ     $+5
+   \   0000AB   02....       LJMP    ??halSleep_8 & 0xFFFF
+    360                {
+    361                    if(CountF == 1)                                //如果计算睡眠时间标志位为1 计算睡眠时间
+   \   0000AE   90....       MOV     DPTR,#CountF
+   \   0000B1   E0           MOVX    A,@DPTR
+   \   0000B2   6401         XRL     A,#0x1
+   \   0000B4   6003         JZ      $+5
+   \   0000B6   02....       LJMP    ??halSleep_9 & 0xFFFF
+    362                    {
+    363                      	CountF = 0;                                  //消除标志位
+   \   0000B9   E4           CLR     A
+   \   0000BA   F0           MOVX    @DPTR,A
+    364          				if(sleepMode == DATA_SLEEP) {
+   \   0000BB   90....       MOV     DPTR,#sleepMode
+   \   0000BE   E0           MOVX    A,@DPTR
+   \   0000BF   6402         XRL     A,#0x2
+   \   0000C1   7064         JNZ     ??halSleep_10
+    365          				  	if(Mode == 'M')                              //调试模式采集间隔为2min
+   \   0000C3   90....       MOV     DPTR,#Mode
+   \   0000C6   E0           MOVX    A,@DPTR
+   \   0000C7   644D         XRL     A,#0x4d
+   \   0000C9   7005         JNZ     ??halSleep_11
+    366                        			Time_Interval = 120000;
+   \   0000CB   90....       MOV     DPTR,#__Constant_1d4c0
+   \   0000CE   8008         SJMP    ??halSleep_12
+    367                      		else if(Mode == 'C')                        //正常模式采集间隔为1h
+   \                     ??halSleep_11:
+   \   0000D0   E0           MOVX    A,@DPTR
+   \   0000D1   6443         XRL     A,#0x43
+   \   0000D3   700C         JNZ     ??halSleep_13
+    368                        			Time_Interval = 3600000; 
+   \   0000D5   90....       MOV     DPTR,#__Constant_36ee80
+   \                     ??halSleep_12:
+   \   0000D8   12....       LCALL   ?XLOAD_R2345
+   \   0000DB   90....       MOV     DPTR,#Time_Interval
+   \   0000DE   12....       LCALL   ?XSTORE_R2345
+    369          					
+    370          					SleepTime = Time_Interval-(osal_systemClock % Time_Interval) + (uint32)delayt;
+   \                     ??halSleep_13:
+   \   0000E1   90....       MOV     DPTR,#Time_Interval
+   \   0000E4   78..         MOV     R0,#?V0 + 4
+   \   0000E6   12....       LCALL   ?L_MOV_X
+   \   0000E9   90....       MOV     DPTR,#osal_systemClock
+   \   0000EC   78..         MOV     R0,#?V0 + 0
+   \   0000EE   12....       LCALL   ?L_MOV_X
+   \   0000F1   90....       MOV     DPTR,#Time_Interval
+   \   0000F4   78..         MOV     R0,#?V0 + 8
+   \   0000F6   12....       LCALL   ?L_MOV_X
+   \   0000F9   78..         MOV     R0,#?V0 + 0
+   \   0000FB   79..         MOV     R1,#?V0 + 8
+   \   0000FD   12....       LCALL   ?UL_DIV_MOD
+   \   000100   78..         MOV     R0,#?V0 + 4
+   \   000102   79..         MOV     R1,#?V0 + 8
+   \   000104   12....       LCALL   ?L_SUB
+   \   000107   90....       MOV     DPTR,#delayt
+   \   00010A   E0           MOVX    A,@DPTR
+   \   00010B   F5..         MOV     ?V0 + 0,A
+   \   00010D   A3           INC     DPTR
+   \   00010E   E0           MOVX    A,@DPTR
+   \   00010F   F5..         MOV     ?V0 + 1,A
+   \   000111   E4           CLR     A
+   \   000112   F5..         MOV     ?V0 + 2,A
+   \   000114   F5..         MOV     ?V0 + 3,A
+   \   000116   78..         MOV     R0,#?V0 + 4
+   \   000118   79..         MOV     R1,#?V0 + 0
+   \   00011A   12....       LCALL   ?L_ADD
+   \   00011D   90....       MOV     DPTR,#SleepTime
+   \   000120   78..         MOV     R0,#?V0 + 4
+   \   000122   12....       LCALL   ?L_MOV_TO_X
+   \   000125   8011         SJMP    ??halSleep_14
+    371          				} else if (sleepMode == START_SLEEP) {
+   \                     ??halSleep_10:
+   \   000127   E0           MOVX    A,@DPTR
+   \   000128   6401         XRL     A,#0x1
+   \   00012A   700C         JNZ     ??halSleep_14
+    372          				  	SleepTime = startSleepTime;
+   \   00012C   90....       MOV     DPTR,#startSleepTime
+   \   00012F   12....       LCALL   ?XLOAD_R2345
+   \   000132   90....       MOV     DPTR,#SleepTime
+   \   000135   12....       LCALL   ?XSTORE_R2345
+    373          				}             
+    374                                
+    375                      	TCount = (uint8)(SleepTime / MAXSLEEPTIME);    //最大睡眠时间的个数
+   \                     ??halSleep_14:
+   \   000138   90....       MOV     DPTR,#SleepTime
+   \   00013B   78..         MOV     R0,#?V0 + 0
+   \   00013D   12....       LCALL   ?L_MOV_X
+   \   000140   90....       MOV     DPTR,#__Constant_fde8
+   \   000143   78..         MOV     R0,#?V0 + 4
+   \   000145   12....       LCALL   ?L_MOV_X
+   \   000148   78..         MOV     R0,#?V0 + 0
+   \   00014A   79..         MOV     R1,#?V0 + 4
+   \   00014C   12....       LCALL   ?UL_DIV_MOD
+   \   00014F   E5..         MOV     A,?V0 + 0
+   \   000151   90....       MOV     DPTR,#TCount
+   \   000154   F0           MOVX    @DPTR,A
+    376                      	SleepTime = (uint32)(SleepTime % MAXSLEEPTIME);//剩余的睡眠时间
+   \   000155   90....       MOV     DPTR,#SleepTime
+   \   000158   78..         MOV     R0,#?V0 + 0
+   \   00015A   12....       LCALL   ?L_MOV_X
+   \   00015D   90....       MOV     DPTR,#__Constant_fde8
+   \   000160   78..         MOV     R0,#?V0 + 4
+   \   000162   12....       LCALL   ?L_MOV_X
+   \   000165   78..         MOV     R0,#?V0 + 0
+   \   000167   79..         MOV     R1,#?V0 + 4
+   \   000169   12....       LCALL   ?UL_DIV_MOD
+   \   00016C   90....       MOV     DPTR,#SleepTime
+   \   00016F   78..         MOV     R0,#?V0 + 4
+   \   000171   12....       LCALL   ?L_MOV_TO_X
+    377                    }
+    378          		  
+    379                    if(TCount > 0) {
+   \                     ??halSleep_9:
+   \   000174   90....       MOV     DPTR,#TCount
+   \   000177   E0           MOVX    A,@DPTR
+   \   000178   6010         JZ      ??halSleep_15
+    380                         TCount--;
+   \   00017A   14           DEC     A
+   \   00017B   F0           MOVX    @DPTR,A
+    381                         SleepTime_MS = MAXSLEEPTIME;
+   \   00017C   90....       MOV     DPTR,#__Constant_fde8
+   \   00017F   12....       LCALL   ?XLOAD_R2345
+   \   000182   90....       MOV     DPTR,#SleepTime_MS
+   \   000185   12....       LCALL   ?XSTORE_R2345
+   \   000188   8020         SJMP    ??halSleep_16
+    382                    } else {
+    383                         SleepTime_MS = SleepTime;
+   \                     ??halSleep_15:
+   \   00018A   90....       MOV     DPTR,#SleepTime
+   \   00018D   12....       LCALL   ?XLOAD_R2345
+   \   000190   90....       MOV     DPTR,#SleepTime_MS
+   \   000193   12....       LCALL   ?XSTORE_R2345
+    384                         CountF = 1;
+   \   000196   90....       MOV     DPTR,#CountF
+   \   000199   7401         MOV     A,#0x1
+   \   00019B   F0           MOVX    @DPTR,A
+    385          			   if(sleepMode == DATA_SLEEP) {	// 若是数据睡眠，则到了采集发送的时间
+   \   00019C   90....       MOV     DPTR,#sleepMode
+   \   00019F   E0           MOVX    A,@DPTR
+   \   0001A0   6402         XRL     A,#0x2
+   \   0001A2   7006         JNZ     ??halSleep_16
+    386          			   		TX_Flag=1;
+   \   0001A4   90....       MOV     DPTR,#TX_Flag
+   \   0001A7   7401         MOV     A,#0x1
+   \   0001A9   F0           MOVX    @DPTR,A
+    387          			   }
+    388                    }
+    389          //****************设置睡眠定时器 单位为MS*************************************//
+    390                   halSleepSetTimer(HAL_SLEEP_MS_TO_320US(SleepTime_MS));
+   \                     ??halSleep_16:
+   \   0001AA                ; Setup parameters for call to function halSleepSetTimer
+   \   0001AA   90....       MOV     DPTR,#SleepTime_MS
+   \   0001AD   78..         MOV     R0,#?V0 + 0
+   \   0001AF   12....       LCALL   ?L_MOV_X
+   \   0001B2   90....       MOV     DPTR,#__Constant_64
+   \   0001B5   78..         MOV     R0,#?V0 + 4
+   \   0001B7   12....       LCALL   ?L_MOV_X
+   \   0001BA   78..         MOV     R0,#?V0 + 0
+   \   0001BC   79..         MOV     R1,#?V0 + 4
+   \   0001BE   12....       LCALL   ?L_MUL
+   \   0001C1   90....       MOV     DPTR,#__Constant_1f
+   \   0001C4   78..         MOV     R0,#?V0 + 0
+   \   0001C6   12....       LCALL   ?L_ADD_X
+   \   0001C9   7405         MOV     A,#0x5
+   \   0001CB   78..         MOV     R0,#?V0 + 0
+   \   0001CD   12....       LCALL   ?UL_SHR
+   \   0001D0   AA..         MOV     R2,?V0 + 0
+   \   0001D2   AB..         MOV     R3,?V0 + 1
+   \   0001D4   AC..         MOV     R4,?V0 + 2
+   \   0001D6   AD..         MOV     R5,?V0 + 3
+   \   0001D8   12....       LCALL   ??halSleepSetTimer?relay
+    391                  
+    392                   /* set up sleep timer interrupt */
+    393                  HAL_SLEEP_TIMER_CLEAR_INT();
+   \   0001DB   C2C7         CLR     0xc0.7
+    394                  HAL_SLEEP_TIMER_ENABLE_INT();
+   \   0001DD   D2AD         SETB    0xa8.5
+    395                }
+    396          
+    397          #ifdef HAL_SLEEP_DEBUG_LED
+    398                if (halPwrMgtMode == CC2530_PM1)
+    399                {
+    400                  HAL_TURN_ON_LED1();
+    401                }
+    402                else
+    403                {
+    404                  HAL_TURN_OFF_LED1();
+    405                }
+    406          #endif
+    407          
+    408                /* Prep CC2530 power mode */
+    409                HAL_SLEEP_PREP_POWER_MODE(halPwrMgtMode);
+   \                     ??halSleep_8:
+   \   0001DF   53BEFC       ANL     0xbe,#0xfc
+   \   0001E2   90....       MOV     DPTR,#halPwrMgtMode
+   \   0001E5   E0           MOVX    A,@DPTR
+   \   0001E6   42BE         ORL     0xbe,A
+   \                     ??halSleep_17:
+   \   0001E8   E5AD         MOV     A,0xad
+   \   0001EA   A2E0         MOV     C,0xE0 /* A   */.0
+   \   0001EC   50FA         JNC     ??halSleep_17
+   \   0001EE   75..01       MOV     halSleepPconValue,#0x1
+    410          
+    411                /* save interrupt enable registers and disable all interrupts */
+    412                HAL_SLEEP_IE_BACKUP_AND_DISABLE(ien0, ien1, ien2);
+   \   0001F1   E5A8         MOV     A,0xa8
+   \   0001F3   FE           MOV     R6,A
+   \   0001F4   E5B8         MOV     A,0xb8
+   \   0001F6   FF           MOV     R7,A
+   \   0001F7   E59A         MOV     A,0x9a
+   \   0001F9   F5..         MOV     ?V0 + 0,A
+   \   0001FB   53A820       ANL     0xa8,#0x20
+   \   0001FE   53B820       ANL     0xb8,#0x20
+   \   000201   539A12       ANL     0x9a,#0x12
+    413                HAL_ENABLE_INTERRUPTS();
+   \   000204   D2AF         SETB    0xa8.7
+    414          
+    415                /* set CC2530 power mode, interrupt is disabled after this function
+    416                 * Note that an ISR (that could wake up from power mode) which runs
+    417                 * between the previous instruction enabling interrupts and before
+    418                 * power mode is set would switch the halSleepPconValue so that
+    419                 * power mode shall not be entered in such a case. 
+    420                 */
+    421                HAL_SLEEP_SET_POWER_MODE();
+   \   000206                ; Setup parameters for call to function halSetSleepMode
+   \   000206   12....       LCALL   ??halSetSleepMode?relay
+    422          
+    423                /* the interrupt is disabled - see halSetSleepMode() */
+    424          
+    425                /* restore interrupt enable registers */
+    426                HAL_SLEEP_IE_RESTORE(ien0, ien1, ien2);
+   \   000209   8EA8         MOV     0xa8,R6
+   \   00020B   8FB8         MOV     0xb8,R7
+   \   00020D   85..9A       MOV     0x9a,?V0 + 0
+    427          
+    428                /* disable sleep timer interrupt */
+    429                HAL_SLEEP_TIMER_DISABLE_INT();
+   \   000210   C2AD         CLR     0xa8.5
+    430          
+    431          #ifdef HAL_SLEEP_DEBUG_LED
+    432                HAL_TURN_ON_LED3();
+    433          #else
+    434                /* use this to turn LEDs back on after sleep */
+    435                HalLedExitSleep();
+   \   000212                ; Setup parameters for call to function HalLedExitSleep
+   \   000212   12....       LCALL   ??HalLedExitSleep?relay
+    436          #endif
+    437          
+    438          #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
+    439                /* handle peripherals */
+    440                (void)HalKeyExitSleep();
+   \   000215                ; Setup parameters for call to function HalKeyExitSleep
+   \   000215   12....       LCALL   ??HalKeyExitSleep?relay
+    441          #endif
+    442          
+    443                /* power on the MAC; blocks until completion */
+    444                MAC_PwrOnReq();
+   \   000218                ; Setup parameters for call to function MAC_PwrOnReq
+   \   000218   12....       LCALL   ??MAC_PwrOnReq?relay
+    445          
+    446                HAL_ENABLE_INTERRUPTS();
+   \   00021B   D2AF         SETB    0xa8.7
+    447          
+    448                /* For CC2530, T2 interrupt won抰 be generated when the current count is greater than
+    449                 * the comparator. The interrupt is only generated when the current count is equal to
+    450                 * the comparator. When the CC2530 is waking up from sleep, there is a small window
+    451                 * that the count may be grater than the comparator, therefore, missing the interrupt.
+    452                 * This workaround will call the T2 ISR when the current T2 count is greater than the
+    453                 * comparator. The problem only occurs when POWER_SAVING is turned on, i.e. the 32KHz
+    454                 * drives the chip in sleep and SYNC start is used.
+    455                 */
+    456                macMcuTimer2OverflowWorkaround();
+   \   00021D                ; Setup parameters for call to function macMcuTimer2OverflowWorkaround
+   \   00021D   12....       LCALL   ??macMcuTimer2OverflowWorkaround?relay
+   \   000220   8002         SJMP    ??halSleep_4
+    457              }
+    458              else
+    459              {
+    460                /* An interrupt may have changed the sleep decision. Do not sleep at all. Turn on
+    461                 * the interrupt, exit normally, and the next sleep will be allowed.
+    462                 */
+    463                HAL_ENABLE_INTERRUPTS();
+   \                     ??halSleep_6:
+   \   000222   D2AF         SETB    0xa8.7
+    464              }
+    465            }
+    466          }
+   \                     ??halSleep_4:
+   \   000224   7F0C         MOV     R7,#0xc
+   \   000226   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000229                REQUIRE _A_IEN0
+   \   000229                REQUIRE _A_IRCON
+   \   000229                REQUIRE SLEEPCMD
+   \   000229                REQUIRE STLOAD
+   \   000229                REQUIRE _A_IEN1
+   \   000229                REQUIRE IEN2
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
    \   000000   E5..         MOV     A,?V0 + 0
-   \   000002                REQUIRE ??Subroutine1_0
-   \   000002                ; // Fall through to label ??Subroutine1_0
+   \   000002   45..         ORL     A,?V0 + 1
+   \   000004   45..         ORL     A,?V0 + 2
+   \   000006   45..         ORL     A,?V0 + 3
+   \   000008   22           RET
+    467          
+    468          /**************************************************************************************************
+    469           * @fn          halSleepSetTimer
+    470           *
+    471           * @brief       This function sets the CC2530 sleep timer compare value.  First it reads and
+    472           *              stores the value of the sleep timer; this value is used later to update OSAL
+    473           *              timers.  Then the timeout value is converted from 320 usec units to 32 kHz
+    474           *              period units and the compare value is set to the timeout.
+    475           *
+    476           * input parameters
+    477           *
+    478           * @param       timeout - Timeout value in 320 usec units.  The sleep timer compare is set to
+    479           *                        this value.
+    480           *
+    481           * output parameters
+    482           *
+    483           * None.
+    484           *
+    485           * @return      None.
+    486           **************************************************************************************************
+    487           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine1_0:
-   \   000000   45..         ORL     A,?V0 + 1
-   \   000002   45..         ORL     A,?V0 + 2
-   \   000004   45..         ORL     A,?V0 + 3
-   \   000006   22           RET
-    466          
-    467          /**************************************************************************************************
-    468           * @fn          halSleepSetTimer
-    469           *
-    470           * @brief       This function sets the CC2530 sleep timer compare value.  First it reads and
-    471           *              stores the value of the sleep timer; this value is used later to update OSAL
-    472           *              timers.  Then the timeout value is converted from 320 usec units to 32 kHz
-    473           *              period units and the compare value is set to the timeout.
-    474           *
-    475           * input parameters
-    476           *
-    477           * @param       timeout - Timeout value in 320 usec units.  The sleep timer compare is set to
-    478           *                        this value.
-    479           *
-    480           * output parameters
-    481           *
-    482           * None.
-    483           *
-    484           * @return      None.
-    485           **************************************************************************************************
-    486           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    487          void halSleepSetTimer(uint32 timeout)
+    488          void halSleepSetTimer(uint32 timeout)
    \                     halSleepSetTimer:
-    488          {
+    489          {
    \   000000   74F0         MOV     A,#-0x10
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 16
@@ -1055,41 +1041,41 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
    \   00000C   8B..         MOV     ?V0 + 1,R3
    \   00000E   8C..         MOV     ?V0 + 2,R4
    \   000010   8D..         MOV     ?V0 + 3,R5
-    489            uint32 ticks;
-    490          
-    491            /* read the sleep timer; ST0 must be read first */
-    492            ((uint8 *) &ticks)[UINT32_NDX0] = ST0;
+    490            uint32 ticks;
+    491          
+    492            /* read the sleep timer; ST0 must be read first */
+    493            ((uint8 *) &ticks)[UINT32_NDX0] = ST0;
    \   000012   E595         MOV     A,0x95
    \   000014   85..82       MOV     DPL,?XSP + 0
    \   000017   85..83       MOV     DPH,?XSP + 1
    \   00001A   F0           MOVX    @DPTR,A
-    493            ((uint8 *) &ticks)[UINT32_NDX1] = ST1;
+    494            ((uint8 *) &ticks)[UINT32_NDX1] = ST1;
    \   00001B   E596         MOV     A,0x96
    \   00001D   C0E0         PUSH    A
    \   00001F   7401         MOV     A,#0x1
    \   000021   12....       LCALL   ?XSTACK_DISP0_8
    \   000024   D0E0         POP     A
    \   000026   F0           MOVX    @DPTR,A
-    494            ((uint8 *) &ticks)[UINT32_NDX2] = ST2;
+    495            ((uint8 *) &ticks)[UINT32_NDX2] = ST2;
    \   000027   E597         MOV     A,0x97
    \   000029   C0E0         PUSH    A
    \   00002B   7402         MOV     A,#0x2
    \   00002D   12....       LCALL   ?XSTACK_DISP0_8
    \   000030   D0E0         POP     A
    \   000032   F0           MOVX    @DPTR,A
-    495            ((uint8 *) &ticks)[UINT32_NDX3] = 0;
+    496            ((uint8 *) &ticks)[UINT32_NDX3] = 0;
    \   000033   7403         MOV     A,#0x3
    \   000035   12....       LCALL   ?XSTACK_DISP0_8
    \   000038   E4           CLR     A
    \   000039   F0           MOVX    @DPTR,A
-    496          
-    497            /* Compute sleep timer compare value.  The ratio of 32 kHz ticks to 320 usec ticks
-    498             * is 32768/3125 = 10.48576.  This is nearly 671/64 = 10.484375.
-    499             */
-    500            ticks += (timeout * 671) / 64;
-    501          
-    502            /* subtract the processing time spent in function halSleep() */
-    503            ticks -= HAL_SLEEP_ADJ_TICKS;
+    497          
+    498            /* Compute sleep timer compare value.  The ratio of 32 kHz ticks to 320 usec ticks
+    499             * is 32768/3125 = 10.48576.  This is nearly 671/64 = 10.484375.
+    500             */
+    501            ticks += (timeout * 671) / 64;
+    502          
+    503            /* subtract the processing time spent in function halSleep() */
+    504            ticks -= HAL_SLEEP_ADJ_TICKS;
    \   00003A   90....       MOV     DPTR,#__Constant_29f
    \   00003D   78..         MOV     R0,#?V0 + 4
    \   00003F   12....       LCALL   ?L_MOV_X
@@ -1106,24 +1092,24 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
    \   00005B   85..83       MOV     DPH,?XSP + 1
    \   00005E   78..         MOV     R0,#?V0 + 0
    \   000060   12....       LCALL   ?L_ADD_TO_X
-    504          
-    505            /* set sleep timer compare; ST0 must be written last */
-    506            ST2 = ((uint8 *) &ticks)[UINT32_NDX2];
+    505          
+    506            /* set sleep timer compare; ST0 must be written last */
+    507            ST2 = ((uint8 *) &ticks)[UINT32_NDX2];
    \   000063   7402         MOV     A,#0x2
    \   000065   12....       LCALL   ?XSTACK_DISP0_8
    \   000068   E0           MOVX    A,@DPTR
    \   000069   F597         MOV     0x97,A
-    507            ST1 = ((uint8 *) &ticks)[UINT32_NDX1];
+    508            ST1 = ((uint8 *) &ticks)[UINT32_NDX1];
    \   00006B   7401         MOV     A,#0x1
    \   00006D   12....       LCALL   ?XSTACK_DISP0_8
    \   000070   E0           MOVX    A,@DPTR
    \   000071   F596         MOV     0x96,A
-    508            ST0 = ((uint8 *) &ticks)[UINT32_NDX0];
+    509            ST0 = ((uint8 *) &ticks)[UINT32_NDX0];
    \   000073   85..82       MOV     DPL,?XSP + 0
    \   000076   85..83       MOV     DPH,?XSP + 1
    \   000079   E0           MOVX    A,@DPTR
    \   00007A   F595         MOV     0x95,A
-    509          }
+    510          }
    \   00007C   7404         MOV     A,#0x4
    \   00007E   12....       LCALL   ?DEALLOC_XSTACK8
    \   000081   7F08         MOV     R7,#0x8
@@ -1131,110 +1117,110 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
    \   000086                REQUIRE ST0
    \   000086                REQUIRE ST1
    \   000086                REQUIRE ST2
-    510          
-    511          /**************************************************************************************************
-    512           * @fn          TimerElapsed
-    513           *
-    514           * @brief       Determine the number of OSAL timer ticks elapsed during sleep.
-    515           *              Deprecated for CC2530 and CC2430 SoC.
-    516           *
-    517           * input parameters
-    518           *
-    519           * @param       None.
-    520           *
-    521           * output parameters
-    522           *
-    523           * None.
-    524           *
-    525           * @return      Number of timer ticks elapsed during sleep.
-    526           **************************************************************************************************
-    527           */
+    511          
+    512          /**************************************************************************************************
+    513           * @fn          TimerElapsed
+    514           *
+    515           * @brief       Determine the number of OSAL timer ticks elapsed during sleep.
+    516           *              Deprecated for CC2530 and CC2430 SoC.
+    517           *
+    518           * input parameters
+    519           *
+    520           * @param       None.
+    521           *
+    522           * output parameters
+    523           *
+    524           * None.
+    525           *
+    526           * @return      Number of timer ticks elapsed during sleep.
+    527           **************************************************************************************************
+    528           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    528          uint32 TimerElapsed( void )
+    529          uint32 TimerElapsed( void )
    \                     TimerElapsed:
-    529          {
+    530          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    530            /* Stubs */
-    531            return (0);
+    531            /* Stubs */
+    532            return (0);
    \   000000   7A00         MOV     R2,#0x0
    \   000002   7B00         MOV     R3,#0x0
    \   000004   7C00         MOV     R4,#0x0
    \   000006   7D00         MOV     R5,#0x0
    \   000008   02....       LJMP    ?BRET
-    532          }
-    533          
-    534          /**************************************************************************************************
-    535           * @fn          halRestoreSleepLevel
-    536           *
-    537           * @brief       Restore the deepest timer sleep level.
-    538           *
-    539           * input parameters
-    540           *
-    541           * @param       None
-    542           *
-    543           * output parameters
-    544           *
-    545           *              None.
-    546           *
-    547           * @return      None.
-    548           **************************************************************************************************
-    549           */
+    533          }
+    534          
+    535          /**************************************************************************************************
+    536           * @fn          halRestoreSleepLevel
+    537           *
+    538           * @brief       Restore the deepest timer sleep level.
+    539           *
+    540           * input parameters
+    541           *
+    542           * @param       None
+    543           *
+    544           * output parameters
+    545           *
+    546           *              None.
+    547           *
+    548           * @return      None.
+    549           **************************************************************************************************
+    550           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    550          void halRestoreSleepLevel( void )
+    551          void halRestoreSleepLevel( void )
    \                     halRestoreSleepLevel:
-    551          {
+    552          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    552            /* Stubs */
-    553          }
+    553            /* Stubs */
+    554          }
    \   000000   02....       LJMP    ?BRET
-    554          
-    555          /**************************************************************************************************
-    556           * @fn          halSleepTimerIsr
-    557           *
-    558           * @brief       Sleep timer ISR.
-    559           *
-    560           * input parameters
-    561           *
-    562           * None.
-    563           *
-    564           * output parameters
-    565           *
-    566           * None.
-    567           *
-    568           * @return      None.
-    569           **************************************************************************************************
-    570           */
+    555          
+    556          /**************************************************************************************************
+    557           * @fn          halSleepTimerIsr
+    558           *
+    559           * @brief       Sleep timer ISR.
+    560           *
+    561           * input parameters
+    562           *
+    563           * None.
+    564           *
+    565           * output parameters
+    566           *
+    567           * None.
+    568           *
+    569           * @return      None.
+    570           **************************************************************************************************
+    571           */
 
    \                                 In  segment NEAR_CODE, align 1, keep-with-next
-    571          HAL_ISR_FUNCTION(halSleepTimerIsr, ST_VECTOR)
+    572          HAL_ISR_FUNCTION(halSleepTimerIsr, ST_VECTOR)
    \                     halSleepTimerIsr:
-    572          {
+    573          {
    \   000000   C0E0         PUSH    A
    \   000002   C0D0         PUSH    PSW
    \   000004   E8           MOV     A,R0
    \   000005   C0E0         PUSH    A
    \   000007                ; Saved register size: 3
    \   000007                ; Auto size: 0
-    573            HAL_ENTER_ISR();
+    574            HAL_ENTER_ISR();
    \   000007   E5A8         MOV     A,0xa8
    \   000009   D2AF         SETB    0xa8.7
-    574            HAL_SLEEP_TIMER_CLEAR_INT();
+    575            HAL_SLEEP_TIMER_CLEAR_INT();
    \   00000B   C2C7         CLR     0xc0.7
-    575          
-    576          #ifdef HAL_SLEEP_DEBUG_POWER_MODE
-    577            halSleepInt = TRUE;
-    578          #endif
-    579            
-    580            CLEAR_SLEEP_MODE();
+    576          
+    577          #ifdef HAL_SLEEP_DEBUG_POWER_MODE
+    578            halSleepInt = TRUE;
+    579          #endif
+    580            
+    581            CLEAR_SLEEP_MODE();
    \   00000D   75..00       MOV     halSleepPconValue,#0x0
-    581            HAL_EXIT_ISR();
+    582            HAL_EXIT_ISR();
    \   000010   A2E7         MOV     C,0xE0 /* A   */.7
    \   000012   92AF         MOV     0xa8.7,C
-    582          }
+    583          }
    \   000014   D0E0         POP     A
    \   000016   F8           MOV     R0,A
    \   000017   D0D0         POP     PSW
@@ -1284,8 +1270,8 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
    \   000000   80EE3600     DD 3600000
 
    \                                 In  segment XDATA_ROM_C, align 1
-   \                     __Constant_fa00:
-   \   000000   00FA0000     DD 64000
+   \                     __Constant_fde8:
+   \   000000   E8FD0000     DD 65000
 
    \                                 In  segment XDATA_ROM_C, align 1
    \                     __Constant_29f:
@@ -1324,7 +1310,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
    \                     ??halRestoreSleepLevel?relay:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halRestoreSleepLevel
-    583          
+    584          
 
    Maximum stack usage in bytes:
 
@@ -1374,9 +1360,8 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
      halPwrMgtMode                           1
      halSetSleepMode                         8
      halSetMaxSleepLoopTime                 34
-     halSleep                              573
-     ?Subroutine0                            2
-     ??Subroutine1_0                         7
+     halSleep                              553
+     ?Subroutine0                            9
      halSleepSetTimer                      134
      TimerElapsed                           11
      halRestoreSleepLevel                    3
@@ -1391,7 +1376,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
      __Constant_2d                           4
      __Constant_1d4c0                        4
      __Constant_36ee80                       4
-     __Constant_fa00                         4
+     __Constant_fde8                         4
      __Constant_29f                          4
      __Constant_ffffffe9                     4
      ??halSetSleepMode?relay                 6
@@ -1402,7 +1387,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
      ??halRestoreSleepLevel?relay            6
 
  
- 764 bytes in segment BANKED_CODE
+ 744 bytes in segment BANKED_CODE
   36 bytes in segment BANK_RELAYS
    1 byte  in segment DATA_I
    1 byte  in segment DATA_ID
@@ -1415,7 +1400,7 @@ C:\Users\icecreamco\Desktop\GAP\EndDvice - 拨码开关地址版\Components\hal\target\
   36 bytes in segment XDATA_ROM_C
    6 bytes in segment XDATA_Z
  
- 845 bytes of CODE  memory (+  3 bytes shared)
+ 825 bytes of CODE  memory (+  3 bytes shared)
    0 bytes of CONST memory (+ 36 bytes shared)
    1 byte  of DATA  memory (+ 10 bytes shared)
   14 bytes of XDATA memory

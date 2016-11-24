@@ -276,8 +276,6 @@ extern void MAC_RfFrontendSetup(void);
   /* set direction for GPIO outputs  */                          \
   LED1_DDR |= LED1_BV;                                           \
                                                                  \
-  /* Set PA/LNA HGM control P0_7                               \
-  P0DIR |= BV(7);              */                                  \
                                                                  \
   /* configure tristates */                                      \
   P0INP |= PUSH2_BV;                                             \

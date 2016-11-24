@@ -83,6 +83,7 @@
 #include "string.h"
 #include "math.h"
 #include "Mac_low_level.h"
+#include "mac_radio_defs.h"
 /*********************************************************************
  * MACROS
  */
@@ -172,7 +173,10 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pckt );
 void SampleApp_SendPeriodicMessage(uint8 ADR);
 void SampleApp_SendFlashMessage( uint16 flashTime );
 void SampleApp_Send_P2P_Message(uint8 select);
-
+void culculateAddr(void);
+void turnOnRFX2401C(void);
+void shutdownRFX2401C(void);
+void shutdown(void);
 /*********************************************************************
  * NETWORK LAYER CALLBACKS
  */
@@ -220,33 +224,21 @@ void SampleApp_Init( uint8 task_id )
   Delay_ms( 50 );          //延时50MS
   SWLED = 1;               //LED打开
   POWER = 0;               //传感器关闭
-  P1DIR &= ~0X01;          //P1_0设置为输入
-  P1INP |= 0X01;          //P1_0设置为高阻态
+  //P1DIR &= ~0X01;          //P1_0设置为输入
+  //P1INP |= 0X01;          //P1_0设置为高阻态
 
   P1DIR &= ~0X0C;          //设置P1_3 P1_2为输入
   P1INP |= 0X0C;           //设置P1_3 P1_2为高阻态
- 
+  
+  P0SEL &= ~0Xc0;
+  P0DIR &= ~0Xc0;          //设置P0_6 P0_7为输入
+  P0INP |= 0Xc0;           //设置P0_6 P0_7为高阻态
+  
   //读取节点地址//
   // P0_0 - P0_5
-  P0SEL = 0X00;
-  P0DIR = 0X00;            //设置P0为输入
-  P0INP = 0X00;
-  Delay_ms( 1000 );          //延时1000MS
-  ADDR = P0;
-  ADDR &= 0x3f;
-  if(ADDR == 0)
-    ADDR = 1;
-  delayt = Delaybet * ADDR;
-  ADDR1 = ((ADDR - 1) / ABLen) + 0x41;
-  ADDR %= ABLen;
-  if(ADDR == 0)
-    ADDR = ABLen;
-  if(ADDR >= 100)
-    ADDR = 99;
-  ADDR2 = ADDR / 10 + 0x30;
-  ADDR3 = ADDR % 10 + 0X30;
-  P0INP = 0Xff;
+  culculateAddr();
   
+  P2SEL &= ~0X04;
   P2DIR &= ~0X04;
   P2INP |= 0X04;
   // Device hardware initialization can be added here or in main() (Zmain.c).
@@ -307,6 +299,55 @@ void SampleApp_Init( uint8 task_id )
 #if defined ( LCD_SUPPORTED )
   HalLcdWriteString( "SampleApp", HAL_LCD_LINE_1 );
 #endif
+}
+
+/* 读取节点地址
+ * P0_0 - P0_5
+ */
+void culculateAddr() {
+	P0SEL &= ~0X3F;
+	P0DIR &= ~0X3F;            //设置P0为输入
+	P0INP &= ~0X3F;
+	Delay_ms( 1000 );          //延时1000MS
+	ADDR = 0;
+	ADDR <<= 1;
+	if (P0_5 == 1) {
+		ADDR |= 1;
+	}
+	ADDR <<= 1;
+	if (P0_4 == 1) {
+		ADDR |= 1;
+	}
+	ADDR <<= 1;
+	if (P0_3 == 1) {
+		ADDR |= 1;
+	}
+	ADDR <<= 1;
+	if (P0_2 == 1) {
+		ADDR |= 1;
+	}
+	ADDR <<= 1;
+	if (P0_1 == 1) {
+		ADDR |= 1;
+	}
+	ADDR <<= 1;
+	if (P0_0 == 1) {
+		ADDR |= 1;
+	}
+	
+	if(ADDR == 0)
+		ADDR = 1;
+	delayt = Delaybet * ADDR;
+	ADDR1 = ((ADDR - 1) / ABLen) + 0x41;
+	ADDR %= ABLen;
+	if(ADDR == 0)
+		ADDR = ABLen;
+	if(ADDR >= 100)
+		ADDR = 99;
+	ADDR2 = ADDR / 10 + 0x30;
+	ADDR3 = ADDR % 10 + 0X30;
+	
+	P0INP |= 0X3F;
 }
 
 /*********************************************************************
@@ -406,12 +447,10 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
       P1DIR |= 0X01;                         //设置P1_0为输出
       Delay_ms( 1 );
       POWER = 1;                             //打开负载电源
+	  turnOnRFX2401C();
       Delay_ms( 1000 );                      //等待负载电压稳定
       SampleApp_Send_P2P_Message( 0x01 );    //发送采集数据  第一组
-      //SampleApp_Send_P2P_Message( 0x01 );    //发送采集数据  第二组
       POWER = 0;                             //关掉负载电源
-      P1DIR &= ~0X01;                        //设置P1_0为输入
-      P1INP |= 0X01;                       //设置P1_0为高阻态
        
       P0DIR &= ~0Xc0;                        //设置P0_6 P0_7为输入
       P1DIR &= ~0X0C;                        //设置P1_3 P1_2为输入
@@ -437,12 +476,10 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
         P1DIR |= 0X01;
         Delay_ms( 1 );
         POWER = 1;             
+		turnOnRFX2401C();
         Delay_ms( 1000 );     
         SampleApp_Send_P2P_Message( 0x01 );
-        //SampleApp_Send_P2P_Message( 0x01 );
         POWER = 0;
-        P1DIR &= ~0X01;
-        P1INP |= 0X01;
          
         P0DIR &= ~0Xc0;                    
         P1DIR &= ~0X0C;
@@ -450,6 +487,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
         P1INP |= 0X0C;
       }
 	  sleepMode = DATA_SLEEP;
+	  shutdown();
       osal_start_timerEx( SampleApp_TaskID, SAMPLEAPP_SEND_PERIODIC_MSG_EVT,
          (SAMPLEAPP_SEND_PERIODIC_MSG_TIMEOUT + (osal_rand() & 0x00FF)) );
     }
@@ -458,6 +496,46 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
   }
   // Discard unknown events
   return 0;
+}
+
+void turnOnRFX2401C() {
+	P1INP &= ~0X30;
+	P1SEL &= ~0X30;
+	P1DIR |= 0X30;
+	Delay_ms( 1 );
+	
+	RFC_OBS_CTRL0 = RFC_OBS_CTRL_PA_PD_INV;
+	OBSSEL5       = OBSSEL_OBS_CTRL0;
+	
+	P1_4 = 1;
+}
+
+void shutdown() {
+	shutdownRFX2401C();
+	P0SEL &= ~0XFF;
+	P0DIR |= 0XFF;
+	P0INP &= ~0XFF;
+	P0 &= ~0XFF;
+	
+	P1SEL &= ~0XFF;
+	P1DIR |= 0XFF;
+	P1INP &= ~0XFC;
+	P1 &= ~0XFF;
+	
+	P2SEL &= ~0X07;
+	P2DIR |= 0X1F;
+	P2INP &= ~0X1F;
+	P2 &= ~0X1F;
+}
+void shutdownRFX2401C() {
+	P1INP &= ~0X30;
+	P1SEL &= ~0X30;
+	P1DIR |= 0X30;
+	Delay_ms( 1 );
+	P1_4 = 0;
+	P1_5 = 0;
+	P1DIR &= ~0X30;
+	P1INP |= 0X30;
 }
 
 /*********************************************************************
